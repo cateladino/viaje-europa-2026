@@ -1,0 +1,1698 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Viaje familiar a Europa · 16 sep – 2 oct 2026</title>
+<meta name="description" content="Itinerario día a día, billetes y gastos del viaje familiar a Europa, del 16 de septiembre al 2 de octubre de 2026.">
+<meta name="theme-color" content="#221D2B">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Europa 2026">
+<meta name="mobile-web-app-capable" content="yes">
+<meta property="og:title" content="Viaje familiar a Europa · 2026">
+<meta property="og:description" content="París, Barcelona, Venecia y Roma. Itinerario, billetes y gastos en un solo sitio.">
+<meta property="og:type" content="website">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%27.9em%27 font-size=%2790%27%3E%E2%9C%88%EF%B8%8F%3C/text%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Public+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<style>
+:root{
+  --paper:#FFFBF5;
+  --paper-2:#FFFFFF;
+  --ink:#221D2B;
+  --ink-soft:#6B6478;
+  --line:#E6DFEC;
+  --line-soft:#F0EBF5;
+
+  --paris:#3B5BDB;
+  --barcelona:#F08C00;
+  --venecia:#0CA678;
+  --roma:#E03131;
+  --vuelo:#7048E8;
+
+  --ok:#0CA678;
+  --warn:#F08C00;
+
+  --display:'Bricolage Grotesque', 'Trebuchet MS', sans-serif;
+  --body:'Public Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --mono:'IBM Plex Mono', ui-monospace, 'Courier New', monospace;
+
+  --r:16px;
+  --shadow:0 2px 4px rgba(34,29,43,.04), 0 8px 24px rgba(34,29,43,.06);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  color:var(--ink);
+  font-family:var(--body);
+  font-size:17px;
+  line-height:1.55;
+  background:
+    radial-gradient(1100px 600px at 8% -5%, rgba(59,91,219,.16), transparent 60%),
+    radial-gradient(900px 520px at 95% 8%, rgba(240,140,0,.18), transparent 60%),
+    radial-gradient(1000px 700px at 50% 105%, rgba(12,166,120,.15), transparent 60%),
+    radial-gradient(800px 500px at 85% 65%, rgba(224,49,49,.10), transparent 60%),
+    linear-gradient(170deg,#FFF8EF 0%,#FFF3F7 40%,#EFF6FF 75%,#EFFBF6 100%);
+  background-attachment:fixed;
+  min-height:100vh;
+}
+.wrap{max-width:1080px;margin:0 auto;padding:0 16px 90px}
+
+/* ---------- Encabezado ---------- */
+header.top{padding:34px 0 18px}
+.eyebrow{
+  font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ink-soft);display:flex;gap:10px;align-items:center;flex-wrap:wrap
+}
+.eyebrow b{color:var(--ink);font-weight:600}
+h1{
+  font-family:var(--display);font-weight:800;font-size:clamp(36px,7.5vw,66px);
+  line-height:.96;letter-spacing:-.03em;margin:12px 0 6px;
+  background:linear-gradient(100deg,var(--paris) 0%,var(--venecia) 32%,var(--barcelona) 66%,var(--roma) 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent
+}
+h1 .thin{font-weight:500}
+.sub{color:var(--ink-soft);max-width:60ch;margin:0 0 18px}
+
+.meters{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.meter{
+  background:var(--paper-2);border:1px solid var(--line);border-radius:var(--r);
+  padding:12px 16px;min-width:136px;box-shadow:var(--shadow);position:relative;overflow:hidden
+}
+.meter::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;background:var(--mc,var(--paris))}
+.meter .k{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft)}
+.meter .v{font-family:var(--display);font-weight:700;font-size:26px;line-height:1.15}
+.meter .v small{font-size:14px;font-weight:500;color:var(--ink-soft)}
+
+/* ---------- Riel de días (elemento firma) ---------- */
+.railwrap{position:sticky;top:0;z-index:40;padding:10px 0 8px;border-bottom:1px solid var(--line);
+  background:rgba(255,251,245,.88);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.rail{display:flex;gap:0;overflow-x:auto;padding-bottom:6px;scrollbar-width:thin}
+.rail::-webkit-scrollbar{height:6px}
+.rail::-webkit-scrollbar-thumb{background:var(--line);border-radius:6px}
+.stop{
+  flex:0 0 auto;width:62px;background:none;border:0;padding:6px 2px 0;cursor:pointer;
+  font-family:var(--body);color:var(--ink-soft);text-align:center;position:relative
+}
+.stop .dot{
+  width:14px;height:14px;border-radius:50%;background:var(--paper-2);
+  border:3px solid var(--c);margin:0 auto 6px;position:relative;z-index:2;transition:transform .15s
+}
+.stop .line{position:absolute;top:12.5px;left:0;width:100%;height:2.5px;background:var(--c);z-index:1}
+.stop:first-child .line{left:50%;width:50%}
+.stop:last-child .line{width:50%}
+.stop .d{font-family:var(--mono);font-size:12px;font-weight:600;color:var(--ink)}
+.stop .m{font-size:10px;letter-spacing:.06em;text-transform:uppercase}
+.stop.move .dot{border-radius:2px;transform:rotate(45deg)}
+.stop.done .dot{background:var(--c)}
+.stop.active .dot{transform:scale(1.5);background:var(--c);box-shadow:0 0 0 4px rgba(0,0,0,.06)}
+.stop.active .d{color:var(--c)}
+.stop:focus-visible{outline:2px solid var(--ink);outline-offset:2px;border-radius:6px}
+
+/* ---------- Pestañas ---------- */
+nav.tabs{display:flex;gap:6px;overflow-x:auto;margin:18px 0 22px;padding-bottom:4px}
+nav.tabs button{
+  flex:0 0 auto;font-family:var(--body);font-size:15px;font-weight:600;
+  background:rgba(255,255,255,.75);border:1px solid var(--line);color:var(--ink-soft);
+  padding:10px 17px;border-radius:999px;cursor:pointer;transition:all .15s
+}
+nav.tabs button:hover{border-color:var(--paris);color:var(--paris)}
+nav.tabs button[aria-selected="true"]{
+  background:linear-gradient(100deg,var(--paris),var(--venecia));
+  color:#fff;border-color:transparent;box-shadow:0 4px 12px rgba(59,91,219,.28)}
+nav.tabs button:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+
+section[hidden]{display:none}
+h2.sec{font-family:var(--display);font-weight:800;font-size:28px;letter-spacing:-.025em;margin:34px 0 4px}
+h2.sec:first-child{margin-top:0}
+p.lede{color:var(--ink-soft);margin:0 0 18px;max-width:70ch}
+
+/* ---------- Tarjetas de día ---------- */
+.day{
+  background:var(--paper-2);border:1px solid var(--line);border-left:6px solid var(--c);
+  border-radius:var(--r);margin-bottom:14px;box-shadow:var(--shadow);scroll-margin-top:110px;overflow:hidden;
+  transition:transform .12s, box-shadow .12s
+}
+.day:hover{box-shadow:0 4px 8px rgba(34,29,43,.05), 0 12px 32px rgba(34,29,43,.09)}
+.day.today{border-color:var(--c);box-shadow:0 0 0 2px rgba(0,0,0,.06),var(--shadow)}
+.dayhead{
+  width:100%;display:flex;gap:14px;align-items:center;text-align:left;
+  background:none;border:0;padding:16px;cursor:pointer;font-family:var(--body);color:inherit
+}
+.dayhead:focus-visible{outline:2px solid var(--ink);outline-offset:-4px}
+.daynum{
+  font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.08em;
+  background:var(--c);color:#fff;border-radius:8px;padding:6px 9px;flex:0 0 auto;line-height:1;
+  box-shadow:0 2px 8px color-mix(in srgb, var(--c) 40%, transparent)
+}
+.daymeta{flex:1;min-width:0}
+.daydate{font-family:var(--mono);font-size:12px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-soft)}
+.daytitle{font-family:var(--display);font-weight:700;font-size:19px;letter-spacing:-.01em;line-height:1.2}
+.tags{display:flex;gap:6px;align-items:center;flex:0 0 auto}
+.pace{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);display:flex;align-items:center;gap:4px}
+.pace i{width:7px;height:7px;border-radius:50%;background:var(--line);display:inline-block}
+.pace i.on{background:var(--c)}
+.count{font-family:var(--mono);font-size:12px;color:var(--ink-soft);white-space:nowrap}
+.chev{transition:transform .18s;color:var(--ink-soft);flex:0 0 auto}
+.day.open .chev{transform:rotate(180deg)}
+.daybody{padding:0 16px 16px;border-top:1px dashed var(--line-soft)}
+.day:not(.open) .daybody{display:none}
+
+.block{display:flex;gap:12px;padding:13px 0;border-bottom:1px dashed var(--line-soft);align-items:flex-start}
+.block:last-of-type{border-bottom:0}
+.block label{display:flex;gap:12px;cursor:pointer;width:100%;align-items:flex-start}
+.block input[type=checkbox]{
+  appearance:none;width:22px;height:22px;flex:0 0 auto;margin-top:3px;
+  border:2px solid var(--line);border-radius:6px;background:#fff;cursor:pointer;position:relative
+}
+.block input[type=checkbox]:checked{background:var(--c);border-color:var(--c)}
+.block input[type=checkbox]:checked::after{
+  content:"";position:absolute;left:6px;top:2px;width:5px;height:11px;
+  border:solid #fff;border-width:0 2.5px 2.5px 0;transform:rotate(42deg)
+}
+.block input[type=checkbox]:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.block .txt{flex:1;min-width:0}
+.block .hh{font-family:var(--mono);font-size:12px;color:var(--ink-soft);letter-spacing:.04em}
+.block .tt{font-weight:600}
+.block .dd{color:var(--ink-soft);font-size:15px}
+.block input:checked ~ .txt .tt{text-decoration:line-through;color:var(--ink-soft)}
+.pill{
+  display:inline-block;font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.07em;
+  text-transform:uppercase;padding:2px 7px;border-radius:4px;margin-left:6px;vertical-align:2px
+}
+.pill.book{background:#F2E4CC;color:#7A4E06}
+.pill.free{background:#DCEBE0;color:#215C3B}
+.pill.paid{background:#215C3B;color:#EAF3EC}
+.pill.time{background:#DDE3EE;color:#2A3D5E}
+
+.note{
+  border-left:3px solid var(--c);background:rgba(0,0,0,.028);
+  padding:11px 13px;border-radius:0 8px 8px 0;margin:14px 0 0;font-size:15px
+}
+.note b{font-family:var(--mono);font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;display:block;margin-bottom:3px;color:var(--c)}
+.note.alert{border-color:var(--warn);background:#FBF2E0}
+.note.alert b{color:var(--warn)}
+
+textarea.notes{
+  width:100%;margin-top:14px;min-height:62px;resize:vertical;font-family:var(--body);font-size:15px;
+  padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink)
+}
+textarea.notes:focus,input:focus,select:focus{outline:2px solid var(--c);outline-offset:0}
+
+/* ---------- Tablas / formularios genéricos ---------- */
+.card{background:var(--paper-2);border:1px solid var(--line);border-radius:var(--r);padding:18px;box-shadow:var(--shadow);margin-bottom:14px}
+.card h3{font-family:var(--display);font-size:18px;font-weight:700;margin:0 0 2px;letter-spacing:-.01em}
+.card .who{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:10px}
+.grid{display:grid;gap:12px}
+@media(min-width:760px){.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}}
+.fields{display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));margin-top:10px}
+label.f{font-family:var(--mono);font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-soft);display:block;margin-bottom:3px}
+input[type=text],input[type=number],input[type=date],select{
+  width:100%;padding:9px 10px;border:1px solid var(--line);border-radius:7px;background:#fff;
+  font-family:var(--body);font-size:15px;color:var(--ink)
+}
+input[type=number]{font-family:var(--mono)}
+.btn{
+  font-family:var(--body);font-weight:600;font-size:15px;border-radius:10px;cursor:pointer;
+  padding:11px 18px;border:1px solid transparent;
+  background:linear-gradient(100deg,var(--paris),var(--venecia));color:#fff;
+  box-shadow:0 3px 10px rgba(59,91,219,.25)
+}
+.btn.ghost{background:#fff;color:var(--ink);border-color:var(--line);box-shadow:none}
+.btn.small{padding:6px 11px;font-size:13.5px}
+.btn:focus-visible{outline:2px solid var(--c);outline-offset:2px}
+
+table{width:100%;border-collapse:collapse;font-size:15px}
+th{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink-soft);text-align:left;padding:6px 8px;border-bottom:1px solid var(--line)
+}
+td{padding:9px 8px;border-bottom:1px dashed var(--line-soft);vertical-align:middle}
+td.num,th.num{text-align:right;font-family:var(--mono)}
+tr.total td{border-bottom:0;font-weight:700;font-family:var(--mono)}
+.del{background:none;border:0;color:var(--ink-soft);cursor:pointer;font-size:17px;line-height:1;padding:2px 6px}
+.del:hover{color:var(--roma)}
+
+ul.check{list-style:none;margin:0;padding:0}
+ul.check li{padding:6px 0;border-bottom:1px dashed var(--line-soft)}
+ul.check li:last-child{border-bottom:0}
+ul.check label{display:flex;gap:10px;align-items:flex-start;cursor:pointer}
+ul.check input[type=checkbox]{
+  appearance:none;width:20px;height:20px;flex:0 0 auto;margin-top:2px;border:2px solid var(--line);
+  border-radius:5px;background:#fff;cursor:pointer;position:relative
+}
+ul.check input[type=checkbox]:checked{background:var(--ink);border-color:var(--ink)}
+ul.check input[type=checkbox]:checked::after{
+  content:"";position:absolute;left:5.5px;top:1.5px;width:4px;height:10px;
+  border:solid #fff;border-width:0 2.5px 2.5px 0;transform:rotate(42deg)
+}
+ul.check input:checked + span{text-decoration:line-through;color:var(--ink-soft)}
+
+.foot{margin-top:36px;padding-top:16px;border-top:1px solid var(--line);color:var(--ink-soft);font-size:14px}
+.savechip{
+  position:fixed;right:14px;bottom:14px;z-index:60;font-family:var(--mono);font-size:11px;
+  letter-spacing:.08em;text-transform:uppercase;background:var(--ink);color:var(--paper-2);
+  padding:8px 12px;border-radius:999px;opacity:0;transition:opacity .3s;pointer-events:none
+}
+.savechip.show{opacity:.92}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);margin-top:10px}
+.legend span{display:flex;align-items:center;gap:5px}
+.legend i{width:10px;height:10px;border-radius:50%;display:inline-block}
+
+@media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
+
+/* ---------- Documentos ---------- */
+/* --- billetes de Drive, rutas y accesos rápidos --- */
+.bgrp{border:1px solid var(--line);border-left:5px solid var(--c,var(--paris));border-radius:var(--r);background:var(--paper-2);padding:14px 16px;margin-bottom:12px;box-shadow:var(--shadow)}
+.bgrp h4{font-family:var(--display);font-size:17.5px;margin:0 0 2px;line-height:1.25}
+.bgrp .sub{color:var(--ink-soft);font-size:14px;margin-bottom:10px}
+.blist{display:flex;flex-wrap:wrap;gap:8px}
+.blink{display:inline-flex;align-items:center;gap:7px;text-decoration:none;color:var(--ink);
+  border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:7px 14px;font-size:14.5px;font-weight:600;
+  transition:border-color .15s,transform .1s}
+.blink:hover{border-color:var(--c,var(--paris));transform:translateY(-1px)}
+.blink:active{transform:none}
+.blink .pg{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;color:#fff;background:var(--c,var(--paris));
+  border-radius:4px;padding:2px 5px;text-transform:uppercase}
+.ruta{margin-top:12px;border-left:3px solid var(--c);background:rgba(0,0,0,.028);border-radius:0 8px 8px 0;padding:11px 14px}
+.ruta b.hd{font-family:var(--mono);font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--c);display:block;margin-bottom:5px}
+.ruta p{margin:0 0 8px;font-size:15px;line-height:1.5}
+.lineas{display:flex;flex-wrap:wrap;gap:6px}
+.li{display:inline-flex;align-items:center;font-family:var(--mono);font-size:11.5px;font-weight:700;letter-spacing:.03em;
+  color:#fff;border-radius:5px;padding:3px 8px;white-space:nowrap}
+.gmaps{display:inline-flex;align-items:center;gap:6px;text-decoration:none;font-size:14px;font-weight:600;
+  color:var(--ink);border:1px solid var(--line);background:var(--paper-2);border-radius:999px;padding:6px 13px}
+.gmaps:hover{border-color:var(--c)}
+.rcard{border:1px solid var(--line);border-left:5px solid var(--c);border-radius:var(--r);background:var(--paper-2);
+  padding:16px 18px;margin-bottom:12px;box-shadow:var(--shadow)}
+.rcard h3{margin-bottom:2px}
+@media print{.blink,.gmaps{border-color:#bbb}}
+.doc{display:flex;gap:12px;align-items:center;padding:11px 0;border-bottom:1px dashed var(--line-soft);flex-wrap:wrap}
+.doc:last-child{border-bottom:0}
+.doc .ico{
+  width:38px;height:38px;flex:0 0 auto;border-radius:7px;background:var(--paper);border:1px solid var(--line);
+  display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:10px;font-weight:600;color:var(--ink-soft)
+}
+.doc .nm{flex:1;min-width:150px;font-weight:600;word-break:break-word;font-size:15px}
+.doc .nm small{display:block;font-weight:400;color:var(--ink-soft);font-family:var(--mono);font-size:11.5px}
+.doc select{width:auto;min-width:150px;font-size:14px;padding:6px 8px}
+.docbox{margin-top:12px;border-left:3px solid var(--c);background:rgba(0,0,0,.028);border-radius:0 8px 8px 0;padding:10px 13px}
+.docbox b.hd{font-family:var(--mono);font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--c);display:block;margin-bottom:4px}
+.docbox a{color:inherit;font-weight:600;font-size:15px}
+
+/* ---------- Reservas importadas ---------- */
+.drop{
+  border:2px dashed var(--paris);border-radius:var(--r);background:rgba(255,255,255,.8);
+  padding:26px 18px;text-align:center;margin-bottom:14px;transition:border-color .15s,background .15s
+}
+.drop.over{border-color:var(--ok);background:#EAF3EC}
+.drop p{margin:6px 0 0;color:var(--ink-soft);font-size:15px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 18px}
+.chip{
+  background:var(--paper-2);border:1px solid var(--line);border-radius:999px;
+  padding:8px 16px;font-family:var(--mono);font-size:12px;letter-spacing:.05em;box-shadow:var(--shadow)
+}
+.chip b{font-family:var(--body);font-size:15px;font-weight:700;letter-spacing:0}
+.est{
+  display:inline-block;font-family:var(--mono);font-size:10px;font-weight:600;letter-spacing:.08em;
+  text-transform:uppercase;padding:3px 8px;border-radius:4px;white-space:nowrap
+}
+.est.Pendiente{background:#EFE8DA;color:#7A5B14}
+.est.Cotizado{background:#DDE3EE;color:#2A3D5E}
+.est.Reservado{background:#DCEBE0;color:#215C3B}
+.est.Pagado{background:#215C3B;color:#EAF3EC}
+.rsv{
+  display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px dashed var(--line-soft);font-size:15px
+}
+.rsv:last-child{border-bottom:0}
+.rsv .body{flex:1;min-width:0}
+.rsv .cn{font-weight:600}
+.rsv .mt{color:var(--ink-soft);font-size:13.5px;font-family:var(--mono);letter-spacing:.02em}
+.rsv .pr{font-family:var(--mono);font-weight:600;white-space:nowrap}
+.daybody .rsvbox{margin-top:14px;border-left:3px solid var(--c);background:rgba(0,0,0,.028);border-radius:0 8px 8px 0;padding:10px 13px}
+.daybody .rsvbox b.hd{font-family:var(--mono);font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--c);display:block;margin-bottom:2px}
+
+@media print{
+  .railwrap,nav.tabs,.savechip,.btn{display:none!important}
+  body{background:#fff}
+  .day:not(.open) .daybody{display:block}
+  section[hidden]{display:block!important}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <div class="eyebrow"><span>Caterine · Martha Lucía · Georgina · María Eugenia</span></div>
+  <h1>Viaje familiar<span class="thin"> a Europa</span></h1>
+  <p class="sub">Diecisiete días entre París, Barcelona, Venecia y Roma, del 16 de septiembre al 2 de octubre de 2026. El plan está armado con una cosa fuerte por día, pausa de tarde y sin llegadas de noche, para que los diecisiete días rindan y nadie termine agotado a la mitad.</p>
+  <div class="meters">
+    <div class="meter" style="--mc:var(--paris)"><div class="k">Faltan</div><div class="v" id="mCount">—</div></div>
+    <div class="meter" style="--mc:var(--venecia)"><div class="k">Avance del plan</div><div class="v" id="mProg">0<small>%</small></div></div>
+    <div class="meter" style="--mc:var(--barcelona)"><div class="k">Reservas (MXN)</div><div class="v" id="mRsv">€0</div></div>
+    <div class="meter" style="--mc:var(--roma)"><div class="k">Gastado en ruta (MXN)</div><div class="v" id="mSpent">€0</div></div>
+    <div class="meter" style="--mc:var(--vuelo)"><div class="k">Por persona (MXN)</div><div class="v" id="mPer">€0</div></div>
+    <div class="meter" style="--mc:var(--barcelona)"><div class="k">Mis gastos (MXN)</div><div class="v" id="mMine">€0</div></div>
+  </div>
+  <div class="legend">
+    <span><i style="background:var(--paris)"></i>París</span>
+    <span><i style="background:var(--barcelona)"></i>Barcelona</span>
+    <span><i style="background:var(--venecia)"></i>Venecia</span>
+    <span><i style="background:var(--roma)"></i>Roma</span>
+    <span><i style="background:var(--vuelo);border-radius:2px;transform:rotate(45deg)"></i>Día de traslado</span>
+  </div>
+</header>
+
+<div class="railwrap"><div class="rail" id="rail" role="tablist" aria-label="Días del viaje"></div></div>
+
+<nav class="tabs" role="tablist">
+  <button role="tab" aria-selected="true" data-tab="dias">Día a día</button>
+  <button role="tab" aria-selected="false" data-tab="reservas">Lo que ya está pagado</button>
+  <button role="tab" aria-selected="false" data-tab="docs">Billetes en PDF</button>
+  <button role="tab" aria-selected="false" data-tab="traslados">Traslados y casas</button>
+  <button role="tab" aria-selected="false" data-tab="gastos">Gastos del grupo</button>
+  <button role="tab" aria-selected="false" data-tab="personal">Mis gastos</button>
+</nav>
+
+<section id="tab-dias">
+  <div class="card" style="border-left:5px solid var(--paris)">
+    <h3>Cómo se usa este tablero</h3>
+    <div class="who">Léelo una vez y ya</div>
+    <div class="grid g3" style="margin-top:6px">
+      <div><b>1 · Toca un día</b><div style="color:var(--ink-soft);font-size:15px">Cada tarjeta se abre y se cierra. Adentro está el plan hora por hora, con lo que ya está pagado marcado en verde.</div></div>
+      <div><b>2 · Ve palomeando</b><div style="color:var(--ink-soft);font-size:15px">Marca cada cosa conforme se hace. Se guarda sola en este dispositivo y la barra de arriba muestra el avance.</div></div>
+      <div><b>3 · Busca arriba</b><div style="color:var(--ink-soft);font-size:15px">La línea de puntos de colores son los 17 días. Cada color es una ciudad y los rombos son los días de traslado.</div></div>
+    </div>
+  </div>
+
+  <div class="card" style="border-left:5px solid var(--roma)">
+    <h3>Datos que hay que tener siempre a la mano</h3>
+    <div class="who">Anótalos también en papel</div>
+    <div class="grid g2" style="margin-top:8px">
+      <div>
+        <div style="padding:6px 0;border-bottom:1px dashed var(--line-soft)"><b>Casa en París</b><div style="color:var(--ink-soft);font-size:15px">11 Rue du Delta, 75009 · 16 al 21 de septiembre</div></div>
+        <div style="padding:6px 0;border-bottom:1px dashed var(--line-soft)"><b>Casa en Barcelona</b><div style="color:var(--ink-soft);font-size:15px">Reserva HMWM9XXSK3 · 21 al 24 de septiembre</div></div>
+        <div style="padding:6px 0;border-bottom:1px dashed var(--line-soft)"><b>Casa en Venecia</b><div style="color:var(--ink-soft);font-size:15px">24 al 26 de septiembre · entrada de 15:00 a 23:00</div></div>
+        <div style="padding:6px 0"><b>Casa en Roma</b><div style="color:var(--ink-soft);font-size:15px">Via della Consulta 1b, 00184 · 26 sep al 1 oct</div></div>
+      </div>
+      <div>
+        <div style="padding:6px 0;border-bottom:1px dashed var(--line-soft)"><b>Vuelos de ellas</b><div style="color:var(--ink-soft);font-size:15px">Air Europa · localizador 7D63DW</div></div>
+        <div style="padding:6px 0;border-bottom:1px dashed var(--line-soft)"><b>Tren a Barcelona</b><div style="color:var(--ink-soft);font-size:15px">P4PNMJ · coche 18 · plazas 818, 819, 822 y 823</div></div>
+        <div style="padding:6px 0;border-bottom:1px dashed var(--line-soft)"><b>Tren a Roma</b><div style="color:var(--ink-soft);font-size:15px">Referencia 2702492 · 26 sep 12:26</div></div>
+        <div style="padding:6px 0;border-bottom:1px dashed var(--line-soft)"><b>Versalles</b><div style="color:var(--ink-soft);font-size:15px">19 sep 10:00 · Puerta A, Pabellón Dufour</div></div>
+        <div style="padding:6px 0;border-bottom:1px dashed var(--line-soft)"><b>Disneyland París</b><div style="color:var(--ink-soft);font-size:15px">20 sep · reserva 35951969 · 1 día, 1 parque</div></div>
+        <div style="padding:6px 0"><b>Emergencias en toda Europa</b><div style="color:var(--ink-soft);font-size:15px">112, gratis y desde cualquier teléfono</div></div>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="sec">Día a día</h2>
+  <p class="lede">Toca cualquier día para abrirlo. El punto de color indica la ciudad y las etiquetas dicen si algo ya está pagado o si todavía hay que comprarlo.</p>
+  <div id="days"></div>
+</section>
+
+<section id="tab-reservas" hidden>
+  <h2 class="sec">Lo que ya está comprado</h2>
+  <p class="lede">Llena el archivo de Excel conforme vayas comprando y suéltalo aquí. Cada reserva se acomoda sola en su día del itinerario. Cuando quieras mandarle el plan a alguien más, usa <b>Crear copia para compartir</b>: genera un solo archivo que ya trae todo adentro, sin que la otra persona tenga que importar nada. Los montos se muestran en pesos mexicanos usando el tipo de cambio que pongas abajo; si el Excel ya trae la columna En MXN, el tablero toma de ahí tu tipo de cambio automáticamente.</p>
+  <div class="drop" id="drop">
+    <button class="btn" id="pick">Elegir archivo de Excel</button>
+    <p>o arrástralo hasta aquí · acepta .xlsx y .csv</p>
+    <input type="file" id="file" accept=".xlsx,.xls,.csv" hidden>
+  </div>
+  <div id="impMsg" style="color:var(--ink-soft);font-size:15px;margin-bottom:8px"></div>
+  <div class="chips" id="rsvChips"></div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px">
+    <select id="rsvFilter" style="max-width:220px">
+      <option value="">Todos los estados</option>
+      <option>Pendiente</option><option>Cotizado</option><option>Reservado</option><option>Pagado</option>
+    </select>
+    <span style="display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)">
+      MXN por € <input type="number" id="tcInput" step="0.01" min="1" style="width:92px"></span>
+    <button class="btn ghost small" id="rsvCsv">Descargar como CSV</button>
+    <button class="btn ghost small" id="rsvShare">Crear copia para compartir</button>
+  </div>
+  <div id="rsvList"></div>
+</section>
+
+<section id="tab-docs" hidden>
+  <h2 class="sec">Billetes, pases y confirmaciones</h2>
+  <p class="lede">Los 42 documentos del viaje, en orden de cuándo se usan. Cada botón abre el PDF en Google Drive:
+  se ve en el celular sin descargar nada y sirve para mostrar el código en la entrada.
+  Para que funcione sin señal, abre cada uno una vez antes de salir y en la app de Drive márcalo como
+  <b>disponible sin conexión</b>.</p>
+  <div class="chips" id="bilChips"></div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:10px 0 16px">
+    <select id="bilFilter" style="max-width:240px">
+      <option value="">Todos los documentos</option>
+      <option value="Vuelos">Vuelos</option>
+      <option value="Trenes">Trenes</option>
+      <option value="Traslados">Traslados</option>
+      <option value="Hospedajes">Hospedajes</option>
+      <option value="Entradas">Entradas</option>
+    </select>
+    <a class="btn ghost small" href="https://drive.google.com/drive/folders/1netn2u_ku8Yxdi6mD4T4mCXVgAldnLX4" target="_blank" rel="noopener" style="text-decoration:none">Abrir la carpeta completa en Drive ↗</a>
+  </div>
+  <div id="bilList"></div>
+
+  <h2 class="sec">Guardar algo más en este dispositivo</h2>
+  <p class="lede">Si durante el viaje aparece un billete nuevo, una factura o una foto del pasaporte, súbela aquí:
+  se queda en este teléfono, se abre sin internet y, si le asignas un día, sale dentro de esa tarjeta del itinerario.</p>
+  <div class="drop" id="dropDoc">
+    <button class="btn" id="pickDoc">Elegir archivos</button>
+    <p>o arrástralos hasta aquí · PDF, imágenes o capturas de pantalla</p>
+    <input type="file" id="fileDoc" accept=".pdf,.png,.jpg,.jpeg,.webp,.heic" multiple hidden>
+  </div>
+  <div id="docMsg" style="color:var(--ink-soft);font-size:15px;margin-bottom:10px"></div>
+  <div class="chips" id="docChips"></div>
+  <div id="docList"></div>
+</section>
+
+<section id="tab-traslados" hidden>
+  <h2 class="sec">Los seis movimientos del viaje</h2>
+  <p class="lede">Aquí va el número de reserva y la hora real en cuanto los tengas. Es lo único del viaje que no se puede improvisar.</p>
+  <div id="moves"></div>
+  <h2 class="sec">Del aeropuerto o la estación a la casa</h2>
+  <p class="lede">La ruta recomendada para cada llegada y cada salida, con la línea que hay que tomar.
+  El botón de Google Maps calcula la ruta con los horarios reales del día en que la abras,
+  así que úsalo el mismo día: si hay una obra o una huelga, ahí aparece.
+  Si escribes la dirección exacta de cada casa más abajo, los enlaces la usan automáticamente.</p>
+  <div id="rutas"></div>
+
+  <h2 class="sec">Dónde dormimos</h2>
+  <p class="lede">Pide siempre planta baja o cerca del ascensor, y confirma que el edificio tenga elevador antes de pagar. En Venecia pregunta cuántos puentes hay entre el hotel y la parada de vaporetto.</p>
+  <div id="hotels"></div>
+</section>
+
+<section id="tab-gastos" hidden>
+  <h2 class="sec">Cuentas del viaje</h2>
+  <p class="lede">Anota el gasto el mismo día, aunque sea aproximado. Al final del viaje nadie recuerda quién pagó el taxi de Venecia.</p>
+  <div class="card">
+    <h3>Registrar un gasto</h3>
+    <div class="fields">
+      <div><label class="f" for="eDesc">Concepto</label><input type="text" id="eDesc" placeholder="Cena en Trastevere"></div>
+      <div><label class="f" for="eCity">Ciudad</label><select id="eCity"><option>París</option><option>Barcelona</option><option>Venecia</option><option>Roma</option><option>Traslado</option><option>Previo al viaje</option></select></div>
+      <div><label class="f" for="eCat">Categoría</label><select id="eCat"><option>Comida</option><option>Entradas</option><option>Transporte</option><option>Hotel</option><option>Salud/farmacia</option><option>Compras</option><option>Otro</option></select></div>
+      <div><label class="f" for="eAmt">Monto (€)</label><input type="number" id="eAmt" min="0" step="0.01" placeholder="0.00"></div>
+      <div style="display:flex;align-items:flex-end"><button class="btn" id="eAdd">Agregar gasto</button></div>
+    </div>
+  </div>
+  <div class="grid g2">
+    <div class="card"><h3>Gastos registrados</h3><div class="who">Del más reciente al más antiguo</div><table><thead><tr><th>Concepto</th><th>Ciudad</th><th class="num">€</th><th></th></tr></thead><tbody id="eList"></tbody></table></div>
+    <div class="card"><h3>Resumen</h3><div class="who">Se divide entre <span id="pplLabel">4</span> personas</div><table><tbody id="eSum"></tbody></table>
+      <div class="fields" style="margin-top:14px">
+        <div><label class="f" for="ppl">Personas en el grupo</label><input type="number" id="ppl" min="1" max="12" value="4"></div>
+        <div><label class="f" for="budget">Presupuesto meta (€)</label><input type="number" id="budget" min="0" step="50" placeholder="0"></div>
+      </div>
+      <div id="budgetMsg" style="margin-top:10px;color:var(--ink-soft);font-size:15px"></div>
+    </div>
+  </div>
+</section>
+
+<section id="tab-personal" hidden>
+  <h2 class="sec">Mis gastos personales</h2>
+  <p class="lede">Lo que pagas solo para ti y que no se reparte con nadie: ropa, souvenirs, un café, un capricho. Va aparte de las cuentas del grupo.</p>
+  <div class="card" style="border-left:6px solid var(--barcelona)">
+    <h3>Anotar un gasto mío</h3>
+    <div class="fields">
+      <div><label class="f" for="pDesc">Concepto</label><input type="text" id="pDesc" placeholder="Bufanda en Montmartre"></div>
+      <div><label class="f" for="pCity">Ciudad</label><select id="pCity"><option>París</option><option>Barcelona</option><option>Venecia</option><option>Roma</option><option>Aeropuerto</option></select></div>
+      <div><label class="f" for="pCat">Categoría</label><select id="pCat"><option>Compras</option><option>Comida</option><option>Souvenirs</option><option>Transporte</option><option>Entradas</option><option>Otro</option></select></div>
+      <div><label class="f" for="pAmt">Monto (€)</label><input type="number" id="pAmt" min="0" step="0.01" placeholder="0.00"></div>
+      <div style="display:flex;align-items:flex-end"><button class="btn" id="pAdd">Agregar</button></div>
+    </div>
+  </div>
+  <div class="chips" id="pChips"></div>
+  <div class="grid g2">
+    <div class="card"><h3>Lo que llevo gastado</h3><div class="who">Del más reciente al más antiguo</div>
+      <table><thead><tr><th>Concepto</th><th>Ciudad</th><th class="num">Monto</th><th></th></tr></thead><tbody id="pList"></tbody></table></div>
+    <div class="card"><h3>Resumen</h3><div class="who">Solo mío, sin dividir</div><table><tbody id="pSum"></tbody></table>
+      <div class="fields" style="margin-top:14px">
+        <div><label class="f" for="pBudget">Mi presupuesto personal (€)</label><input type="number" id="pBudget" min="0" step="10" placeholder="0"></div>
+      </div>
+      <div id="pMsg" style="margin-top:10px;color:var(--ink-soft);font-size:15px"></div>
+    </div>
+  </div>
+  <h2 class="sec">Reiniciar el tablero</h2>
+  <div class="card">
+    <p style="margin-top:0;color:var(--ink-soft)">Borra todas las palomitas, notas y gastos guardados. No se puede deshacer.</p>
+    <button class="btn ghost" id="reset">Borrar todo lo guardado</button>
+    <button class="btn ghost" id="export" style="margin-left:8px">Descargar respaldo</button>
+  </div>
+</section>
+
+<p class="foot">Horarios, precios y accesos cambian: confirma en las páginas oficiales antes de reservar, sobre todo el tren de París a Barcelona y las entradas con hora asignada. Este tablero guarda lo que marques en este mismo dispositivo.</p>
+</div>
+
+<div class="savechip" id="savechip">Guardado</div>
+
+<script>
+/* ============ DATOS DEL VIAJE ============ */
+const CITY = {
+  'París':      {v:'--paris'},
+  'Barcelona':  {v:'--barcelona'},
+  'Venecia':    {v:'--venecia'},
+  'Roma':       {v:'--roma'}
+};
+
+const DAYS = [
+ {id:'d1', iso:'2026-09-16', city:'París', move:true, title:'Llegada a París', resumen:'Solo llegar, instalarse y dormir. Nada más.', pace:1,
+  blocks:[
+   {h:'18:25',t:'Ellas llegan a París Orly',d:'Air Europa desde Bogotá con escala en Madrid. Llevan 22 horas de viaje.',p:'clave'},
+   {h:'18:30',t:'Van privada esperando en Orly',d:'Ya está pagada. Reserva 588871925, 62 euros. El chofer espera con cartel.',p:'pagado'},
+   {h:'19:30',t:'Llegada a la casa · 11 Rue du Delta, 75009 París',d:'Entrada desde las 16:00. Escríbele al anfitrión un día antes para confirmar cómo se recogen las llaves.',p:'pagado'},
+   {h:'19:50',t:'Caterine llega a París Charles de Gaulle',d:'Otro aeropuerto y hora y media después. Con migración y maleta, sale hacia las 20:40.'},
+   {h:'21:45',t:'Todos en casa',d:'Cena ligera de lo que se compre cerca. Aguantar hasta las 22:30 ayuda con el cambio de horario.'}
+  ],
+  tip:'Este día no se pasea, se aterriza. Lo único que importa es que lleguen bien, coman algo y duerman.',
+  planB:'Si se retrasa el vuelo de Bogotá y pierden la conexión en Madrid, Air Europa las reubica en el mostrador de transferencias. Que no salgan de la zona sin hablar con ellos.',
+  alert:'Sigue pendiente comprar la maleta documentada de Air Europa: los tres billetes son tarifa NOBAG, con cero piezas incluidas. Se compra en aireuropa.com con el localizador 7D63DW.'},
+
+ {id:'d2', iso:'2026-09-17', city:'París', title:'Torre Eiffel, Campos Elíseos y el Sena', resumen:'La foto de todos juntos, la torre por dentro y la tarde junto al río.', pace:2,
+  blocks:[
+   {h:'09:30',t:'Trocadéro para la foto de todos juntos',d:'Metro línea 9, estación Trocadéro. La explanada es plana y es donde la torre se ve completa. Los jardines de abajo tienen bancas y fuentes si quieren sentarse un rato.',p:'gratis'},
+   {h:'11:00',t:'Torre Eiffel · ascensor hasta la cima',d:'Entradas pagadas, 146.80 euros, reserva 262010530930. Arriba hace viento y frío aunque abajo haga calor: lleven un suéter cada una.',p:'pagado'},
+   {h:'13:30',t:'Comida en Rue Cler',d:'Calle peatonal a diez minutos, con mesas afuera y precios sensatos.'},
+   {h:'15:30',t:'Crucero por el Sena · una hora sentados',d:'Entradas pagadas, reserva GYG2Q9BXRFRN. El boleto sirve de 10:00 a 22:00, así que si el día se atrasa no se pierde.',p:'pagado'},
+   {h:'17:00',t:'Jardines de los Campos Elíseos',d:'Bajando del barco quedan a un paso, entre la Concordia y el Grand Palais. Son jardines arbolados con bancas y sombra, mucho más tranquilos que la avenida comercial. El sitio perfecto para sentarse una hora sin hacer nada.',p:'gratis'},
+   {h:'18:30',t:'Subir los Campos Elíseos hasta el Arco',d:'Un kilómetro y medio en plano, con escaparates y cafés. Al final, el Arco del Triunfo visto desde la acera.',p:'gratis'},
+   {h:'20:00',t:'Cena por el barrio',d:''},
+   {h:'21:00',t:'Opcional: el destello de la torre',d:'Brilla cinco minutos al inicio de cada hora al oscurecer. Se ve desde el Campo de Marte.'}
+  ],
+  tip:'Es un día largo pero todo en plano y con dos horas sentados en el barco a la mitad. Si a alguien se le cansan los pies, los jardines de los Campos Elíseos son la parada natural.',
+  planB:'Si llueve, el crucero se hace igual: los barcos van techados. Los jardines se cambian por un café con vista a la avenida.'},
+
+ {id:'d3', iso:'2026-09-18', city:'París', title:'Louvre, Notre-Dame y Montmartre de noche', resumen:'Museo por la mañana, la isla de la Cité por la tarde y el barrio de casa al anochecer.', pace:2,
+  blocks:[
+   {h:'10:00',t:'Louvre · entrada con hora',d:'Entradas pagadas, 128 euros, reserva C262340001706. Entren por el Carrousel, el acceso subterráneo con ascensor y menos fila que la pirámide.',p:'pagado'},
+   {h:'10:15',t:'Recorrido de dos horas y media',d:'Victoria de Samotracia, la Gioconda, la Venus de Milo, las salas de Apolo y la galería de pintura italiana. Hay bancas en casi todas las salas y sillas de ruedas prestadas gratis en el mostrador de información.'},
+   {h:'13:00',t:'Comida en Rue Saint-Honoré',d:'Salir del museo a comer es más barato y más cómodo que quedarse dentro.'},
+   {h:'14:30',t:'Jardín de las Tullerías',d:'Las sillas verdes se mueven libremente y se ponen a la sombra o junto al estanque. Media hora aquí y siguen frescos.',p:'gratis'},
+   {h:'15:30',t:'Caminar al Sena por el Pont des Arts',d:'Veinte minutos junto al río hasta la isla de la Cité, todo en plano y con vistas todo el camino.',p:'gratis'},
+   {h:'16:00',t:'Catedral de Notre-Dame',d:'La entrada es gratuita, pero sin reserva la fila puede ser de dos o tres horas. Reserven franja gratuita en notredamedeparis.fr, que se abre dos o tres días antes hacia la medianoche de París. Ojo: nadie vende entradas para Notre-Dame, es gratis.',p:'reservar'},
+   {h:'17:15',t:'Vuelta por la isla y Sainte-Chapelle por fuera',d:'La plaza Dauphine y el Pont Neuf están a dos minutos y son de lo más bonito de París.',p:'gratis'},
+   {h:'19:00',t:'Regreso a casa y descanso',d:''},
+   {h:'20:30',t:'Sacré-Cœur iluminada y Montmartre',d:'La casa está al pie de Montmartre. Del metro Anvers, a diez minutos, sale el funicular que evita los 222 escalones y acepta el boleto de metro. De noche la basílica iluminada y la vista de París son de lo mejor del viaje.',p:'gratis'},
+   {h:'21:30',t:'Foto en el Moulin Rouge',d:'Está en Place Blanche, bajando de Montmartre y a diez minutos de casa. De noche, con el molino iluminado en rojo, es cuando vale la foto.',p:'gratis'}
+  ],
+  tip:'El truco de este día es no quedarse cinco horas en el Louvre. Dos horas y media alcanzan para lo importante, y así queda tarde para la catedral, que reabrió hace poco y está espectacular.',
+  planB:'Si la fila de Notre-Dame se ve imposible, la fachada y los jardines de atrás valen la caminata igual, y se cambia el interior por la Sainte-Chapelle.'},
+
+ {id:'d4', iso:'2026-09-19', city:'París', title:'Palacio de Versalles', resumen:'Excursión de día completo. Entrada a las 10:00 por la puerta A.', pace:3,
+  blocks:[
+   {h:'08:45',t:'Salida de casa en van privada',d:'Versalles queda a unos 45 minutos. Reserva los dos trayectos por separado: la ida desde ahora y el regreso esa misma mañana, cuando ya sepas cómo va el día.',p:'reservar'},
+   {h:'09:40',t:'Llegada y control de seguridad',d:'Hay margen para el control, un café y llegar a la puerta sin correr.'},
+   {h:'10:00',t:'Entrada al palacio · Puerta A, Pabellón Dufour',d:'Billete Passeport pagado, 35 euros por persona, transacción 200500399. La entrada es por la puerta A y el horario permite acceder dentro de la media hora siguiente. Un retraso de más de una hora puede significar que no las dejen pasar.',p:'pagado'},
+   {h:'10:15',t:'Salón de los Espejos y aposentos reales',d:'Unas dos horas, todo en interiores. Es un circuito de un solo sentido y con mucha gente: no se puede regresar a media visita.'},
+   {h:'12:30',t:'Comida dentro del dominio',d:'Hay restaurantes junto al Gran Canal. Sentarse ahí es parte del plan, no una parada rápida.'},
+   {h:'14:00',t:'Jardines con las fuentes musicales',d:'El Passeport ya incluye los jardines en día de Grandes Aguas, que es lo que les tocó por ser sábado. Los caminos son de gravilla y las distancias enormes.'},
+   {h:'14:30',t:'Recorrer los jardines en el trenecito',d:'Este es el truco del día. Va del palacio al Gran Canal, al Trianón y al Caserío de María Antonieta. Se paga aparte y ahorra kilómetros de caminata.',p:'clave'},
+   {h:'16:30',t:'Regreso a París',d:'Ese sábado los jardines cierran antes, a las 17:30, porque en la noche hay espectáculo. Salir a las 16:30 evita la salida en masa.'},
+   {h:'19:30',t:'Cena tranquila cerca de casa',d:'Nada de planes después: mañana es Disney y es un día largo.'}
+  ],
+  tip:'El billete es nominativo y no se cambia ni se devuelve. Llévenlo en el teléfono y también impreso, y con identificación: lo piden en cada control.',
+  planB:'Si el día pinta pesado, se puede hacer solo el palacio y el jardín de enfrente y volver a comer a París. Vale igual.',
+  alert:'La entrada es a las 10:00 en punto por la PUERTA A del Pabellón Dufour, no por la entrada principal. Reserven la van para las 08:45 y no más tarde.'},
+
+ {id:'d5', iso:'2026-09-20', city:'París', title:'Disneyland París', resumen:'Día completo en el parque, a ritmo relajado.', pace:3,
+  blocks:[
+   {h:'08:00',t:'Salida hacia el parque en Uber',d:'Un domingo temprano hay poco tráfico y son unos 45 minutos. Resérvenlo desde la app la noche anterior para no depender de que haya coche.',p:'reservar'},
+   {h:'09:30',t:'Entrada · una entrada, un parque',d:'Entradas pagadas, 87 euros por persona, reserva 35951969. El billete dice "parque de tu elección", así que eligen al llegar. Mi recomendación es el Parque Disneyland, el del castillo: atracciones más tranquilas y es la experiencia clásica.',p:'pagado'},
+   {h:'09:45',t:'Main Street y el castillo primero',d:'Con las piernas frescas, la parte más fotogénica. Lleven la entrada completa impresa o en el móvil, no solo el QR, y una identificación: son nominativas.',p:'clave'},
+   {h:'12:30',t:'Comida sentadas, con mesa reservada',d:'Reservar un restaurante de servicio a la mesa desde ahora es lo que garantiza una hora de descanso real en lugar de comer de pie con bandeja.',p:'reservar'},
+   {h:'14:30',t:'Vuelta al parque en el tren de vapor',d:'El Disneyland Railroad da la vuelta completa con varias estaciones. Es el mismo truco del trenecito de Versalles: descansan mientras se mueven.',p:'clave'},
+   {h:'17:00',t:'Cabalgata Disney Stars on Parade',d:'Ver la cabalgata sentadas en la banqueta de Main Street es el mejor momento del día y no exige nada.'},
+   {h:'18:30',t:'Regreso a París en RER A',d:'La estación Marne-la-Vallée–Chessy está a cinco minutos de la salida y pasa cada 10 o 15 minutos. Ojo: es zona 5, hace falta el billete correcto. Bajarse en Auber es más cómodo que en Châtelet.',p:'clave'},
+   {h:'20:30',t:'Cena ligera y maletas',d:'Mañana es el tren a Barcelona. Dejen las maletas armadas esta noche aunque sea a medias.'}
+  ],
+  tip:'Dos días fuertes seguidos, Versalles y Disney, es lo más exigente del viaje. La regla de hoy es no correr: no intenten verlo todo, no hagan fila para las atracciones intensas y siéntense cada vez que puedan.',
+  planB:'Si a media tarde ya están cansadas, salgan sin culpa. El espectáculo nocturno las dejaría en casa cerca de medianoche y mañana hay siete horas de tren.',
+  alert:'Esta noche hay que armar maletas. El lunes el tren sale a las 14:42 y hay que etiquetar cada maleta con nombre y apellido, que en el TGV es obligatorio.'},
+
+ {id:'d6', iso:'2026-09-21', city:'París', move:true, title:'Tren de París a Barcelona', resumen:'Mañana de recuperación y siete horas de tren por la tarde.', pace:2,
+  blocks:[
+   {h:'08:30',t:'Desayuno con calma y terminar las maletas',d:'Después de Disney es normal que hayan quedado a medias. Etiquetar cada una con nombre y apellido: en el TGV es obligatorio.',p:'clave'},
+   {h:'10:30',t:'Check-out y dejar el equipaje',d:'En la consigna del alojamiento si el anfitrión lo permite; si no, hay guarda-equipajes cerca de Gare du Nord.'},
+   {h:'11:00',t:'Mañana ligera cerca de casa',d:'Un café, una plaza. Hoy las piernas se guardan: vienen de dos días muy largos.'},
+   {h:'12:00',t:'Comer bien antes de subir al tren',d:'Llegan a Barcelona a las 21:32 y cenarán tardísimo. Esta es la comida fuerte del día.',p:'clave'},
+   {h:'13:30',t:'Llegar a Gare de Lyon con una hora de margen',d:'Las pantallas dicen antes si sale del Hall 1 o del Hall 2; el andén se anuncia unos 20 minutos antes.'},
+   {h:'14:42',t:'TGV INOUI 9715 · Coche 18, planta baja',d:'Billetes pagados, 516 euros los cuatro, expediente P4PNMJ. Plazas 818, 819, 822 y 823: mesa de cuatro enfrentados, sin escaleras.',p:'pagado'},
+   {h:'A bordo',t:'Llevar la cena comprada desde París',d:'Seis horas y cincuenta minutos. El vagón cafetería queda lejos del coche 18. Levantarse a caminar cada hora.'},
+   {h:'21:32',t:'Llegada a Barcelona Sants',d:'Dejar reservado el traslado a la casa desde ahora y avisar al anfitrión de la llegada tardía.',p:'reservar'},
+   {h:'22:15',t:'Llegada al alojamiento de Barcelona',d:'Reserva HMWM9XXSK3, tres noches. Directo a dormir.',p:'pagado'}
+  ],
+  tip:'El tren ya está en la mejor configuración posible. Lo que hay que cuidar es el final del día: traslado reservado, anfitrión avisado y cena resuelta antes de salir de París.',
+  planB:'El billete es Semi Flex: se puede cambiar pagando diferencia, con 19 euros de cargo desde seis días antes de la salida.'},
+
+ {id:'d7', iso:'2026-09-22', city:'Barcelona', title:'Sagrada Familia', resumen:'Mañana de descanso y la Sagrada Familia al atardecer.', pace:2,
+  blocks:[
+   {h:'10:00',t:'Mañana tranquila y desayuno largo',d:'Vienen de siete horas de tren y de llegar a medianoche. Hoy se empieza tarde a propósito.',p:'clave'},
+   {h:'12:00',t:'Paseo corto por el barrio',d:'Barcelona es la ciudad más plana del viaje. Caminar sin rumbo aquí sí es descanso.'},
+   {h:'14:00',t:'Comida con menú del día',d:'Entre semana, tres tiempos a buen precio y a la hora en que comen los locales.'},
+   {h:'16:00',t:'Siesta',d:'En España es costumbre, no pereza.'},
+   {h:'17:30',t:'Sagrada Familia · FALTA COMPRAR LA ENTRADA',d:'Cómprenla en sagradafamilia.org, que cuesta 26 euros por adulto y no 120 como la que cancelaron. No hay taquilla física: sin entrada comprada en línea no se entra, sin importar a qué hora lleguen. A las 17:30 entra el sol por los vitrales del oeste y el interior se llena de naranjas y rojos.',p:'reservar'},
+   {h:'19:30',t:'Plaza de Gaudí y cena',d:'Bancas frente al estanque, con la vista clásica del templo reflejado.',p:'gratis'}
+  ],
+  tip:'Todo el interior de la basílica es plano y accesible. No hace falta la subida a las torres: se sube en ascensor pero se baja por una escalera de caracol estrecha.',
+  alert:'Esta entrada sigue sin comprarse y es la más urgente de todas. En 2026, por el centenario de Gaudí, los horarios se agotan con semanas de anticipación y no existe taquilla en la puerta.',
+  planB:'Si alguna no quiere salir, la casa está cerca y puede alcanzarlas después.'},
+
+ {id:'d8', iso:'2026-09-23', city:'Barcelona', title:'Park Güell y Paseo de Gràcia', resumen:'La mañana en el parque y la tarde entre las casas de Gaudí.', pace:3,
+  blocks:[
+   {h:'Antes',t:'Comprar la entrada del Park Güell',d:'Todavía está pendiente. La zona monumental tiene cupo por franja horaria y se agota; son unos 108 euros los cuatro.',p:'reservar'},
+   {h:'09:30',t:'Subir en taxi hasta la entrada de arriba',d:'El parque está en una colina y la subida caminando es dura. El taxi deja en Carretera del Carmel y desde ahí el recorrido va en bajada.',p:'clave'},
+   {h:'10:00',t:'Park Güell: banco ondulado y terraza',d:'Hora y media a paso lento. Hay bancas, sombra y baños.'},
+   {h:'13:00',t:'Comida y descanso largo',d:'Aquí se parte el día en dos. No encadenar el parque con la tarde sin pausa.',p:'clave'},
+   {h:'16:30',t:'Paseo de Gràcia y una sola casa',d:'Elegir entre Casa Batlló y La Pedrera, no las dos. Batlló tiene más color; La Pedrera tiene azotea con ascensor.'},
+   {h:'18:30',t:'Barrio Gótico y catedral',d:'Calles estrechas y adoquín irregular, pero es el corazón antiguo de la ciudad. Plaza Sant Jaume, la catedral y el Pont del Bisbe en un paseo corto.',p:'gratis'},
+   {h:'20:30',t:'Cena en el Gótico o el Born',d:'Barcelona cena a las nueve. Muchas cocinas ni siquiera abren antes de las ocho.'}
+  ],
+  tip:'Es el día más cargado de Barcelona, pero con la pausa larga de la comida se hace bien. Si algo se cae, que se caiga la casa de Gaudí: el parque no se puede mover de hora.',
+  planB:'Con calor fuerte, invertir el orden: casa con aire acondicionado a media mañana y parque al atardecer.'},
+
+ {id:'d9', iso:'2026-09-24', city:'Barcelona', move:true, title:'Vuelo de Barcelona a Venecia', resumen:'Mañana libre, vuelo al mediodía y llegada a Venecia con luz.', pace:2,
+  blocks:[
+   {h:'09:00',t:'Desayuno y salida del alojamiento',d:'Dejar el equipaje listo desde la noche anterior.'},
+   {h:'11:30',t:'Salir al aeropuerto de El Prat',d:'Tres horas antes del vuelo. Pedir la asistencia especial para las tres al llegar al mostrador.',p:'clave'},
+   {h:'14:45',t:'Vuelo IB5560 · Terminal 1',d:'Operado por Vueling. Billetes pagados, incluye una maleta documentada por persona.',p:'pagado'},
+   {h:'16:35',t:'Llegada a Venecia Marco Polo',d:'Es el aeropuerto bueno, el que está junto a la laguna.'},
+   {h:'17:15',t:'Lancha del aeropuerto al alojamiento',d:'Falta contratarla. Un taxi acuático privado deja en el muelle más cercano a la puerta y ahorra puentes con maletas; entre cuatro, el costo por cabeza es razonable.',p:'reservar'},
+   {h:'18:30',t:'Llegada al alojamiento de Venecia',d:'Entrada de 15:00 a 23:00. Dos noches, con vista al río y aire acondicionado.',p:'pagado'},
+   {h:'20:00',t:'Cena cerca y primer paseo corto',d:'Solo el barrio, para ubicarse antes de que oscurezca.'}
+  ],
+  tip:'Venecia es la ciudad más difícil del viaje: puentes con escalones, sin coches y sin atajos. La lancha privada hasta el muelle más cercano resuelve la mayor parte del problema.',
+  planB:'Si el vuelo se retrasa mucho, mejor cenar en el aeropuerto que llegar de noche a buscar restaurante entre callejones.'},
+
+ {id:'d10', iso:'2026-09-25', city:'Venecia', title:'San Marcos, Rialto y el Gran Canal', resumen:'El día completo en Venecia, con el Gran Canal en vaporetto.', pace:2,
+  blocks:[
+   {h:'08:30',t:'Plaza San Marcos casi vacía',d:'Antes de las nueve la plaza es de quien madrugó. A media mañana llegan los cruceros y cambia por completo.',p:'gratis'},
+   {h:'11:00',t:'Basílica de San Marcos · entrada con hora',d:'Entradas pagadas, reserva 171-7OPMOU6. Hay acceso adaptado por la Porta dei Fiori: pregunten por él al llegar en vez de hacer la fila general.',p:'pagado'},
+   {h:'12:30',t:'Café sentadas frente a la plaza',d:'Sentarse en las terrazas históricas cuesta bastante más. Conviene saberlo antes de pedir.'},
+   {h:'13:30',t:'Vaporetto línea 1 por el Gran Canal',d:'Recorre el canal entero, sentadas y con vista. Es el mejor paseo de Venecia para ustedes. Un pase de un día se paga solo.',p:'clave'},
+   {h:'15:00',t:'Comida lejos de San Marcos',d:'Cruzar a Dorsoduro o Cannaregio baja los precios y sube la calidad.'},
+   {h:'17:30',t:'Puente de Rialto y mercado',d:'Tiene escalones de los dos lados. Si es demasiado, se cruza el canal en vaporetto.'},
+   {h:'19:30',t:'Atardecer junto al agua',d:'Zattere o la Punta della Dogana: planos y con el mejor cielo de la ciudad.',p:'gratis'}
+  ],
+  tip:'Aquí la regla es simple: cada puente que se pueda cambiar por un tramo de vaporetto, se cambia.',
+  planB:'Si hay marea alta, la plaza se inunda por horas y se pone resbalosa. Ese día se cambia todo al vaporetto.'},
+
+ {id:'d11', iso:'2026-09-26', city:'Venecia', move:true, title:'Tren de Venecia a Roma', resumen:'Salida temprana del alojamiento y tren del mediodía.', pace:2,
+  blocks:[
+   {h:'08:30',t:'Desayuno y maletas listas',d:'La salida del alojamiento es a las 10:00 en punto.',p:'clave'},
+   {h:'10:00',t:'Salida y vaporetto hasta Ferrovia',d:'Desde la parada de Rialto, el vaporetto llega a Ferrovia, justo enfrente de la estación. Sentadas, por el Gran Canal y sin cruzar puentes con maletas.',p:'clave'},
+   {h:'11:00',t:'Llegada a Venezia Santa Lucia',d:'Hay hora y media de margen. Café sentadas dentro de la estación, sin apuro.'},
+   {h:'12:26',t:'Frecciarossa a Roma · referencia 2702492',d:'Billetes pagados. Casi cuatro horas de viaje. Ubiquen el número de coche en las pantallas antes de caminar por el andén.',p:'pagado'},
+   {h:'16:24',t:'Llegada a Roma Termini',d:'Solo taxis blancos de la fila oficial. Termini es grande y confusa: salir juntos y no dispersarse.'},
+   {h:'17:00',t:'Llegada al alojamiento · Via della Consulta 1b',d:'Cinco noches. Está a diez minutos de Termini y a caminata corta de Trevi y del Coliseo.',p:'reservado'},
+   {h:'20:00',t:'Primera cena romana cerca de casa',d:''}
+  ],
+  tip:'El horario del tren quedó bien: salen a las 10:00 del alojamiento y a las 11:00 ya están en la estación. Sin horas muertas cargando maletas.',
+  planB:'Si algo se atrasa, los Frecciarossa a Roma salen cada hora, pero el billete no siempre es transferible: hay que preguntar en taquilla de inmediato.'},
+
+ {id:'d12', iso:'2026-09-27', city:'Roma', title:'Vaticano: Ángelus y San Pedro', resumen:'Domingo en la Plaza de San Pedro y la basílica.', pace:2,
+  blocks:[
+   {h:'10:00',t:'Llegar a la Plaza de San Pedro',d:'Hay control de seguridad con fila de pie y la plaza casi no tiene sombra. Sombrero, agua y ubicar una banca de antemano.',p:'gratis'},
+   {h:'12:00',t:'Ángelus dominical',d:'El rezo se hace desde la ventana del Palacio Apostólico y dura unos quince minutos. No requiere boleto.',p:'gratis'},
+   {h:'12:45',t:'Basílica de San Pedro',d:'La entrada es libre; lo que toma tiempo es el control. Vestimenta estricta: hombros y rodillas cubiertos.',p:'clave'},
+   {h:'14:30',t:'Comida en Borgo Pio o Prati',d:'A dos calles del Vaticano los precios bajan notablemente.'},
+   {h:'16:30',t:'Descanso largo en casa',d:''},
+   {h:'19:30',t:'Cena tranquila',d:''}
+  ],
+  tip:'La cúpula son más de 300 escalones aunque se tome el ascensor la mitad del camino, y el último tramo es estrecho e inclinado. No es plan para el grupo.',
+  planB:'Si el sol pega fuerte, ver el Ángelus desde la sombra de la columnata en lugar del centro de la plaza.',
+  alert:'Ese domingo 27 es el último del mes y los Museos Vaticanos abren gratis, con filas de más de dos horas. No intenten entrar hoy: ya tienen entrada para el miércoles.'},
+
+ {id:'d13', iso:'2026-09-28', city:'Roma', title:'Coliseo, Foro y Palatino', resumen:'La mañana en la Roma antigua. El día que más piernas cobra.', pace:3,
+  blocks:[
+   {h:'09:20',t:'Salir hacia el Coliseo',d:'Desde la casa son unos 20 minutos caminando o cinco en taxi.'},
+   {h:'09:55',t:'Estar en el punto de encuentro',d:'El voucher pide llegar 30 minutos antes de la hora. Si llegan justas a las 10:25, pueden perder la franja.',p:'clave'},
+   {h:'10:25',t:'Coliseo · entrada con hora',d:'Entradas pagadas, 4 adultos. Hay ascensor al segundo nivel y ruta accesible señalizada. Se puede cancelar con reembolso completo hasta el 25 de septiembre.',p:'pagado'},
+   {h:'12:00',t:'Foro Romano y subida al Palatino',d:'El suelo es de piedra antigua irregular y con desnivel: es el terreno más difícil de Roma, así que zapato firme y sin prisa. Desde el Palatino se ve el Foro entero desde arriba y vale mucho la pena la subida.'},
+   {h:'13:30',t:'Comida en el barrio Monti',d:'A cinco minutos, con calles peatonales y mesas afuera.'},
+   {h:'15:30',t:'Descanso obligatorio en casa',d:'Después de una mañana en piedra y sol, esta pausa no se negocia.',p:'clave'},
+   {h:'18:30',t:'Opcional: Coliseo iluminado desde fuera',d:'Se ve desde la acera de Via dei Fori Imperiali sin caminar de más.',p:'gratis'}
+  ],
+  tip:'Es el día que más piernas cobra de todo el viaje: piedra irregular, sol y poca sombra. Por eso la pausa de la tarde no se negocia. Si alguien prefiere saltarse el Palatino, el Coliseo y el Foro ya justifican el día.',
+  planB:'Con calor o lluvia fuerte, cambiar el Foro por la Basílica de San Clemente, techada y a diez minutos.'},
+
+ {id:'d14', iso:'2026-09-29', city:'Roma', title:'Trevi, Panteón y Piazza Navona', resumen:'Todo el día dentro de un cuadro de un kilómetro, en plano.', pace:2,
+  blocks:[
+   {h:'09:00',t:'Fontana di Trevi temprano',d:'A las nueve todavía se puede llegar al borde. Después de las once es una pared de gente. Está a quince minutos caminando desde la casa.',p:'gratis'},
+   {h:'10:30',t:'Panteón',d:'Requiere boleto con hora y todavía no está comprado. Es plano, techado y de los interiores más impresionantes de Roma; media hora basta.',p:'reservar'},
+   {h:'11:30',t:'Café en Piazza della Rotonda',d:'Sentarse frente al Panteón, que para eso vinieron.'},
+   {h:'12:30',t:'Piazza Navona',d:'Plana, con bancas, tres fuentes y sombra en los costados.',p:'gratis'},
+   {h:'13:30',t:'Comida por Campo de\u2019 Fiori',d:''},
+   {h:'16:00',t:'Descanso y tarde libre',d:'Opción suave: la Escalinata de España vista desde abajo, o compras en Via del Corso.'}
+  ],
+  tip:'Es el paseo romano más amable con las tres: todo cerca, todo plano y con cafés cada dos calles para sentarse.',
+  planB:'Si el cansancio pesa, este día se parte en dos mitades con regreso a casa entre una y otra.'},
+
+ {id:'d15', iso:'2026-09-30', city:'Roma', title:'Museos Vaticanos y Capilla Sixtina', resumen:'La última visita grande del viaje, y la más larga de caminar.', pace:3,
+  blocks:[
+   {h:'10:10',t:'Estar en el punto de encuentro y canjear el voucher',d:'El voucher tiene que cambiarse por la entrada antes de empezar, y piden llegar 25 minutos antes. Este paso extra es fácil de olvidar y es el que hace perder la franja.',p:'clave'},
+   {h:'10:35',t:'Museos Vaticanos · entrada con hora',d:'Entradas pagadas, reserva GYG996W789W8. La hora puede moverse media hora y en temporada alta el acceso llega a tardar más de una hora. Los miércoles hay menos gente porque la audiencia papal se lleva a las multitudes a la plaza.',p:'pagado'},
+   {h:'11:15',t:'Recorrido a paso lento',d:'Hay ascensores y préstamo de sillas de ruedas sin costo, pero el camino hasta la Sixtina es largo y casi todo en un solo sentido. Calculen dos horas y media con pausas.',p:'clave'},
+   {h:'13:00',t:'Capilla Sixtina',d:'Se está de pie, en silencio y con mucha gente. Hay bancas en los laterales: apuntar a ellas apenas se entra.'},
+   {h:'14:30',t:'Comida en Prati',d:''},
+   {h:'16:30',t:'Tarde libre o Castel Sant\u2019Angelo por fuera',d:'El puente de los ángeles es plano y da una de las mejores vistas de Roma al atardecer.',p:'gratis'},
+   {h:'19:30',t:'Cena de despedida en Trastevere',d:'La última noche real de vacaciones. Vale la pena reservar mesa.',p:'reservar'}
+  ],
+  tip:'Es la visita más agotadora de Roma: mucha distancia, poco dónde sentarse y calor humano. Entrar y salir sin culpa cuando ya vieron la Sixtina.',
+  planB:'La Basílica de San Pedro cierra los miércoles por la mañana por la audiencia y reabre hacia las 12:30. Por eso la vieron el domingo.'},
+
+ {id:'d16', iso:'2026-10-01', city:'Roma', move:true, title:'Vuelo de Roma a París', resumen:'Última mañana en Roma y vuelo de la tarde a Orly.', pace:2,
+  blocks:[
+   {h:'Antes',t:'Preguntar al anfitrión si pueden dejar las maletas',d:'La salida del alojamiento suele ser a las 10:00 y el vuelo es hasta las 18:10. Si no se puede, hay guarda-equipajes en Termini, a diez minutos de la casa.',p:'clave'},
+   {h:'10:00',t:'Salida del alojamiento',d:''},
+   {h:'10:30',t:'Última mañana romana, ligera',d:'Un café, una plaza cercana, sin planes que impliquen caminar mucho con equipaje.'},
+   {h:'14:30',t:'Traslado a Fiumicino',d:'Van o taxi con tarifa fija. Con maletas llenas de vuelta, nada de tren.',p:'reservar'},
+   {h:'18:10',t:'Vuelo TO 3917 a París Orly',d:'Transavia, reserva GF88PT. Pagado. Aterriza a las 20:20 en Orly, que es justo de donde ellas salen mañana.',p:'pagado'},
+   {h:'21:00',t:'Hotel junto a Orly',d:'Reserva 5831697889. Pedir que guarden la maleta de Caterine hasta la tarde del día siguiente.',p:'pagado'},
+   {h:'21:30',t:'Cena en el hotel y maletas finales',d:'Repartir las compras para que ninguna maleta pase de peso.'}
+  ],
+  tip:'Que el vuelo llegue a Orly fue la mejor decisión de la logística final: mañana ellas solo cruzan del hotel a la terminal.',
+  planB:'Si el vuelo se retrasa, avisar de inmediato al hotel para que no cancele la reserva por llegada tardía.'},
+
+ {id:'d17', iso:'2026-10-02', city:'París', move:true, title:'Regreso a casa', resumen:'Ellas salen de Orly por la mañana; Caterine de CDG por la tarde.', pace:2,
+  blocks:[
+   {h:'06:45',t:'Despertar y desayuno rápido',d:'Deben estar en el mostrador de Orly a las 08:00.',p:'clave'},
+   {h:'07:45',t:'Llevarlas al mostrador de asistencia especial',d:'Ahí ayudan con el documentado y las acompañan hasta la puerta. Despedirse antes del control de seguridad.'},
+   {h:'10:55',t:'Ellas vuelan Orly → Madrid → Bogotá',d:'Escala en Madrid y llegada a Bogotá a las 18:15.',p:'pagado'},
+   {h:'09:00',t:'Día libre de Caterine en París',d:'Quedan casi siete horas. Se puede dejar la maleta en el hotel y subir al centro, o salir directo sin prisa.'},
+   {h:'14:30',t:'Traslado de Orly a Charles de Gaulle',d:'Entre una hora y hora y media. Taxi directo es lo más cómodo con maleta.',p:'clave'},
+   {h:'18:40',t:'Vuelo CDG → México',d:'Llegada a Ciudad de México a las 02:05 del día 3.',p:'pagado'}
+  ],
+  tip:'Antes de separarse, dejen una foto de todos los pasaportes y billetes en el teléfono de al menos dos personas.',
+  planB:'Si alguien pierde la conexión en Madrid, la aerolínea reubica en el mostrador de transferencias. No salir de la zona sin hablar con ellos.'}
+];
+
+const MOVES = [
+ {k:'mv0', when:'15 y 16 sep · PAGADO', title:'Bogotá → Madrid → París Orly', city:'París',
+  detail:'Air Europa, localizador 7D63DW. Salen de Bogotá el 15 a las 20:15, llegan a Madrid a las 13:00 y a Orly a las 18:25. Falta comprar la maleta documentada: la tarifa es NOBAG.',
+  fields:['Maletas compradas','Asistencia pedida','Asientos juntos','Notas']},
+ {k:'mv0b', when:'15 y 16 sep · PAGADO', title:'México → París CDG (Caterine)', city:'París',
+  detail:'Aeroméxico. Sale de México el 15 a las 19:25 y llega a CDG el 16 a las 19:50, con una escala.',
+  fields:['Número de vuelo','Terminal en CDG','Traslado al hotel','Notas']},
+ {k:'mv1', when:'16 sep · PAGADO', title:'Van privada Orly → casa de París', city:'París',
+  detail:'Reserva 588871925, 62 euros. Recogen a las 18:30 en Orly con cartel a nombre de la familia.',
+  fields:['Teléfono del chofer','Punto de encuentro','Confirmado un día antes','Notas']},
+ {k:'mv2', when:'21 sep · PAGADO', title:'Tren París → Barcelona', city:'París',
+  detail:'TGV INOUI 9715, expediente P4PNMJ. Gare de Lyon 14:42 → Barcelona Sants 21:32. Coche 18 planta baja, plazas 818, 819, 822 y 823.',
+  fields:['Traslado en Sants','Anfitrión avisado','Cena comprada','Maletas etiquetadas']},
+ {k:'mv3', when:'24 sep · PAGADO', title:'Vuelo Barcelona → Venecia', city:'Barcelona',
+  detail:'Vuelo IB5560 operado por Vueling. Barcelona Terminal 1 a las 14:45, llegada a Venecia Marco Polo a las 16:35. Incluye una maleta documentada por persona.',
+  fields:['Asistencia pedida','Check-in hecho','Notas','']},
+ {k:'mv4', when:'24 sep · FALTA', title:'Lancha del aeropuerto de Venecia a la casa', city:'Venecia',
+  detail:'Taxi acuático privado o Alilaguna. Preguntar al anfitrión cuál es el muelle más cercano a la puerta.',
+  fields:['Empresa','Hora','Reserva','Muelle de llegada']},
+ {k:'mv5', when:'26 sep · PAGADO', title:'Tren Venecia → Roma', city:'Venecia',
+  detail:'Frecciarossa, referencia 2702492. Santa Lucia 12:26 → Roma Termini 16:24, casi cuatro horas.',
+  fields:['Coche y asientos','Vaporetto a Ferrovia','Taxi en Termini','Notas']},
+ {k:'mv6', when:'1 oct · PAGADO', title:'Vuelo Roma → París Orly', city:'Roma',
+  detail:'Transavia TO 3917, reserva GF88PT. Fiumicino 18:10 → París Orly 20:20. Llega al aeropuerto correcto para el vuelo del día siguiente.',
+  fields:['Traslado a Fiumicino','Equipaje guardado en Roma','Check-in hecho','Notas']},
+ {k:'mv7', when:'2 oct · PAGADO', title:'Regresos: ellas a Bogotá, Caterine a México', city:'París',
+  detail:'Ellas salen de Orly a las 10:55 con escala en Madrid y llegan a Bogotá a las 18:15. Caterine sale de CDG a las 18:40 y llega a México a las 02:05 del día 3.',
+  fields:['Traslado a la terminal 07:45','Asistencia para ellas','Traslado Orly → CDG','Terminal en CDG']}
+];
+
+const HOTELS = [
+ {k:'h1', city:'París', nights:'16 al 21 de septiembre · 5 noches · PAGADO', ask:'11 Rue du Delta, 75009 París. Reserva HMXXDNTPZF. Preguntar al anfitrión por el piso, el ascensor y cómo se recogen las llaves.'},
+ {k:'h2', city:'Barcelona', nights:'21 al 24 de septiembre · 3 noches · PAGADO', ask:'Reserva HMWM9XXSK3. Avisar que llegan hacia las 22:15 desde la estación de Sants.'},
+ {k:'h3', city:'Venecia', nights:'24 al 26 de septiembre · 2 noches · PAGADO', ask:'Entrada de 15:00 a 23:00, salida a las 10:00. Preguntar cuántos puentes hay hasta el vaporetto y dónde puede dejarlas la lancha.'},
+ {k:'h4', city:'Roma', nights:'26 de septiembre al 1 de octubre · 5 noches', ask:'Via della Consulta 1b, 00184 Roma. Preguntar si pueden dejar las maletas el 1 de octubre después de la salida.'},
+ {k:'h5', city:'París · junto a Orly', nights:'1 al 2 de octubre · 1 noche · PAGADO', ask:'Reserva 5831697889. Pedir transporte a la terminal y que guarden la maleta de Caterine hasta la tarde del día 2.'}
+];
+
+
+const BILLETES = [
+ {cat:"Vuelos", day:"d1", title:"Bogotá → Madrid → París Orly", sub:"Air Europa · 15 y 16 sep · localizador 7D63DW", items:[{n:"Georgina Aguirre De Galvis",i:"1HJNIJGOPRSVLm99JLsFId76JbZlq7kk4"}, {n:"Maria Eugenia Galviz Aguirre",i:"17y4oSLaH2BSghd3TDRwFAvZFddkNiIcz"}, {n:"Martha Lucia Galvis Aguirre",i:"1x8J1dTZnSa8ZQPRJ12DwnFQV0Xa46rdu"}]},
+ {cat:"Vuelos", day:"d1", title:"México → París CDG · Caterine", sub:"Aeroméxico · 15 y 16 sep", items:[{n:"Itinerario Aeroméxico · captura 1",i:"14CmSdULX0k64KZ0-NF5Y71Bi8HVs9sAP"}, {n:"Itinerario Aeroméxico · captura 2",i:"1YUPNb-pc6v3zxVV9YDOLeAOnDEiDH5PQ"}]},
+ {cat:"Traslados", day:"d1", title:"Van privada Orly → casa de París", sub:"16 sep · 18:30 · reserva 588871925 · 62 €", items:[{n:"Confirmación Booking · van privada",i:"1BOXH0Gv-0HmolaputCNWuUe64ubkxm_9"}]},
+ {cat:"Hospedajes", day:"d1", title:"Casa de París", sub:"11 Rue du Delta, 75009 · 16 al 21 sep · reserva HMXXDNTPZF", items:[{n:"Confirmación de la reserva",i:"11ZxNDMUMSsQkdycMRGx1kpgMmbNpJl1y"}, {n:"Recibo de pago",i:"1hNNJbj2YYooHD0Sb3vWjJJTzbByM9LfH"}]},
+ {cat:"Entradas", day:"d2", title:"Torre Eiffel · ascensor a la cima", sub:"17 sep · 11:00 · reserva 262010530930", items:[{n:"Abrir la entrada",i:"1BHbilGa6J7fQktTgjsQB3Po04Uqem952"}]},
+ {cat:"Entradas", day:"d2", title:"Crucero por el Sena", sub:"17 sep · válido de 10:00 a 22:00 · GYG2Q9BXRFRN", items:[{n:"Abrir la entrada",i:"1905nMkQP0xVshZRcFBPuy2cRZpFZa89d"}]},
+ {cat:"Entradas", day:"d3", title:"Museo del Louvre", sub:"18 sep · 10:00 · reserva C262340001706", items:[{n:"Abrir la entrada",i:"1nsZd97QzqGTlcvlEIU9dNTCh8Vbbk43m"}]},
+ {cat:"Entradas", day:"d4", title:"Palacio de Versalles", sub:"19 sep · 10:00 · Puerta A · Passeport", items:[{n:"Abrir la entrada",i:"1r0gRJN9tp5i40DJNg0t1003sKEWoVpxl"}]},
+ {cat:"Entradas", day:"d5", title:"Disneyland París", sub:"20 sep · una entrada por persona", items:[{n:"Caterine Ladino",i:"1G8P8EJxMmYcjwI83zwW-2hjdch6eOMBW"}, {n:"Georgina Aguirre",i:"1zgW5rx9uwOCs59VmxhpfWgxKDhITZ68E"}, {n:"Maria Eugenia Galviz",i:"1VeoA_LjUOo_dUDygDKE_KA3qZViiEd8F"}, {n:"Martha Galvis",i:"1ox3c5QQHtNjT92wuVu9v8FII0I8OWdaC"}]},
+ {cat:"Trenes", day:"d6", title:"París Gare de Lyon → Barcelona Sants", sub:"TGV INOUI 9715 · 21 sep · 14:42 · expediente P4PNMJ", items:[{n:"Billete 1 de 4",i:"1HAVlfVvGrf75QFRkq9ZvdLIZBpDDbGDc"}, {n:"Billete 2 de 4",i:"1nxIje188sDTM239kAP3Zg7wYMyAbSiBL"}, {n:"Billete 3 de 4",i:"1PDXiU9mI1yqXmNXy97K2ZU4SighqGQxY"}, {n:"Billete 4 de 4",i:"1hKjoPy_S15O4xSZ3jhwo6Z57_fWfeC2u"}]},
+ {cat:"Hospedajes", day:"d6", title:"Casa de Barcelona", sub:"21 al 24 sep · reserva HMWM9XXSK3", items:[{n:"Confirmación de la reserva",i:"1ARmgo9ruiLNaSLLgqgkklOduQvxLB58v"}, {n:"Recibo de pago",i:"1RBJ2S1MccjJNucEa_BdlA1piWmlLIF4w"}]},
+ {cat:"Vuelos", day:"d9", title:"Barcelona → Venecia Marco Polo", sub:"Vueling IB5560 · 24 sep · 14:45", items:[{n:"Georgina Aguirre",i:"15fTw3bsjIM6rxMkBGBw6fX9Q80z35C9T"}, {n:"Martha Lucía Galvis",i:"1NRUwb6qdGeJtCd5eJNSEGQju-lANGIWN"}, {n:"María Eugenia Galviz",i:"1kWK-8vRaoELVQB5xYxzKv4Cg1SM8TmZ4"}, {n:"Caterine Ladino",i:"10S27_lWswYKwk1hSiBv-AfAb-VAd3h7i"}]},
+ {cat:"Hospedajes", day:"d9", title:"Casa de Venecia", sub:"24 al 26 sep · entrada de 15:00 a 23:00", items:[{n:"Confirmación de la reserva",i:"1xZ8q5Li9cP_-WE9yoW0nVQ5yxgwJ1W7Q"}, {n:"Recibo de pago",i:"17T92-04zlNONO90ZlZM8WVspayyyO47a"}]},
+ {cat:"Entradas", day:"d10", title:"Basílica de San Marcos", sub:"25 sep · 11:00 · Venecia", items:[{n:"Billete 3",i:"1hXJTqwB3Yq6nRd43gdQB494twTFhOcNe"}, {n:"Billete 4",i:"1teGjiD5Zu-jYapq_CFsFfNo5g0vqZnqq"}, {n:"Billete 5",i:"1D-h260OWKCMwgm8hVAkU_PnTMwl9u4OI"}, {n:"Billete 6",i:"1LtrUOSsGsjO7ZXjTv2KPkJZWXKTz9IfA"}, {n:"Recibo de compra",i:"1UVNJ-kIflT7HtJ0HL9KrMruJs-RpYUCl"}]},
+ {cat:"Trenes", day:"d11", title:"Venecia Santa Lucía → Roma Termini", sub:"Frecciarossa · 26 sep · 12:26 · referencia 2702492", items:[{n:"Reserva Trenitalia",i:"1f8fOPMO44Fl0q9uX_ey3iWKsT69zKGG7"}]},
+ {cat:"Trenes", day:"d11", title:"Billetes nominativos del Frecciarossa", sub:"Uno por persona · 26 sep", items:[{n:"Billete 1 de 4",i:"1dB5mcym4AkkMUrrkFDmxLQuUgrEFigC2"}, {n:"Billete 2 de 4",i:"1HTH1Am7y_VN-PyPCNtQXBYEGJoyY6-ib"}, {n:"Billete 3 de 4",i:"12CPmB63n5ag1D3pbV3fRD6jjA2rfr8Z1"}, {n:"Billete 4 de 4",i:"1tZeiLXVtGklWu71lowvXxex8TPMR-uBb"}]},
+ {cat:"Hospedajes", day:"d11", title:"Casa de Roma", sub:"Via della Consulta 1b, 00184 · 26 sep al 1 oct", items:[{n:"Confirmación de la reserva",i:"1ehcIxt59ANnp_V-SKgspgA6R46-Wjlu7"}]},
+ {cat:"Entradas", day:"d13", title:"Coliseo, Foro y Palatino", sub:"28 sep · 10:25", items:[{n:"Abrir la entrada",i:"1orUZLiVnm79i6mcCzdhICF0_qjGK-ZnV"}]},
+ {cat:"Entradas", day:"d15", title:"Museos Vaticanos y Capilla Sixtina", sub:"30 sep · 10:30", items:[{n:"Abrir la entrada",i:"1N3su_4bEhWQMUFP-DGaxrBy73Y5RhV2U"}]},
+ {cat:"Vuelos", day:"d16", title:"Roma Fiumicino → París Orly", sub:"Transavia TO 3917 · 1 oct · reserva GF88PT", items:[{n:"Confirmación Transavia · GF88PT",i:"1WPjyDyJZ9l0mlsVozDV2DQwpXu_NacJF"}]},
+];
+
+/* ============ CARPETA DE DRIVE ============ */
+const DRIVE_FOLDER='https://drive.google.com/drive/folders/1netn2u_ku8Yxdi6mD4T4mCXVgAldnLX4';
+function driveView(id){ return 'https://drive.google.com/file/d/'+id+'/view'; }
+
+/* ============ DIRECCIONES Y RUTAS ============ */
+const CASA={
+  'París':'11 Rue du Delta, 75009 París, Francia',
+  'Barcelona':'',
+  'Venecia':'',
+  'Roma':'Via della Consulta 1b, 00184 Roma, Italia'
+};
+const HKEY={'París':'h1','Barcelona':'h2','Venecia':'h3','Roma':'h4'};
+function casa(city){
+  const g=(S.hotels||{})[(HKEY[city]||'')+'-a'];
+  return (g&&g.trim()) || CASA[city] || city;
+}
+function gmaps(from,to){
+  return 'https://www.google.com/maps/dir/?api=1&origin='+encodeURIComponent(from)+
+         '&destination='+encodeURIComponent(to)+'&travelmode=transit';
+}
+function lineas(arr){
+  return '<div class="lineas">'+(arr||[]).map(l=>
+    `<span class="li" style="background:${l[1]};${l[2]?'color:#221D2B':''}">${esc(l[0])}</span>`).join('')+'</div>';
+}
+/* Llegadas y salidas: aeropuerto o estación <-> casa */
+const RUTAS=[
+ {city:'París', when:'16 sep · llegada de Caterine',
+  title:'París Charles de Gaulle → casa de París',
+  from:'Aeroport Charles de Gaulle 2 TGV, Roissy-en-France, Francia', to:'casa:París',
+  lines:[['RER B','#5291ce'],['a pie','#6B6478']],
+  text:'RER B dirección Saint-Rémy-lès-Chevreuse desde la terminal, sin transbordos hasta Gare du Nord: unos 35 minutos. De ahí son 10 minutos a pie por Rue de Maubeuge y Rue de Rochechouart. Con maleta grande y de noche, un taxi desde la parada oficial de la terminal sale en 55–70 € y llega en 45 minutos.'},
+
+ {city:'París', when:'16 sep · respaldo si falla la van',
+  title:'París Orly → casa de París',
+  from:'Aeropuerto de Orly, Francia', to:'casa:París',
+  lines:[['M14','#62259d'],['M4','#a0006e'],['a pie','#6B6478']],
+  text:'La van ya está pagada, pero si algo pasa: la línea 14 del metro llega desde 2024 hasta la propia terminal de Orly y va directa a Châtelet en 25 minutos, con tren cada minuto y medio. En Châtelet se cambia a la línea 4 dirección Porte de Clignancourt y se baja en Gare du Nord, a 9 minutos a pie de la casa.'},
+
+ {city:'París', when:'21 sep · salida hacia Barcelona',
+  title:'Casa de París → Gare de Lyon',
+  from:'casa:París', to:'Gare de Lyon, París, Francia',
+  lines:[['a pie','#6B6478'],['RER D','#00814f']],
+  text:'Diez minutos a pie hasta Gare du Nord y el RER D dirección Melun deja en Gare de Lyon en dos paradas, unos 7 minutos. Es lo más rápido y lo más cómodo con maletas porque no hay escaleras entre andenes. Salgan de casa a las 13:15 para el tren de las 14:42.'},
+
+ {city:'Barcelona', when:'21 sep · llegada de noche',
+  title:'Barcelona Sants → casa de Barcelona',
+  from:'Estació de Barcelona-Sants, Barcelona, España', to:'casa:Barcelona',
+  lines:[['L3','#00a94f'],['L5','#0079c2']],
+  text:'Sants Estació tiene las líneas 3 (verde) y 5 (azul) del metro dentro de la propia estación, con ascensor desde el andén del tren. Llegan hacia las 22:15 con cuatro maletas: si la casa queda a más de dos paradas o hay transbordo, el taxi de la fila oficial cuesta 10–15 € y evita cargarlas. Anota la dirección exacta en la pestaña de traslados y el botón de abajo calcula la ruta del día.'},
+
+ {city:'Barcelona', when:'24 sep · salida al aeropuerto',
+  title:'Casa de Barcelona → aeropuerto T1',
+  from:'casa:Barcelona', to:'Aeropuerto Josep Tarradellas Barcelona-El Prat T1, España',
+  lines:[['Aerobús A1','#004b87'],['L9 Sud','#ff8000',1]],
+  text:'El Aerobús A1 sale de Plaça de Catalunya cada 5 minutos, tarda 35 minutos hasta la Terminal 1 y tiene maletero abajo: es la opción sensata con equipaje. El metro L9 Sud también llega a la T1, pero obliga a transbordar en Zona Universitària o Collblanc con escaleras. Para el vuelo de las 14:45, salir de casa a las 11:45.'},
+
+ {city:'Venecia', when:'24 sep · llegada',
+  title:'Aeropuerto Marco Polo → casa de Venecia',
+  from:'Aeroporto di Venezia Marco Polo, Italia', to:'casa:Venecia',
+  lines:[['Alilaguna','#0CA678'],['Taxi acuático','#0b7285']],
+  text:'En Venecia no hay metro: se llega por agua. Del edificio de llegadas hasta el muelle hay 7 minutos por una pasarela techada y plana. El Alilaguna cuesta 15 € por persona y tarda entre 45 y 75 minutos según la línea. El taxi acuático privado cuesta 110–140 € para las cuatro y deja lo más cerca posible de la puerta: con maletas y a las cuatro de la tarde, vale cada euro. Pregúntale al anfitrión a qué muelle puede llegar la lancha.'},
+
+ {city:'Venecia', when:'26 sep · salida hacia Roma',
+  title:'Casa de Venecia → estación Santa Lucía',
+  from:'casa:Venecia', to:'Stazione di Venezia Santa Lucia, Italia',
+  lines:[['Vaporetto 1','#e8590c'],['Vaporetto 2','#1971c2']],
+  text:'El vaporetto 2 por el Gran Canal es el rápido y el 1 para en todos los muelles; los dos terminan en Ferrovia, que es la estación. Calculen entre 30 y 45 minutos más los puentes que haya desde la casa hasta el muelle, y cada puente son escalones con maleta. Para el tren de las 12:26, salgan a las 10:45.'},
+
+ {city:'Roma', when:'26 sep · llegada',
+  title:'Roma Termini → casa de Roma',
+  from:'Roma Termini, Italia', to:'casa:Roma',
+  lines:[['a pie','#6B6478'],['Metro A','#fb8c00']],
+  text:'Via della Consulta queda a 12 minutos a pie de Termini bajando por Via Nazionale, pero es cuesta arriba al final y llegan con maletas después de cuatro horas de tren. El taxi blanco de la fila oficial cuesta unos 10 € y tarda 6 minutos. Si prefieren metro: línea A dirección Battistini, una parada hasta Repubblica, y 6 minutos a pie.'},
+
+ {city:'Roma', when:'1 oct · salida al aeropuerto',
+  title:'Casa de Roma → Fiumicino',
+  from:'casa:Roma', to:'Aeropuerto de Roma Fiumicino, Italia',
+  lines:[['a pie','#6B6478'],['Leonardo Express','#c92a2a']],
+  text:'A Termini a pie en 12 minutos o en taxi por 10 €, y ahí el Leonardo Express sale cada 15 minutos del andén 23 y llega a Fiumicino en 32 minutos sin paradas. Cuesta 14 € por persona. Para el vuelo de las 18:10, tomen el tren de las 15:15.'}
+];
+
+/* Cómo llegar desde casa a lo principal de cada día */
+const RUTA_DIA={
+ d2:{to:'Trocadéro, París, Francia', lines:[['M2','#003ca6'],['M6','#6eca97',1]],
+     text:'Metro línea 2 desde Anvers, la estación al pie de casa, dirección Porte Dauphine hasta Charles de Gaulle–Étoile; ahí se cambia a la línea 6 dirección Nation y se baja en Trocadéro. Unos 25 minutos.'},
+ d3:{to:'Museo del Louvre, París, Francia', lines:[['M4','#a0006e'],['M1','#ffcd00',1]],
+     text:'Línea 4 desde Barbès–Rochechouart dirección Bagneux hasta Châtelet, y una parada en la línea 1 hasta Palais-Royal–Musée du Louvre. Unos 20 minutos. Salgan 40 minutos antes: la entrada es con hora.'},
+ d4:{to:'Palacio de Versalles, Francia', lines:[['RER C','#ffcd00',1]],
+     text:'La van privada es el plan y con la entrada a las 10:00 en punto conviene. En transporte público serían el RER C desde Saint-Michel–Notre-Dame hasta Versailles Château Rive Gauche, unos 50 minutos más el traslado hasta el RER.'},
+ d5:{to:'Disneyland París, Marne-la-Vallée, Francia', lines:[['M4','#a0006e'],['RER A','#e3051c']],
+     text:'Línea 4 desde Barbès hasta Châtelet–Les Halles y ahí el RER A dirección Marne-la-Vallée–Chessy, que es la última parada y deja en la puerta del parque. Unos 55 minutos en total. Compren el billete que cubre la zona 5.'},
+ d7:{to:'Sagrada Família, Barcelona, España', lines:[['L2','#a1006b'],['L5','#0079c2']],
+     text:'Las líneas 2 (lila) y 5 (azul) tienen parada Sagrada Família y la salida da justo a la fachada del Nacimiento, que es la que hay que ver primero.'},
+ d8:{to:'Park Güell, Barcelona, España', lines:[['L3','#00a94f'],['bus 24','#d6336c']],
+     text:'Línea 3 hasta Vallcarca y luego las escaleras mecánicas públicas que suben casi todo el cerro: es mucho más llevadero que bajarse en Lesseps. El bus 24 es la otra opción y deja en la puerta lateral, sin cuesta.'},
+ d10:{to:'Basílica de San Marcos, Venecia, Italia', lines:[['Vaporetto 1','#e8590c'],['Vaporetto 2','#1971c2']],
+     text:'Vaporetto hasta San Zaccaria o San Marco–Vallaresso; de los dos muelles son cinco minutos en plano hasta la plaza. Con la entrada de las 11:00, tomen el vaporetto a las 10:00.'},
+ d12:{to:'Basílica de San Pedro, Ciudad del Vaticano', lines:[['Metro A','#fb8c00'],['a pie','#6B6478']],
+     text:'Metro A desde Repubblica dirección Battistini hasta Ottaviano, y diez minutos a pie por Via Ottaviano hasta la plaza. Unos 25 minutos. Para el Ángelus del domingo, estar a las 11:15.'},
+ d13:{to:'Coliseo, Roma, Italia', lines:[['Metro B','#0065b3']],
+     text:'A Termini a pie y ahí la línea B dirección Laurentina, dos paradas hasta Colosseo: la salida del metro da a los pies del anfiteatro. Unos 20 minutos puerta a puerta.'},
+ d14:{to:'Fontana di Trevi, Roma, Italia', lines:[['a pie','#6B6478']],
+     text:'Todo este día se hace caminando y en bajada: de Via della Consulta a la Fontana de Trevi son 10 minutos, y de ahí al Panteón y a Piazza Navona otros 10 entre uno y otro.'},
+ d15:{to:'Museos Vaticanos, Ciudad del Vaticano', lines:[['Metro A','#fb8c00'],['a pie','#6B6478']],
+     text:'Metro A hasta Ottaviano o Cipro: desde Cipro la entrada de los museos queda a 6 minutos y es la opción con menos caminata. Con la entrada de las 10:30, salgan de casa a las 9:30.'}
+};
+function rutaHTML(r,cv){
+  const from=String(r.from||'').indexOf('casa:')===0?casa(r.from.slice(5)):r.from;
+  const to=String(r.to||'').indexOf('casa:')===0?casa(r.to.slice(5)):r.to;
+  return `<div class="ruta" style="--c:${cv}">
+    <b class="hd">Cómo llegar</b>
+    <div style="margin-bottom:7px">${lineas(r.lines)}</div>
+    <p>${esc(r.text)}</p>
+    <a class="gmaps" style="--c:${cv}" target="_blank" rel="noopener" href="${gmaps(from,to)}">Ver la ruta de hoy en Google Maps ↗</a>
+  </div>`;
+}
+
+
+
+
+/* ============ ESTADO Y GUARDADO ============ */
+const KEY='viaje-europa-2026';
+let S={checks:{},notes:{},moves:{},hotels:{},expenses:[],bookings:[],personal:[],ppl:4,budget:'',pbudget:'',tc:21.5};
+const mem={};
+let saveTimer=null;
+
+async function load(){
+  let got=false;
+  try{
+    if(window.storage){
+      const r=await window.storage.get(KEY,false);
+      if(r&&r.value){ S=Object.assign(S,JSON.parse(r.value)); got=true; }
+    }
+  }catch(e){ if(mem[KEY]){ S=Object.assign(S,mem[KEY]); got=true; } }
+  if(!got && window.__SEED__){ try{ S=Object.assign(S,window.__SEED__); }catch(e){} }
+}
+function save(){
+  mem[KEY]=S;
+  clearTimeout(saveTimer);
+  saveTimer=setTimeout(async()=>{
+    try{ if(window.storage) await window.storage.set(KEY,JSON.stringify(S),false); }catch(e){}
+    const c=document.getElementById('savechip');
+    c.classList.add('show'); setTimeout(()=>c.classList.remove('show'),1200);
+  },400);
+}
+
+/* ============ UTILIDADES ============ */
+const MES=['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+const DIA=['dom','lun','mar','mié','jue','vie','sáb'];
+const DIAL=['domingo','lunes','martes','miércoles','jueves','viernes','sábado'];
+function dObj(iso){const [y,m,d]=iso.split('-').map(Number);return new Date(y,m-1,d);}
+function fLarga(iso){const x=dObj(iso);return DIAL[x.getDay()]+' '+x.getDate()+' de '+({0:'enero',8:'septiembre',9:'octubre'}[x.getMonth()]||MES[x.getMonth()]);}
+function fCorta(iso){const x=dObj(iso);return x.getDate()+' '+MES[x.getMonth()];}
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+function cvar(city){return 'var('+CITY[city].v+')';}
+function tc(){const v=Number(S.tc);return (v>0?v:21.5);}
+function mxn(n){return '$'+Math.round(n*tc()).toLocaleString('es-MX')+' MXN';}
+function usd(n){return 'US$'+(Math.round(n*100)/100).toLocaleString('es-MX',{minimumFractionDigits:0,maximumFractionDigits:2});}
+function eur(n){return '€'+(Math.round(n*100)/100).toLocaleString('es-MX',{minimumFractionDigits:0,maximumFractionDigits:2});}
+const PILL={'reservar':['book','Falta comprar'],'gratis':['free','Gratis'],'clave':['time','Importante'],
+ 'pagado':['paid','Ya pagado'],'reservado':['free','Reservado']};
+const PACE=['','Ritmo suave','Ritmo medio','Día exigente'];
+
+/* ============ RENDER: DÍAS ============ */
+function renderDays(){
+  const host=document.getElementById('days');
+  host.innerHTML=DAYS.map((d,i)=>{
+    const c=cvar(d.city);
+    const blocks=d.blocks.map((b,j)=>{
+      const id=d.id+'-'+j;
+      const on=S.checks[id]?'checked':'';
+      let pill='';
+      if(b.p){const p=PILL[b.p]||['time',b.p];pill=`<span class="pill ${p[0]}">${esc(p[1])}</span>`;}
+      return `<div class="block"><label>
+        <input type="checkbox" data-check="${id}" ${on}>
+        <span class="txt"><span class="hh">${esc(b.h)}</span>
+        <div class="tt">${esc(b.t)}${pill}</div>
+        ${b.d?`<div class="dd">${esc(b.d)}</div>`:''}</span></label></div>`;
+    }).join('');
+    const alert=d.alert?`<div class="note alert"><b>Ojo con esto</b>${esc(d.alert)}</div>`:'';
+    const paceD=[1,2,3].map(n=>`<i class="${n<=d.pace?'on':''}"></i>`).join('');
+    const mine=(S.bookings||[]).filter(b=>b.iso===d.iso);
+    const mdocs=(DOC.docs||[]).filter(x=>x.day===d.id);
+    const dbox=mdocs.length?`<div class="docbox"><b class="hd">Documentos de este día</b>${mdocs.map(x=>`<div style="padding:3px 0"><a href="#" data-docopen="${x.id}">${esc(x.name)}</a> <span style="color:var(--ink-soft);font-size:12.5px">${kb(x.size)}</span></div>`).join('')}</div>`:'';
+    const rbox=mine.length?`<div class="rsvbox"><b class="hd">Reservas de este día</b>${mine.map(rsvHTML).join('')}</div>`:'';
+    const bil=BILLETES.filter(g=>g.day===d.id);
+    const bbox=bil.length?`<div class="docbox"><b class="hd">Billetes de este día</b>${bil.map(g=>
+      `<div style="padding:5px 0"><div style="font-weight:600;font-size:14.5px">${esc(g.title)}</div>
+       <div class="blist" style="margin-top:5px">${g.items.map(it=>
+         `<a class="blink" style="--c:${c};padding:5px 11px;font-size:13.5px" target="_blank" rel="noopener" href="${driveView(it.i)}">${esc(it.n)}</a>`).join('')}</div></div>`
+      ).join('')}</div>`:'';
+    const rt=RUTA_DIA[d.id];
+    const rtbox=rt?rutaHTML({from:'casa:'+d.city, to:rt.to, lines:rt.lines, text:rt.text}, c):'';
+    return `<article class="day" id="${d.id}" style="--c:${c}">
+      <button class="dayhead" data-toggle="${d.id}" aria-expanded="false">
+        <span class="daynum">DÍA ${i+1}</span>
+        <span class="daymeta">
+          <span class="daydate">${esc(fLarga(d.iso))} · ${esc(d.city)}${d.move?' · traslado':''}</span>
+          <span class="daytitle">${esc(d.title)}</span>
+          ${d.resumen?`<span style="display:block;color:var(--ink-soft);font-size:14.5px;margin-top:2px">${esc(d.resumen)}</span>`:''}
+        </span>
+        <span class="tags">
+          <span class="pace" title="Qué tanto se camina">${paceD}<span style="margin-left:2px">${esc(PACE[d.pace]||'')}</span></span>
+          <span class="count" data-count="${d.id}"></span>
+          <span class="chev">▾</span>
+        </span>
+      </button>
+      <div class="daybody">
+        ${alert}
+        ${blocks}
+        ${rtbox}
+        ${bbox}
+        ${rbox}
+        ${dbox}
+        <div class="note"><b>Para mamá, la abuela y la tía</b>${esc(d.tip)}</div>
+        ${d.planB?`<div class="note" style="--c:var(--ink-soft)"><b>Si algo falla</b>${esc(d.planB)}</div>`:''}
+        <textarea class="notes" data-note="${d.id}" placeholder="Notas del día: reservas, direcciones, cómo se sintieron…">${esc(S.notes[d.id]||'')}</textarea>
+      </div>
+    </article>`;
+  }).join('');
+  DAYS.forEach(d=>updCount(d.id));
+}
+
+function updCount(id){
+  const d=DAYS.find(x=>x.id===id);
+  const done=d.blocks.filter((b,j)=>S.checks[id+'-'+j]).length;
+  const el=document.querySelector(`[data-count="${id}"]`);
+  if(el) el.textContent=done+'/'+d.blocks.length;
+  const stop=document.querySelector(`.stop[data-go="${id}"]`);
+  if(stop) stop.classList.toggle('done',done===d.blocks.length);
+}
+
+/* ============ RENDER: RIEL ============ */
+function renderRail(){
+  const host=document.getElementById('rail');
+  host.innerHTML=DAYS.map((d,i)=>{
+    const x=dObj(d.iso);
+    return `<button class="stop ${d.move?'move':''}" data-go="${d.id}" style="--c:${cvar(d.city)}" title="${esc(d.title)}">
+      <span class="line"></span><span class="dot"></span>
+      <span class="d">${x.getDate()}</span><span class="m">${DIA[x.getDay()]}</span>
+    </button>`;
+  }).join('');
+}
+
+/* ============ RENDER: TRASLADOS Y HOTELES ============ */
+function renderRutas(){
+  document.getElementById('rutas').innerHTML=RUTAS.map(r=>{
+    const cv=cvar(r.city);
+    const from=String(r.from).indexOf('casa:')===0?casa(r.from.slice(5)):r.from;
+    const to=String(r.to).indexOf('casa:')===0?casa(r.to.slice(5)):r.to;
+    return `<div class="rcard" style="--c:${cv}">
+      <h3>${esc(r.title)}</h3>
+      <div class="who">${esc(r.when)}</div>
+      <div style="margin:9px 0 8px">${lineas(r.lines)}</div>
+      <div style="color:var(--ink-soft);font-size:15px;line-height:1.55;margin-bottom:11px">${esc(r.text)}</div>
+      <a class="gmaps" style="--c:${cv}" target="_blank" rel="noopener" href="${gmaps(from,to)}">Ver la mejor ruta en Google Maps ↗</a>
+    </div>`;
+  }).join('');
+}
+function renderMoves(){
+  document.getElementById('moves').innerHTML=MOVES.map(m=>{
+    const f=m.fields.map((l,i)=>{
+      const k=m.k+'-'+i;
+      return `<div><label class="f" for="${k}">${esc(l)}</label><input type="text" id="${k}" data-move="${k}" value="${esc(S.moves[k]||'')}"></div>`;
+    }).join('');
+    return `<div class="card" style="--c:${cvar(m.city)};border-left:5px solid var(--c)">
+      <h3>${esc(m.title)}</h3><div class="who">${esc(m.when)}</div>
+      <div style="color:var(--ink-soft);font-size:15px">${esc(m.detail)}</div>
+      <div class="fields">${f}</div></div>`;
+  }).join('');
+
+  document.getElementById('hotels').innerHTML='<div class="grid g2">'+HOTELS.map(h=>{
+    const cv=CITY[h.city]?cvar(h.city):'var(--paris)';
+    return `<div class="card" style="--c:${cv};border-left:5px solid var(--c)">
+      <h3>${esc(h.city)}</h3><div class="who">${esc(h.nights)}</div>
+      <div style="color:var(--ink-soft);font-size:15px">${esc(h.ask)}</div>
+      <div class="fields">
+        <div><label class="f">Hotel</label><input type="text" data-hotel="${h.k}-n" value="${esc(S.hotels[h.k+'-n']||'')}"></div>
+        <div><label class="f">Dirección</label><input type="text" data-hotel="${h.k}-a" value="${esc(S.hotels[h.k+'-a']||'')}"></div>
+        <div><label class="f">N.º de reserva</label><input type="text" data-hotel="${h.k}-r" value="${esc(S.hotels[h.k+'-r']||'')}"></div>
+        <div><label class="f">Teléfono</label><input type="text" data-hotel="${h.k}-t" value="${esc(S.hotels[h.k+'-t']||'')}"></div>
+      </div></div>`;
+  }).join('')+'</div>';
+}
+
+/* ============ RENDER: MALETAS, CUIDADOS ============ */
+/* ============ GASTOS ============ */
+function renderExpenses(){
+  const body=document.getElementById('eList');
+  if(!S.expenses.length){
+    body.innerHTML='<tr><td colspan="4" style="color:var(--ink-soft)">Todavía no hay gastos. El primero seguramente será el taxi del aeropuerto.</td></tr>';
+  } else {
+    body.innerHTML=S.expenses.slice().reverse().map(e=>
+      `<tr><td>${esc(e.desc)}<div style="font-size:12.5px;color:var(--ink-soft)">${esc(e.cat)}</div></td>
+       <td style="color:var(--ink-soft);font-size:14px">${esc(e.city)}</td>
+       <td class="num">${eur(e.amt)}<div style="font-size:12px;color:var(--ink-soft);font-weight:400">${mxn(e.amt)}</div></td>
+       <td><button class="del" data-del="${e.id}" aria-label="Borrar gasto">×</button></td></tr>`).join('');
+  }
+  const total=S.expenses.reduce((a,b)=>a+b.amt,0);
+  const byCity={},byCat={};
+  S.expenses.forEach(e=>{byCity[e.city]=(byCity[e.city]||0)+e.amt;byCat[e.cat]=(byCat[e.cat]||0)+e.amt;});
+  const rows=[];
+  Object.keys(byCity).sort((a,b)=>byCity[b]-byCity[a]).forEach(k=>rows.push(`<tr><td>${esc(k)}</td><td class="num">${eur(byCity[k])}</td></tr>`));
+  if(Object.keys(byCat).length){
+    rows.push('<tr><td colspan="2" style="border:0;padding-top:14px"><span class="who">Por categoría</span></td></tr>');
+    Object.keys(byCat).sort((a,b)=>byCat[b]-byCat[a]).forEach(k=>rows.push(`<tr><td>${esc(k)}</td><td class="num">${eur(byCat[k])}</td></tr>`));
+  }
+  rows.push(`<tr class="total"><td>Total</td><td class="num">${eur(total)}</td></tr>`);
+  rows.push(`<tr class="total"><td style="font-weight:500">Total en pesos</td><td class="num">${mxn(total)}</td></tr>`);
+  const ppl=Math.max(1,Number(S.ppl)||4);
+  rows.push(`<tr class="total"><td style="font-weight:500">Por persona</td><td class="num">${mxn(total/ppl)}</td></tr>`);
+  document.getElementById('eSum').innerHTML=rows.join('');
+  document.getElementById('pplLabel').textContent=ppl;
+
+  const b=Number(S.budget)||0;
+  const msg=document.getElementById('budgetMsg');
+  if(b>0){
+    const left=b-total;
+    msg.innerHTML=left>=0
+      ? `Quedan <b>${mxn(left)}</b> del presupuesto (${eur(left)}), es decir ${mxn(left/ppl)} por persona.`
+      : `Van <b>${mxn(-left)}</b> por encima del presupuesto (${eur(-left)}).`;
+  } else msg.textContent='';
+  updMeters();
+}
+
+/* ============ RESERVAS DESDE EXCEL ============ */
+const COLMAP=[
+ ['id','id'],['fecha','fecha'],['ciudad','ciudad'],['tipo','tipo'],['concepto','concepto'],
+ ['proveedor','proveedor'],['estado','estado'],['hora inicio','horaIni'],['hora fin','horaFin'],
+ ['direccion','dir'],['localizador','loc'],['personas','pax'],
+ ['precio','precio'],['moneda','moneda'],['en eur','eur'],['en usd','usd'],['en mxn','mxn'],
+ ['enlace','link'],['notas','notas']
+];
+function slug(s){return String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();}
+function toISO(v){
+  if(v==null||v==='')return '';
+  if(v instanceof Date && !isNaN(v)) return v.getFullYear()+'-'+String(v.getMonth()+1).padStart(2,'0')+'-'+String(v.getDate()).padStart(2,'0');
+  if(typeof v==='number'&&v>20000&&v<60000){
+    const d=new Date(Math.round((v-25569)*86400000));
+    return d.getUTCFullYear()+'-'+String(d.getUTCMonth()+1).padStart(2,'0')+'-'+String(d.getUTCDate()).padStart(2,'0');
+  }
+  const s=String(v).trim();
+  let m=s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
+  if(m)return m[1]+'-'+m[2].padStart(2,'0')+'-'+m[3].padStart(2,'0');
+  m=s.match(/^(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})/);
+  if(m)return m[3]+'-'+m[2].padStart(2,'0')+'-'+m[1].padStart(2,'0');
+  return '';
+}
+function toNum(v){
+  if(v==null||v==='')return 0;
+  if(typeof v==='number')return v;
+  const s=String(v).replace(/[^\d.,-]/g,'').replace(/\.(?=\d{3}\b)/g,'').replace(',','.');
+  const n=parseFloat(s);return isNaN(n)?0:n;
+}
+function mapRow(obj){
+  const o={};
+  Object.keys(obj).forEach(k=>{
+    const s=slug(k);
+    for(const [pre,key] of COLMAP){ if(s.startsWith(pre)){o[key]=obj[k];return;} }
+  });
+  if(!o.concepto||String(o.id||'').toUpperCase().trim()==='EJEMPLO')return null;
+  return {
+    id:String(o.id||o.concepto).trim(), iso:toISO(o.fecha),
+    ciudad:String(o.ciudad||'').trim(), tipo:String(o.tipo||'').trim(),
+    concepto:String(o.concepto).trim(), prov:String(o.proveedor||'').trim(),
+    estado:(String(o.estado||'Pendiente').trim()||'Pendiente'),
+    h1:String(o.horaIni||'').trim(), h2:String(o.horaFin||'').trim(),
+    dir:String(o.dir||'').trim(), loc:String(o.loc||'').trim(),
+    pax:String(o.pax||'').trim(),
+    precio:(toNum(o.eur)||toNum(o.precio)), usd:toNum(o.usd), mxn:toNum(o.mxn),
+    orig:toNum(o.precio), moneda:(String(o.moneda||'EUR').trim().toUpperCase()||'EUR'),
+    link:String(o.link||'').trim(), notas:String(o.notas||'').trim()
+  };
+}
+function parseCSV(text){
+  const lines=text.replace(/\r/g,'').split('\n').filter(l=>l.trim());
+  if(!lines.length)return [];
+  const del=(lines[0].split(';').length>lines[0].split(',').length)?';':',';
+  const cut=l=>{const out=[];let cur='',q=false;
+    for(let i=0;i<l.length;i++){const c=l[i];
+      if(c==='"'){ if(q&&l[i+1]==='"'){cur+='"';i++;} else q=!q; }
+      else if(c===del&&!q){out.push(cur);cur='';}
+      else cur+=c;}
+    out.push(cur);return out;};
+  const head=cut(lines[0]);
+  return lines.slice(1).map(l=>{const c=cut(l),o={};head.forEach((h,i)=>o[h]=(c[i]||'').trim());return o;});
+}
+async function importFile(file){
+  const msg=document.getElementById('impMsg');
+  msg.textContent='Leyendo '+file.name+'…';
+  try{
+    let raw=[];
+    if(/\.csv$/i.test(file.name)){
+      raw=parseCSV(await file.text());
+    } else {
+      if(typeof XLSX==='undefined')throw new Error('sin-xlsx');
+      const buf=await file.arrayBuffer();
+      const wb=XLSX.read(new Uint8Array(buf),{type:'array',cellDates:true});
+      let sh=wb.SheetNames.find(n=>slug(n).indexOf('reserva')>=0)||wb.SheetNames[0];
+      raw=XLSX.utils.sheet_to_json(wb.Sheets[sh],{defval:''});
+    }
+    const rows=raw.map(mapRow).filter(Boolean);
+    if(!rows.length){msg.textContent='No encontré filas con datos. Revisa que la hoja se llame RESERVAS y que la fila 1 tenga los encabezados.';return;}
+    const ref=rows.find(r=>r.precio>0&&r.mxn>0);
+    if(ref){const t=ref.mxn/ref.precio; if(t>5&&t<60) S.tc=Math.round(t*10000)/10000;}
+    S.bookings=rows;save();
+    document.getElementById('tcInput').value=tc();
+    msg.innerHTML='Listo: <b>'+rows.length+'</b> reservas importadas de '+esc(file.name)+'.';
+    renderBookings();repaintDays();
+  }catch(err){
+    msg.textContent=(err.message==='sin-xlsx')
+      ? 'No se pudo cargar el lector de Excel (quizá no hay internet). Guarda el archivo como CSV desde Excel y súbelo así.'
+      : 'No pude leer el archivo. Verifica que sea el .xlsx original o un .csv.';
+  }
+}
+function rsvHTML(b){
+  const meta=[b.h1&&(b.h1+(b.h2?'–'+b.h2:'')),b.loc&&('LOC '+b.loc),b.prov,b.pax&&(b.pax+' pers.')].filter(Boolean).join(' · ');
+  return `<div class="rsv">
+    <span class="est ${esc(b.estado)}">${esc(b.estado)}</span>
+    <span class="body"><span class="cn">${esc(b.concepto)}</span>
+      ${meta?`<div class="mt">${esc(meta)}</div>`:''}
+      ${b.dir?`<div class="mt" style="text-transform:none;font-family:var(--body);font-size:13.5px">${esc(b.dir)}</div>`:''}
+      ${b.link?`<div class="mt"><a href="${esc(b.link)}" target="_blank" rel="noopener" style="color:inherit">${esc(b.link.replace(/^https?:\/\//,'').slice(0,46))}</a></div>`:''}
+      ${b.notas?`<div style="color:var(--ink-soft);font-size:13.5px">${esc(b.notas)}</div>`:''}
+    </span>
+    <span class="pr">${b.precio?eur(b.precio):'—'}${b.precio?`<div style="font-weight:400;color:var(--ink-soft);font-size:12px">${mxn(b.precio)}</div>`:''}${(b.moneda&&b.moneda!=='EUR'&&b.orig)?`<div style="font-weight:400;color:var(--ink-soft);font-size:12px">pagado en ${esc(b.moneda)}</div>`:''}</span></div>`;
+}
+function renderBookings(){
+  const list=document.getElementById('rsvList');
+  const chips=document.getElementById('rsvChips');
+  const f=document.getElementById('rsvFilter').value;
+  const all=S.bookings||[];
+  if(!all.length){
+    list.innerHTML='<div class="card" style="color:var(--ink-soft)">Todavía no importas nada. En cuanto subas el Excel, aquí verás cada reserva con su localizador y su precio, ordenada por fecha.</div>';
+    chips.innerHTML='';updMeters();return;
+  }
+  const sum=k=>all.filter(b=>b.estado===k).reduce((a,b)=>a+b.precio,0);
+  const total=all.reduce((a,b)=>a+b.precio,0);
+  const pend=all.filter(b=>b.estado==='Pendiente').length;
+  const ppl=Math.max(1,Number(S.ppl)||4);
+  chips.innerHTML=[
+    ['Total comprometido',mxn(total)],['Equivale a',eur(total)],['Ya pagado',mxn(sum('Pagado'))],
+    ['Reservado sin pagar',mxn(sum('Reservado'))],['Por persona',mxn(total/ppl)],
+    ['Sin definir',pend+' de '+all.length]
+  ].map(c=>`<span class="chip">${c[0]} <b>${c[1]}</b></span>`).join('');
+
+  const rows=f?all.filter(b=>b.estado===f):all;
+  const groups={};
+  rows.forEach(b=>{(groups[b.iso||'Sin fecha']=groups[b.iso||'Sin fecha']||[]).push(b);});
+  list.innerHTML=Object.keys(groups).sort().map(k=>{
+    const d=DAYS.find(x=>x.iso===k);
+    const cv=d?cvar(d.city):'var(--ink-soft)';
+    const t=k==='Sin fecha'?'Sin fecha asignada':fLarga(k);
+    const st=groups[k].reduce((a,b)=>a+b.precio,0);
+    return `<div class="card" style="--c:${cv};border-left:5px solid var(--c)">
+      <h3 style="text-transform:capitalize">${esc(t)}</h3>
+      <div class="who">${groups[k].length} reserva${groups[k].length>1?'s':''} · ${mxn(st)} · ${eur(st)}</div>
+      ${groups[k].map(rsvHTML).join('')}</div>`;
+  }).join('');
+  updMeters();
+}
+function repaintDays(){
+  const open=[...document.querySelectorAll('.day.open')].map(x=>x.id);
+  renderDays();
+  open.forEach(id=>{const c=document.getElementById(id);if(c){c.classList.add('open');c.querySelector('.dayhead').setAttribute('aria-expanded','true');}});
+}
+document.getElementById('pick').addEventListener('click',()=>document.getElementById('file').click());
+document.getElementById('file').addEventListener('change',e=>{if(e.target.files[0])importFile(e.target.files[0]);});
+const dz=document.getElementById('drop');
+['dragenter','dragover'].forEach(ev=>dz.addEventListener(ev,e=>{e.preventDefault();dz.classList.add('over');}));
+['dragleave','drop'].forEach(ev=>dz.addEventListener(ev,e=>{e.preventDefault();dz.classList.remove('over');}));
+dz.addEventListener('drop',e=>{if(e.dataTransfer.files[0])importFile(e.dataTransfer.files[0]);});
+document.getElementById('rsvFilter').addEventListener('change',renderBookings);
+document.getElementById('tcInput').addEventListener('input',e=>{
+  S.tc=parseFloat(e.target.value)||21.5;save();renderBookings();renderExpenses();renderPersonal();repaintDays();
+});
+document.getElementById('rsvShare').addEventListener('click',()=>{
+  const clone=document.documentElement.cloneNode(true);
+  clone.querySelectorAll('script[data-seed]').forEach(n=>n.remove());
+  const seed=document.createElement('script');
+  seed.setAttribute('data-seed','1');
+  seed.textContent='window.__SEED__='+JSON.stringify(S).replace(/</g,'\\u003c')+';';
+  const b=clone.querySelector('body');
+  b.insertBefore(seed,b.firstChild);
+  const blob=new Blob(['<!DOCTYPE html>\n'+clone.outerHTML],{type:'text/html;charset=utf-8'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='itinerario-europa-2026-para-compartir.html';
+  a.click();
+  document.getElementById('impMsg').innerHTML='Copia generada. Trae adentro las reservas y '+DOC.docs.length+' documento(s): mándala por WhatsApp o correo y se abre sola.';
+});
+document.getElementById('rsvCsv').addEventListener('click',()=>{
+  const h=['ID','Fecha','Ciudad','Tipo','Concepto','Proveedor','Estado','Hora inicio','Hora fin','Direccion','Localizador','Personas','Precio como te lo cobraron','Moneda','En EUR','En USD','Enlace','Notas'];
+  const q=s=>'"'+String(s==null?'':s).replace(/"/g,'""')+'"';
+  const body=(S.bookings||[]).map(b=>[b.id,b.iso,b.ciudad,b.tipo,b.concepto,b.prov,b.estado,b.h1,b.h2,b.dir,b.loc,b.pax,b.orig,b.moneda,b.precio,b.usd,b.link,b.notas].map(q).join(','));
+  const blob=new Blob(['\ufeff'+[h.map(q).join(',')].concat(body).join('\n')],{type:'text/csv;charset=utf-8'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='reservas-europa-2026.csv';a.click();
+});
+
+
+/* ============ DOCUMENTOS ADJUNTOS ============ */
+const DKEY='viaje-europa-2026-docs';
+const MAXFILE=2*1024*1024, MAXTOTAL=4.5*1024*1024;
+let DOC={docs:[]};
+let dTimer=null;
+async function loadDocs(){
+  let got=false;
+  try{
+    if(window.storage){
+      const r=await window.storage.get(DKEY,false);
+      if(r&&r.value){ DOC=JSON.parse(r.value); got=true; }
+    }
+  }catch(e){ if(mem[DKEY]){ DOC=mem[DKEY]; got=true; } }
+  if(!got && window.__DOCS__){ try{ DOC=window.__DOCS__; }catch(e){} }
+  if(!DOC||!DOC.docs) DOC={docs:[]};
+}
+function saveDocs(){
+  mem[DKEY]=DOC;
+  clearTimeout(dTimer);
+  dTimer=setTimeout(async()=>{
+    try{ if(window.storage) await window.storage.set(DKEY,JSON.stringify(DOC),false); }
+    catch(e){ document.getElementById('docMsg').textContent='No se pudieron guardar los archivos: probablemente ya no cabe más. Borra alguno pesado.'; }
+    const c=document.getElementById('savechip'); c.classList.add('show'); setTimeout(()=>c.classList.remove('show'),1200);
+  },500);
+}
+function docSize(){ return DOC.docs.reduce((a,b)=>a+(b.size||0),0); }
+function kb(n){ return n>1048576 ? (n/1048576).toFixed(1)+' MB' : Math.round(n/1024)+' KB'; }
+function blobOf(d){
+  const b64=String(d.data).split(',')[1]||'';
+  const bin=atob(b64); const arr=new Uint8Array(bin.length);
+  for(let i=0;i<bin.length;i++) arr[i]=bin.charCodeAt(i);
+  return new Blob([arr],{type:d.type||'application/octet-stream'});
+}
+function openDoc(id,forceDownload){
+  const d=DOC.docs.find(x=>x.id===id); if(!d)return;
+  const url=URL.createObjectURL(blobOf(d));
+  const a=document.createElement('a');
+  a.href=url;
+  if(forceDownload) a.download=d.name; else { a.target='_blank'; a.rel='noopener'; }
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),60000);
+}
+function addFiles(files){
+  const msg=document.getElementById('docMsg');
+  const list=[...files];
+  if(!list.length)return;
+  let pending=list.length, added=0, skipped=[];
+  list.forEach(f=>{
+    if(f.size>MAXFILE){ skipped.push(f.name+' (pesa '+kb(f.size)+')'); if(!--pending) done(); return; }
+    if(docSize()+f.size>MAXTOTAL){ skipped.push(f.name+' (ya no cabe)'); if(!--pending) done(); return; }
+    const fr=new FileReader();
+    fr.onload=()=>{
+      DOC.docs.push({id:'f'+Date.now()+Math.random().toString(36).slice(2,6),
+        name:f.name, type:f.type, size:f.size, day:guessDay(f.name), data:fr.result});
+      added++; if(!--pending) done();
+    };
+    fr.onerror=()=>{ skipped.push(f.name); if(!--pending) done(); };
+    fr.readAsDataURL(f);
+  });
+  function done(){
+    saveDocs(); renderDocs(); repaintDays();
+    msg.innerHTML = (added? '<b>'+added+'</b> archivo'+(added>1?'s':'')+' guardado'+(added>1?'s':'')+'. ' : '')
+      + (skipped.length? 'No se pudo con: '+esc(skipped.join(', '))+'. El límite es 2 MB por archivo.' : '');
+  }
+}
+function guessDay(name){
+  const n=slug(name);
+  if(n.indexOf('7d63dw')>=0) return 'd1';
+  if(n.indexOf('p4pnmj')>=0||n.indexOf('sants')>=0||n.indexOf('tgv')>=0) return 'd6';
+  return '';
+}
+function docHTML(d){
+  const ext=(d.name.split('.').pop()||'?').toUpperCase().slice(0,4);
+  const opts=['<option value="">Sin día asignado</option>'].concat(
+    DAYS.map((x,i)=>`<option value="${x.id}" ${d.day===x.id?'selected':''}>Día ${i+1} · ${fLarga(x.iso).replace(/^\w/,c=>c.toUpperCase())}</option>`)).join('');
+  return `<div class="doc">
+    <span class="ico">${esc(ext)}</span>
+    <span class="nm">${esc(d.name)}<small>${kb(d.size)}</small></span>
+    <select data-docday="${d.id}">${opts}</select>
+    <button class="btn small" data-docopen="${d.id}">Abrir</button>
+    <button class="btn ghost small" data-docdl="${d.id}">Guardar</button>
+    <button class="del" data-docdel="${d.id}" aria-label="Borrar">×</button>
+  </div>`;
+}
+const CATC={'Vuelos':'var(--vuelo)','Trenes':'var(--paris)','Traslados':'var(--barcelona)',
+  'Hospedajes':'var(--venecia)','Entradas':'var(--roma)'};
+function bilDia(day){
+  const i=DAYS.findIndex(x=>x.id===day);
+  return i<0?'':'Día '+(i+1)+' · '+fCorta(DAYS[i].iso);
+}
+function renderBilletes(){
+  const f=document.getElementById('bilFilter').value;
+  const host=document.getElementById('bilList');
+  const gs=BILLETES.filter(g=>!f||g.cat===f);
+  document.getElementById('bilChips').innerHTML=
+    [['Documentos',BILLETES.reduce((a,g)=>a+g.items.length,0)],
+     ['Reservas',BILLETES.length],
+     ['Mostrando',gs.reduce((a,g)=>a+g.items.length,0)]]
+    .map(c=>`<span class="chip">${c[0]} <b>${c[1]}</b></span>`).join('');
+  host.innerHTML=gs.map(g=>{
+    const cv=CATC[g.cat]||'var(--paris)';
+    const dd=bilDia(g.day);
+    return `<div class="bgrp" style="--c:${cv}">
+      <h4>${esc(g.title)}</h4>
+      <div class="sub">${dd?'<b>'+esc(dd)+'</b> · ':''}${esc(g.sub)}</div>
+      <div class="blist">${g.items.map(it=>
+        `<a class="blink" target="_blank" rel="noopener" href="${driveView(it.i)}"><span class="pg">${it.n.indexOf('captura')>=0?'IMG':'PDF'}</span>${esc(it.n)}</a>`
+      ).join('')}</div>
+    </div>`;
+  }).join('') || '<div class="card" style="color:var(--ink-soft)">No hay documentos de ese tipo.</div>';
+}
+document.getElementById('bilFilter').addEventListener('change',renderBilletes);
+
+function renderDocs(){
+  const list=document.getElementById('docList');
+  const chips=document.getElementById('docChips');
+  if(!DOC.docs.length){
+    list.innerHTML='<div class="card" style="color:var(--ink-soft)">Todavía no hay archivos. Empieza por los billetes de Air Europa (7D63DW) y los del tren (P4PNMJ): el tablero los asigna solo a su día.</div>';
+    chips.innerHTML=''; return;
+  }
+  chips.innerHTML=[['Archivos',DOC.docs.length],['Espacio usado',kb(docSize())],
+    ['Sin día',DOC.docs.filter(d=>!d.day).length]]
+    .map(c=>`<span class="chip">${c[0]} <b>${c[1]}</b></span>`).join('');
+  list.innerHTML='<div class="card">'+DOC.docs.map(docHTML).join('')+'</div>';
+}
+document.getElementById('pickDoc').addEventListener('click',()=>document.getElementById('fileDoc').click());
+document.getElementById('fileDoc').addEventListener('change',e=>{addFiles(e.target.files);e.target.value='';});
+const dzd=document.getElementById('dropDoc');
+['dragenter','dragover'].forEach(ev=>dzd.addEventListener(ev,e=>{e.preventDefault();dzd.classList.add('over');}));
+['dragleave','drop'].forEach(ev=>dzd.addEventListener(ev,e=>{e.preventDefault();dzd.classList.remove('over');}));
+dzd.addEventListener('drop',e=>{e.preventDefault();addFiles(e.dataTransfer.files);});
+document.addEventListener('click',e=>{
+  const o=e.target.closest('[data-docopen]'); if(o){openDoc(o.dataset.docopen,false);return;}
+  const g=e.target.closest('[data-docdl]');   if(g){openDoc(g.dataset.docdl,true);return;}
+  const x=e.target.closest('[data-docdel]');
+  if(x){ DOC.docs=DOC.docs.filter(d=>d.id!==x.dataset.docdel); saveDocs(); renderDocs(); repaintDays(); }
+});
+document.addEventListener('change',e=>{
+  const s=e.target.closest('[data-docday]');
+  if(s){ const d=DOC.docs.find(x=>x.id===s.dataset.docday); if(d){d.day=s.value;saveDocs();repaintDays();} }
+});
+
+
+/* ============ MIS GASTOS ============ */
+function renderPersonal(){
+  const body=document.getElementById('pList');
+  const list=S.personal||[];
+  if(!list.length){
+    body.innerHTML='<tr><td colspan="4" style="color:var(--ink-soft)">Todavía no has anotado nada tuyo. Aquí van las compras y caprichos que no se reparten.</td></tr>';
+  } else {
+    body.innerHTML=list.slice().reverse().map(e=>
+      `<tr><td>${esc(e.desc)}<div style="font-size:12.5px;color:var(--ink-soft)">${esc(e.cat)}</div></td>
+       <td style="color:var(--ink-soft);font-size:14px">${esc(e.city)}</td>
+       <td class="num">${eur(e.amt)}<div style="font-size:12px;color:var(--ink-soft);font-weight:400">${mxn(e.amt)}</div></td>
+       <td><button class="del" data-pdel="${e.id}" aria-label="Borrar">×</button></td></tr>`).join('');
+  }
+  const total=list.reduce((a,b)=>a+b.amt,0);
+  const byCat={},byCity={};
+  list.forEach(e=>{byCat[e.cat]=(byCat[e.cat]||0)+e.amt;byCity[e.city]=(byCity[e.city]||0)+e.amt;});
+  const rows=[];
+  Object.keys(byCity).sort((a,b)=>byCity[b]-byCity[a]).forEach(k=>rows.push(`<tr><td>${esc(k)}</td><td class="num">${eur(byCity[k])}</td></tr>`));
+  if(Object.keys(byCat).length){
+    rows.push('<tr><td colspan="2" style="border:0;padding-top:14px"><span class="who">Por categoría</span></td></tr>');
+    Object.keys(byCat).sort((a,b)=>byCat[b]-byCat[a]).forEach(k=>rows.push(`<tr><td>${esc(k)}</td><td class="num">${eur(byCat[k])}</td></tr>`));
+  }
+  rows.push(`<tr class="total"><td>Total en euros</td><td class="num">${eur(total)}</td></tr>`);
+  rows.push(`<tr class="total"><td style="font-weight:500">Total en pesos</td><td class="num">${mxn(total)}</td></tr>`);
+  document.getElementById('pSum').innerHTML=rows.join('');
+  document.getElementById('pChips').innerHTML=[
+    ['Llevo gastado',mxn(total)],['En euros',eur(total)],['Movimientos',list.length]
+  ].map(c=>`<span class="chip">${c[0]} <b>${c[1]}</b></span>`).join('');
+  const b=Number(S.pbudget)||0, msg=document.getElementById('pMsg');
+  if(b>0){
+    const left=b-total;
+    msg.innerHTML=left>=0 ? `Te quedan <b>${mxn(left)}</b> de tu presupuesto personal (${eur(left)}).`
+                          : `Vas <b>${mxn(-left)}</b> por encima de tu presupuesto personal.`;
+  } else msg.textContent='';
+  updMeters();
+}
+document.getElementById('pAdd').addEventListener('click',()=>{
+  const d=document.getElementById('pDesc'), a=document.getElementById('pAmt');
+  const amt=parseFloat(a.value);
+  if(!d.value.trim()||!(amt>0)){ d.focus(); document.getElementById('pMsg').textContent='Escribe el concepto y un monto mayor a cero.'; return; }
+  (S.personal=S.personal||[]).push({id:'p'+Date.now(),desc:d.value.trim(),
+    city:document.getElementById('pCity').value,cat:document.getElementById('pCat').value,amt:amt});
+  d.value='';a.value='';save();renderPersonal();d.focus();
+});
+document.addEventListener('click',e=>{
+  const x=e.target.closest('[data-pdel]');
+  if(x){ S.personal=(S.personal||[]).filter(v=>v.id!==x.dataset.pdel); save(); renderPersonal(); }
+});
+document.addEventListener('input',e=>{
+  if(e.target.id==='pBudget'){ S.pbudget=e.target.value; save(); renderPersonal(); }
+});
+
+/* ============ MEDIDORES ============ */
+function updMeters(){
+  const total=DAYS.reduce((a,d)=>a+d.blocks.length,0);
+  const done=Object.values(S.checks).filter(Boolean).length;
+  document.getElementById('mProg').innerHTML=Math.round(done/total*100)+'<small>%</small>';
+  const rsv=(S.bookings||[]).reduce((a,b)=>a+b.precio,0);
+  document.getElementById('mRsv').innerHTML=mxn(rsv)+'<small><br>'+eur(rsv)+'</small>';
+  const spent=S.expenses.reduce((a,b)=>a+b.amt,0);
+  document.getElementById('mSpent').innerHTML=mxn(spent)+'<small><br>'+eur(spent)+'</small>';
+  document.getElementById('mPer').innerHTML=mxn((spent+rsv)/Math.max(1,Number(S.ppl)||4));
+  const mine=(S.personal||[]).reduce((a,b)=>a+b.amt,0);
+  document.getElementById('mMine').innerHTML=mxn(mine)+'<small><br>'+eur(mine)+'</small>';
+
+  const hoy=new Date();hoy.setHours(0,0,0,0);
+  const ini=dObj('2026-09-16'), fin=dObj('2026-10-02');
+  const el=document.getElementById('mCount');
+  if(hoy<ini){
+    const n=Math.round((ini-hoy)/86400000);
+    el.innerHTML=n+'<small> día'+(n===1?'':'s')+'</small>';
+  } else if(hoy<=fin){
+    const n=Math.round((hoy-ini)/86400000)+1;
+    el.innerHTML='Día '+n+'<small>/17</small>';
+  } else el.innerHTML='<small>Viaje terminado</small>';
+}
+
+/* ============ INTERACCIÓN ============ */
+document.addEventListener('click',e=>{
+  const tog=e.target.closest('[data-toggle]');
+  if(tog){
+    const card=document.getElementById(tog.dataset.toggle);
+    const open=card.classList.toggle('open');
+    tog.setAttribute('aria-expanded',open);
+    return;
+  }
+  const go=e.target.closest('[data-go]');
+  if(go){
+    const id=go.dataset.go;
+    document.querySelector('nav.tabs button[data-tab="dias"]').click();
+    const card=document.getElementById(id);
+    card.classList.add('open');
+    card.querySelector('.dayhead').setAttribute('aria-expanded','true');
+    card.scrollIntoView({behavior:'smooth',block:'start'});
+    document.querySelectorAll('.stop').forEach(s=>s.classList.remove('active'));
+    go.classList.add('active');
+    return;
+  }
+  const del=e.target.closest('[data-del]');
+  if(del){
+    S.expenses=S.expenses.filter(x=>x.id!==del.dataset.del);
+    save();renderExpenses();
+    return;
+  }
+  const tab=e.target.closest('nav.tabs button');
+  if(tab){
+    document.querySelectorAll('nav.tabs button').forEach(b=>b.setAttribute('aria-selected',b===tab));
+    ['dias','reservas','docs','traslados','gastos','personal'].forEach(t=>{
+      document.getElementById('tab-'+t).hidden=(t!==tab.dataset.tab);
+    });
+    document.querySelector('.railwrap').style.display=(tab.dataset.tab==='dias')?'':'none';
+  }
+});
+
+document.addEventListener('change',e=>{
+  const t=e.target;
+  if(t.dataset.check!==undefined){
+    S.checks[t.dataset.check]=t.checked;
+    updCount(t.dataset.check.split('-')[0]);
+    updMeters();save();
+  }
+});
+
+document.addEventListener('input',e=>{
+  const t=e.target;
+  if(t.dataset.note!==undefined){S.notes[t.dataset.note]=t.value;save();}
+  if(t.dataset.move!==undefined){S.moves[t.dataset.move]=t.value;save();}
+  if(t.dataset.hotel!==undefined){S.hotels[t.dataset.hotel]=t.value;save();
+    if(/-a$/.test(t.dataset.hotel)){ renderRutas(); repaintDays(); } }
+  if(t.id==='ppl'){S.ppl=t.value;save();renderExpenses();renderBookings();}
+  if(t.id==='budget'){S.budget=t.value;save();renderExpenses();}
+});
+
+document.getElementById('eAdd').addEventListener('click',()=>{
+  const d=document.getElementById('eDesc'), a=document.getElementById('eAmt');
+  const amt=parseFloat(a.value);
+  if(!d.value.trim()||!(amt>0)){
+    d.focus();
+    document.getElementById('budgetMsg').textContent='Escribe el concepto y un monto mayor a cero para agregarlo.';
+    return;
+  }
+  S.expenses.push({id:'x'+Date.now(),desc:d.value.trim(),city:document.getElementById('eCity').value,
+    cat:document.getElementById('eCat').value,amt:amt});
+  d.value='';a.value='';
+  save();renderExpenses();d.focus();
+});
+
+document.getElementById('reset').addEventListener('click',async()=>{
+  if(!confirm('¿Borrar todas las palomitas, notas, reservas y gastos guardados?'))return;
+  S={checks:{},notes:{},moves:{},hotels:{},pack:{},contacts:{},expenses:[],bookings:[],personal:[],ppl:4,budget:'',pbudget:'',tc:21.5};
+  try{ if(window.storage) await window.storage.delete(KEY,false); }catch(e){}
+  delete mem[KEY];
+  boot(true);
+});
+
+document.getElementById('export').addEventListener('click',()=>{
+  const blob=new Blob([JSON.stringify(S,null,2)],{type:'application/json'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='respaldo-viaje-europa-2026.json';
+  a.click();
+});
+
+/* ============ ARRANQUE ============ */
+function paint(){
+  renderRail();renderDays();renderMoves();renderRutas();renderBookings();renderBilletes();renderDocs();
+  document.getElementById('tcInput').value=tc();
+  document.getElementById('ppl').value=S.ppl||4;
+  document.getElementById('budget').value=S.budget||'';
+  renderExpenses();
+  document.getElementById('pBudget').value=S.pbudget||'';
+  renderPersonal();
+  const hoy=new Date();hoy.setHours(0,0,0,0);
+  let target=DAYS.find(d=>dObj(d.iso).getTime()===hoy.getTime());
+  if(target){
+    const card=document.getElementById(target.id);
+    card.classList.add('open','today');
+    card.querySelector('.dayhead').setAttribute('aria-expanded','true');
+    const st=document.querySelector(`.stop[data-go="${target.id}"]`);
+    if(st){st.classList.add('active');st.scrollIntoView({inline:'center',block:'nearest'});}
+  } else {
+    const first=document.getElementById(DAYS[0].id);
+    first.classList.add('open');
+    first.querySelector('.dayhead').setAttribute('aria-expanded','true');
+  }
+}
+async function boot(skipLoad){
+  if(!skipLoad){ await load(); await loadDocs(); }
+  paint();
+}
+boot();
+</script>
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(()=>{}));
+}
+</script>
+</body>
+</html>
