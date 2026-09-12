@@ -268,6 +268,53 @@ ul.check input:checked + span{text-decoration:line-through;color:var(--ink-soft)
 @media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
 
 /* ---------- Documentos ---------- */
+/* --- pasaportes, seguros y visor de documentos --- */
+.docmeter{display:flex;align-items:center;gap:14px;flex-wrap:wrap;border:1px solid var(--line);border-radius:var(--r);
+  background:var(--paper-2);padding:14px 18px;margin-bottom:16px;box-shadow:var(--shadow)}
+.docmeter .big{font-family:var(--display);font-size:30px;font-weight:800;line-height:1}
+.docmeter .big small{font-size:16px;font-weight:600;color:var(--ink-soft)}
+.docmeter .bar{flex:1;min-width:150px;height:9px;border-radius:99px;background:var(--line-soft);overflow:hidden}
+.docmeter .bar i{display:block;height:100%;background:var(--ok);border-radius:99px;transition:width .4s}
+.docmeter .txt{font-size:14.5px;color:var(--ink-soft);flex-basis:100%}
+.pcard{background:var(--paper-2);border:1px solid var(--line);border-top:5px solid var(--c);border-radius:var(--r);
+  padding:18px;box-shadow:var(--shadow);margin-bottom:14px}
+.phead{display:flex;align-items:center;gap:13px;margin-bottom:14px}
+.avatar{width:48px;height:48px;flex:0 0 48px;border-radius:50%;background:var(--c);color:#fff;display:grid;place-items:center;
+  font-family:var(--display);font-weight:800;font-size:18px;letter-spacing:.02em}
+.phead h3{margin:0;font-size:18.5px;line-height:1.2}
+.phead .who{margin:1px 0 0}
+.dtiles{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+.dtile{display:flex;flex-direction:column;gap:5px;align-items:flex-start;text-align:left;cursor:pointer;
+  border:1px solid var(--line);background:var(--paper);border-radius:11px;padding:11px 12px;font:inherit;color:inherit;
+  transition:border-color .15s,transform .1s}
+.dtile:hover{border-color:var(--c);transform:translateY(-1px)}
+.dtile .ic{font-size:19px;line-height:1}
+.dtile .lb{font-size:13.5px;font-weight:700;line-height:1.25}
+.dtile .st{font-family:var(--mono);font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--ok)}
+.dtile.no{cursor:default;border-style:dashed;opacity:.75}
+.dtile.no:hover{border-color:var(--line);transform:none}
+.dtile.no .st{color:var(--warn)}
+.dtile.no .ic{filter:grayscale(1);opacity:.5}
+.viewer{position:fixed;inset:0;z-index:80;background:rgba(20,16,26,.72);backdrop-filter:blur(3px);
+  display:flex;align-items:center;justify-content:center;padding:18px}
+.viewer[hidden]{display:none}
+.vbox{background:var(--paper-2);border-radius:16px;width:min(940px,100%);height:min(88vh,100%);
+  display:flex;flex-direction:column;overflow:hidden;box-shadow:0 24px 70px rgba(0,0,0,.4)}
+.vhead{display:flex;align-items:center;gap:11px;padding:12px 14px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.vhead b{font-family:var(--display);font-size:16.5px}
+.vwho{width:32px;height:32px;flex:0 0 32px;border-radius:50%;background:var(--c,var(--paris));color:#fff;
+  display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:12.5px}
+.vx{border:0;background:none;font-size:27px;line-height:1;cursor:pointer;color:var(--ink-soft);padding:0 4px}
+.vx:hover{color:var(--ink)}
+.vbody{flex:1;background:#f4f1f7}
+.vbody iframe{width:100%;height:100%;border:0;display:block}
+@media(max-width:560px){
+  .dtiles{grid-template-columns:1fr}
+  .dtile{flex-direction:row;align-items:center;gap:10px}
+  .dtile .lb{flex:1}
+  .viewer{padding:0}
+  .vbox{height:100%;border-radius:0}
+}
 /* --- billetes de Drive, rutas y accesos rápidos --- */
 .bgrp{border:1px solid var(--line);border-left:5px solid var(--c,var(--paris));border-radius:var(--r);background:var(--paper-2);padding:14px 16px;margin-bottom:12px;box-shadow:var(--shadow)}
 .bgrp h4{font-family:var(--display);font-size:17.5px;margin:0 0 2px;line-height:1.25}
@@ -376,6 +423,7 @@ ul.check input:checked + span{text-decoration:line-through;color:var(--ink-soft)
   <button role="tab" aria-selected="true" data-tab="dias">Día a día</button>
   <button role="tab" aria-selected="false" data-tab="reservas">Lo que ya está pagado</button>
   <button role="tab" aria-selected="false" data-tab="docs">Billetes en PDF</button>
+  <button role="tab" aria-selected="false" data-tab="ident">Pasaportes y seguros</button>
   <button role="tab" aria-selected="false" data-tab="traslados">Traslados y casas</button>
   <button role="tab" aria-selected="false" data-tab="gastos">Gastos del grupo</button>
   <button role="tab" aria-selected="false" data-tab="personal">Mis gastos</button>
@@ -474,6 +522,43 @@ ul.check input:checked + span{text-decoration:line-through;color:var(--ink-soft)
   <div id="docList"></div>
 </section>
 
+<section id="tab-ident" hidden>
+  <h2 class="sec">Quién lleva qué</h2>
+  <p class="lede">El pasaporte, el seguro de asistencia y la carta consular de cada una, en un solo lugar.
+  Toca cualquiera y el documento se abre aquí mismo, sin salir de la página ni descargar nada.
+  Abajo de cada tarjeta puedes anotar el número de pasaporte y el de la póliza:
+  <b>eso se queda guardado solo en este teléfono</b>, no se publica ni lo ve nadie más.</p>
+
+  <div class="docmeter" id="docMeter"></div>
+  <div class="grid g2" id="personas"></div>
+
+  <h2 class="sec">Si algo pasa</h2>
+  <div class="grid g2">
+    <div class="card" style="--c:var(--roma);border-left:5px solid var(--c)">
+      <h3>Teléfonos de emergencia</h3>
+      <div class="who">Los mismos en toda la Unión Europea</div>
+      <table><tbody>
+        <tr><td><b>112</b></td><td>Emergencias en Francia, España e Italia. Gratis desde cualquier celular, incluso sin saldo y sin tarjeta SIM.</td></tr>
+        <tr><td><b>114</b></td><td>El mismo 112 pero por mensaje de texto, si no se puede hablar.</td></tr>
+      </tbody></table>
+      <div class="fields">
+        <div><label class="f" for="tel-seg">Asistencia del seguro · 24 h</label><input type="text" id="tel-seg" data-pers="tel-seg" placeholder="El número que viene en el certificado"></div>
+        <div><label class="f" for="tel-emb">Embajada o consulado</label><input type="text" id="tel-emb" data-pers="tel-emb" placeholder="Consulado de Colombia en París"></div>
+      </div>
+    </div>
+    <div class="card" style="--c:var(--venecia);border-left:5px solid var(--c)">
+      <h3>Antes de salir de casa</h3>
+      <div class="who">Cinco minutos que evitan un dolor de cabeza</div>
+      <table><tbody>
+        <tr><td>Abrir cada documento de esta pestaña una vez con señal, para que quede cargado.</td></tr>
+        <tr><td>En la app de Google Drive, marcar la carpeta del viaje como <b>disponible sin conexión</b>.</td></tr>
+        <tr><td>Llevar una copia en papel del pasaporte y del seguro, aparte del original.</td></tr>
+        <tr><td>Revisar que el pasaporte tenga vigencia de al menos tres meses después del 2 de octubre. Es lo que pide el espacio Schengen.</td></tr>
+      </tbody></table>
+    </div>
+  </div>
+</section>
+
 <section id="tab-traslados" hidden>
   <h2 class="sec">Los seis movimientos del viaje</h2>
   <p class="lede">Aquí va el número de reserva y la hora real en cuanto los tengas. Es lo único del viaje que no se puede improvisar.</p>
@@ -548,6 +633,18 @@ ul.check input:checked + span{text-decoration:line-through;color:var(--ink-soft)
 </section>
 
 <p class="foot">Horarios, precios y accesos cambian: confirma en las páginas oficiales antes de reservar, sobre todo el tren de París a Barcelona y las entradas con hora asignada. Este tablero guarda lo que marques en este mismo dispositivo.</p>
+</div>
+
+<div class="viewer" id="viewer" hidden>
+  <div class="vbox">
+    <div class="vhead">
+      <span class="vwho" id="vWho"></span>
+      <b id="vTitle"></b>
+      <a class="btn ghost small" id="vOpen" target="_blank" rel="noopener" style="text-decoration:none;margin-left:auto">Abrir en Drive ↗</a>
+      <button class="vx" id="vClose" aria-label="Cerrar">×</button>
+    </div>
+    <div class="vbody"><iframe id="vFrame" title="Documento" allow="autoplay"></iframe></div>
+  </div>
 </div>
 
 <div class="savechip" id="savechip">Guardado</div>
@@ -975,17 +1072,30 @@ function rutaHTML(r,cv){
 
 /* ============ ESTADO Y GUARDADO ============ */
 const KEY='viaje-europa-2026';
-let S={checks:{},notes:{},moves:{},hotels:{},expenses:[],bookings:[],personal:[],ppl:4,budget:'',pbudget:'',tc:21.5};
+let S={checks:{},notes:{},moves:{},hotels:{},expenses:[],bookings:[],personal:[],pers:{},ppl:4,budget:'',pbudget:'',tc:21.5};
 const mem={};
 let saveTimer=null;
 
+/* Guarda en el navegador del teléfono. window.storage solo existe en el
+   entorno original del tablero; en la web se usa localStorage. */
+const store={
+  async get(k){
+    try{ if(window.storage){ const r=await window.storage.get(k,false); if(r&&r.value) return r.value; } }catch(e){}
+    try{ const v=localStorage.getItem(k); if(v) return v; }catch(e){}
+    return null;
+  },
+  async set(k,v){
+    let ok=false;
+    try{ if(window.storage){ await window.storage.set(k,v,false); ok=true; } }catch(e){}
+    try{ localStorage.setItem(k,v); ok=true; }catch(e){}
+    return ok;
+  }
+};
 async function load(){
   let got=false;
   try{
-    if(window.storage){
-      const r=await window.storage.get(KEY,false);
-      if(r&&r.value){ S=Object.assign(S,JSON.parse(r.value)); got=true; }
-    }
+    const v=await store.get(KEY);
+    if(v){ S=Object.assign(S,JSON.parse(v)); got=true; }
   }catch(e){ if(mem[KEY]){ S=Object.assign(S,mem[KEY]); got=true; } }
   if(!got && window.__SEED__){ try{ S=Object.assign(S,window.__SEED__); }catch(e){} }
 }
@@ -993,7 +1103,7 @@ function save(){
   mem[KEY]=S;
   clearTimeout(saveTimer);
   saveTimer=setTimeout(async()=>{
-    try{ if(window.storage) await window.storage.set(KEY,JSON.stringify(S),false); }catch(e){}
+    try{ await store.set(KEY,JSON.stringify(S)); }catch(e){}
     const c=document.getElementById('savechip');
     c.classList.add('show'); setTimeout(()=>c.classList.remove('show'),1200);
   },400);
@@ -1361,10 +1471,8 @@ let dTimer=null;
 async function loadDocs(){
   let got=false;
   try{
-    if(window.storage){
-      const r=await window.storage.get(DKEY,false);
-      if(r&&r.value){ DOC=JSON.parse(r.value); got=true; }
-    }
+    const v=await store.get(DKEY);
+    if(v){ DOC=JSON.parse(v); got=true; }
   }catch(e){ if(mem[DKEY]){ DOC=mem[DKEY]; got=true; } }
   if(!got && window.__DOCS__){ try{ DOC=window.__DOCS__; }catch(e){} }
   if(!DOC||!DOC.docs) DOC={docs:[]};
@@ -1373,7 +1481,7 @@ function saveDocs(){
   mem[DKEY]=DOC;
   clearTimeout(dTimer);
   dTimer=setTimeout(async()=>{
-    try{ if(window.storage) await window.storage.set(DKEY,JSON.stringify(DOC),false); }
+    try{ const ok=await store.set(DKEY,JSON.stringify(DOC)); if(!ok) throw 0; }
     catch(e){ document.getElementById('docMsg').textContent='No se pudieron guardar los archivos: probablemente ya no cabe más. Borra alguno pesado.'; }
     const c=document.getElementById('savechip'); c.classList.add('show'); setTimeout(()=>c.classList.remove('show'),1200);
   },500);
@@ -1437,6 +1545,97 @@ function docHTML(d){
     <button class="del" data-docdel="${d.id}" aria-label="Borrar">×</button>
   </div>`;
 }
+
+/* ============ PASAPORTES, SEGUROS Y CARTAS CONSULARES ============ */
+const TIPOS=[
+ {k:'pas', lb:'Pasaporte',    ic:'\ud83d\udec2', falta:'Falta subirlo'},
+ {k:'seg', lb:'Seguro de asistencia', ic:'\ud83e\ude7a', falta:'Falta contratarlo'},
+ {k:'con', lb:'Carta consular', ic:'\ud83d\udcdc', falta:'Falta subirla'}
+];
+const PERSONAS=[
+ {k:'p1', n:'Caterine Ladino', ini:'CL', c:'var(--paris)', rol:'Sale de México el 15 · llega a CDG',
+  docs:{pas:'1Fn4hmgE2E0m67x19CgZQnUuURopUXl9y', seg:'', con:''}},
+ {k:'p2', n:'Martha Lucía Galvis', ini:'ML', c:'var(--barcelona)', rol:'Sale de Bogotá el 15 · llega a Orly',
+  docs:{pas:'', seg:'1fP36o7u19abP7JlfA4YkWqyDeVeD1W07', con:'1I8880BEHrUtOQL0PjRI9R-QOOxLh96WA'}},
+ {k:'p3', n:'María Eugenia Galviz', ini:'ME', c:'var(--venecia)', rol:'Sale de Bogotá el 15 · llega a Orly',
+  docs:{pas:'13CQhPl9iMimqanUD1NnmJDQF_-T2vPhV', seg:'1JquC7soTQCU4MSKIFJ7BmMa2nKuLki5I', con:'1ex1CYJTPZ3Zb7mMq2WgVSkCgVG_pcixb'}},
+ {k:'p4', n:'Georgina Aguirre de Galvis', ini:'GA', c:'var(--roma)', rol:'Sale de Bogotá el 15 · llega a Orly',
+  docs:{pas:'1A-uyTkaM9tARs3yPzDSOgzPgigUCdnab', seg:'1Qg3rQm-5SRCbk-GD2QPySJEAWJpblYwX', con:'1rifbXI81qpWniTsEYQVLTtG0mcTqvFbd'}}
+];
+const CAMPOS=[['pasnum','N.º de pasaporte'],['pasvto','Vence el'],['poliza','N.º de póliza'],['emerg','A quién llamar']];
+
+function renderPersonas(){
+  const total=PERSONAS.length*TIPOS.length;
+  const hay=PERSONAS.reduce((a,p)=>a+TIPOS.filter(t=>p.docs[t.k]).length,0);
+  const faltan=[];
+  PERSONAS.forEach(p=>TIPOS.forEach(t=>{ if(!p.docs[t.k]) faltan.push(t.lb.toLowerCase()+' de '+p.n.split(' ')[0]); }));
+  document.getElementById('docMeter').innerHTML=
+    `<div class="big">${hay}<small>/${total}</small></div>
+     <div class="bar"><i style="width:${Math.round(hay/total*100)}%"></i></div>
+     <div class="txt">${faltan.length
+        ? 'Ya están guardados '+hay+' de los '+total+' documentos. Falta '+esc(listar(faltan))+'.'
+        : 'Están los doce documentos de las cuatro. No falta nada.'}</div>`;
+
+  document.getElementById('personas').innerHTML=PERSONAS.map(p=>{
+    const tiles=TIPOS.map(t=>{
+      const id=p.docs[t.k];
+      return id
+        ? `<button class="dtile" data-ver="${p.k}:${t.k}"><span class="ic">${t.ic}</span>
+             <span class="lb">${esc(t.lb)}</span><span class="st">Ver ahora</span></button>`
+        : `<div class="dtile no"><span class="ic">${t.ic}</span>
+             <span class="lb">${esc(t.lb)}</span><span class="st">${esc(t.falta)}</span></div>`;
+    }).join('');
+    const campos=CAMPOS.map(([c,l])=>{
+      const key=p.k+'-'+c;
+      return `<div><label class="f" for="${key}">${esc(l)}</label>
+        <input type="text" id="${key}" data-pers="${key}" value="${esc((S.pers||{})[key]||'')}"></div>`;
+    }).join('');
+    return `<div class="pcard" style="--c:${p.c}">
+      <div class="phead">
+        <div class="avatar">${esc(p.ini)}</div>
+        <div><h3>${esc(p.n)}</h3><div class="who">${esc(p.rol)}</div></div>
+      </div>
+      <div class="dtiles">${tiles}</div>
+      <div class="fields">${campos}</div>
+    </div>`;
+  }).join('');
+  ['tel-seg','tel-emb'].forEach(k=>{
+    const el=document.getElementById(k);
+    if(el) el.value=(S.pers||{})[k]||'';
+  });
+}
+function listar(a){
+  if(a.length===1) return a[0];
+  return a.slice(0,-1).join(', ')+' y '+a[a.length-1];
+}
+
+/* --- visor --- */
+const VW=document.getElementById('viewer');
+function verDoc(pk,tk){
+  const p=PERSONAS.find(x=>x.k===pk), t=TIPOS.find(x=>x.k===tk);
+  if(!p||!t||!p.docs[tk]) return;
+  const id=p.docs[tk];
+  document.getElementById('vWho').textContent=p.ini;
+  document.getElementById('vWho').style.setProperty('--c',p.c);
+  document.getElementById('vTitle').textContent=t.lb+' · '+p.n;
+  document.getElementById('vOpen').href=driveView(id);
+  document.getElementById('vFrame').src='https://drive.google.com/file/d/'+id+'/preview';
+  VW.hidden=false;
+  document.body.style.overflow='hidden';
+}
+function cerrarDoc(){
+  VW.hidden=true;
+  document.getElementById('vFrame').src='about:blank';
+  document.body.style.overflow='';
+}
+document.getElementById('vClose').addEventListener('click',cerrarDoc);
+VW.addEventListener('click',e=>{ if(e.target===VW) cerrarDoc(); });
+document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&!VW.hidden) cerrarDoc(); });
+document.addEventListener('click',e=>{
+  const b=e.target.closest('[data-ver]');
+  if(b){ const [pk,tk]=b.dataset.ver.split(':'); verDoc(pk,tk); }
+});
+
 const CATC={'Vuelos':'var(--vuelo)','Trenes':'var(--paris)','Traslados':'var(--barcelona)',
   'Hospedajes':'var(--venecia)','Entradas':'var(--roma)'};
 function bilDia(day){
@@ -1603,7 +1802,7 @@ document.addEventListener('click',e=>{
   const tab=e.target.closest('nav.tabs button');
   if(tab){
     document.querySelectorAll('nav.tabs button').forEach(b=>b.setAttribute('aria-selected',b===tab));
-    ['dias','reservas','docs','traslados','gastos','personal'].forEach(t=>{
+    ['dias','reservas','docs','ident','traslados','gastos','personal'].forEach(t=>{
       document.getElementById('tab-'+t).hidden=(t!==tab.dataset.tab);
     });
     document.querySelector('.railwrap').style.display=(tab.dataset.tab==='dias')?'':'none';
@@ -1623,6 +1822,7 @@ document.addEventListener('input',e=>{
   const t=e.target;
   if(t.dataset.note!==undefined){S.notes[t.dataset.note]=t.value;save();}
   if(t.dataset.move!==undefined){S.moves[t.dataset.move]=t.value;save();}
+  if(t.dataset.pers!==undefined){ if(!S.pers)S.pers={}; S.pers[t.dataset.pers]=t.value; save(); return; }
   if(t.dataset.hotel!==undefined){S.hotels[t.dataset.hotel]=t.value;save();
     if(/-a$/.test(t.dataset.hotel)){ renderRutas(); repaintDays(); } }
   if(t.id==='ppl'){S.ppl=t.value;save();renderExpenses();renderBookings();}
@@ -1661,7 +1861,7 @@ document.getElementById('export').addEventListener('click',()=>{
 
 /* ============ ARRANQUE ============ */
 function paint(){
-  renderRail();renderDays();renderMoves();renderRutas();renderBookings();renderBilletes();renderDocs();
+  renderRail();renderDays();renderMoves();renderRutas();renderBookings();renderBilletes();renderDocs();renderPersonas();
   document.getElementById('tcInput').value=tc();
   document.getElementById('ppl').value=S.ppl||4;
   document.getElementById('budget').value=S.budget||'';
