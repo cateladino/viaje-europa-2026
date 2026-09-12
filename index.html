@@ -268,6 +268,12 @@ ul.check input:checked + span{text-decoration:line-through;color:var(--ink-soft)
 @media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
 
 /* ---------- Documentos ---------- */
+.syncbar{border:1px solid var(--line);border-left:5px solid var(--ok);border-radius:10px;background:var(--paper-2);
+  padding:10px 14px;font-size:14.5px;line-height:1.5;margin-bottom:12px}
+.syncbar.off{border-left-color:var(--ink-soft);color:var(--ink-soft)}
+.syncbar.hay{border-left-color:var(--warn);background:#FFF8EC}
+.syncbar code{font-family:var(--mono);font-size:12.5px;background:var(--line-soft);padding:1px 5px;border-radius:4px}
+
 /* --- pasaportes, seguros y visor de documentos --- */
 .docmeter{display:flex;align-items:center;gap:14px;flex-wrap:wrap;border:1px solid var(--line);border-radius:var(--r);
   background:var(--paper-2);padding:14px 18px;margin-bottom:16px;box-shadow:var(--shadow)}
@@ -325,6 +331,8 @@ ul.check input:checked + span{text-decoration:line-through;color:var(--ink-soft)
   transition:border-color .15s,transform .1s}
 .blink:hover{border-color:var(--c,var(--paris));transform:translateY(-1px)}
 .blink:active{transform:none}
+.blink.nv{border-color:var(--warn);background:#FFF8EC}
+.blink.nv .pg{background:var(--warn)}
 .blink .pg{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;color:#fff;background:var(--c,var(--paris));
   border-radius:4px;padding:2px 5px;text-transform:uppercase}
 .ruta{margin-top:12px;border-left:3px solid var(--c);background:rgba(0,0,0,.028);border-radius:0 8px 8px 0;padding:11px 14px}
@@ -495,6 +503,7 @@ ul.check input:checked + span{text-decoration:line-through;color:var(--ink-soft)
   se ve en el celular sin descargar nada y sirve para mostrar el código en la entrada.
   Para que funcione sin señal, abre cada uno una vez antes de salir y en la app de Drive márcalo como
   <b>disponible sin conexión</b>.</p>
+  <div class="syncbar off" id="syncMsg">Revisando Drive…</div>
   <div class="chips" id="bilChips"></div>
   <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:10px 0 16px">
     <select id="bilFilter" style="max-width:240px">
@@ -506,6 +515,7 @@ ul.check input:checked + span{text-decoration:line-through;color:var(--ink-soft)
       <option value="Entradas">Entradas</option>
     </select>
     <a class="btn ghost small" href="https://drive.google.com/drive/folders/1netn2u_ku8Yxdi6mD4T4mCXVgAldnLX4" target="_blank" rel="noopener" style="text-decoration:none">Abrir la carpeta completa en Drive ↗</a>
+    <button class="btn ghost small" id="syncNow">Buscar cambios en Drive</button>
   </div>
   <div id="bilList"></div>
 
@@ -530,6 +540,9 @@ ul.check input:checked + span{text-decoration:line-through;color:var(--ink-soft)
   <b>eso se queda guardado solo en este teléfono</b>, no se publica ni lo ve nadie más.</p>
 
   <div class="docmeter" id="docMeter"></div>
+  <p class="lede" style="font-size:15px;margin:-6px 0 16px">Cuando subas a Drive lo que falta, aparece aquí solo:
+  basta con que el nombre del archivo lleve el nombre de la persona, como los que ya están.
+  Los pasaportes van en la carpeta <b>Identificaciones</b> y los seguros y las cartas en <b>Seguros</b>.</p>
   <div class="grid g2" id="personas"></div>
 
   <h2 class="sec">Si algo pasa</h2>
@@ -928,26 +941,26 @@ const HOTELS = [
 
 
 const BILLETES = [
- {cat:"Vuelos", day:"d1", title:"Bogotá → Madrid → París Orly", sub:"Air Europa · 15 y 16 sep · localizador 7D63DW", items:[{n:"Georgina Aguirre De Galvis",i:"1HJNIJGOPRSVLm99JLsFId76JbZlq7kk4"}, {n:"Maria Eugenia Galviz Aguirre",i:"17y4oSLaH2BSghd3TDRwFAvZFddkNiIcz"}, {n:"Martha Lucia Galvis Aguirre",i:"1x8J1dTZnSa8ZQPRJ12DwnFQV0Xa46rdu"}]},
- {cat:"Vuelos", day:"d1", title:"México → París CDG · Caterine", sub:"Aeroméxico · 15 y 16 sep", items:[{n:"Itinerario Aeroméxico · captura 1",i:"14CmSdULX0k64KZ0-NF5Y71Bi8HVs9sAP"}, {n:"Itinerario Aeroméxico · captura 2",i:"1YUPNb-pc6v3zxVV9YDOLeAOnDEiDH5PQ"}]},
- {cat:"Traslados", day:"d1", title:"Van privada Orly → casa de París", sub:"16 sep · 18:30 · reserva 588871925 · 62 €", items:[{n:"Confirmación Booking · van privada",i:"1BOXH0Gv-0HmolaputCNWuUe64ubkxm_9"}]},
- {cat:"Hospedajes", day:"d1", title:"Casa de París", sub:"11 Rue du Delta, 75009 · 16 al 21 sep · reserva HMXXDNTPZF", items:[{n:"Confirmación de la reserva",i:"11ZxNDMUMSsQkdycMRGx1kpgMmbNpJl1y"}, {n:"Recibo de pago",i:"1hNNJbj2YYooHD0Sb3vWjJJTzbByM9LfH"}]},
- {cat:"Entradas", day:"d2", title:"Torre Eiffel · ascensor a la cima", sub:"17 sep · 11:00 · reserva 262010530930", items:[{n:"Abrir la entrada",i:"1BHbilGa6J7fQktTgjsQB3Po04Uqem952"}]},
- {cat:"Entradas", day:"d2", title:"Crucero por el Sena", sub:"17 sep · válido de 10:00 a 22:00 · GYG2Q9BXRFRN", items:[{n:"Abrir la entrada",i:"1905nMkQP0xVshZRcFBPuy2cRZpFZa89d"}]},
- {cat:"Entradas", day:"d3", title:"Museo del Louvre", sub:"18 sep · 10:00 · reserva C262340001706", items:[{n:"Abrir la entrada",i:"1nsZd97QzqGTlcvlEIU9dNTCh8Vbbk43m"}]},
- {cat:"Entradas", day:"d4", title:"Palacio de Versalles", sub:"19 sep · 10:00 · Puerta A · Passeport", items:[{n:"Abrir la entrada",i:"1r0gRJN9tp5i40DJNg0t1003sKEWoVpxl"}]},
- {cat:"Entradas", day:"d5", title:"Disneyland París", sub:"20 sep · una entrada por persona", items:[{n:"Caterine Ladino",i:"1G8P8EJxMmYcjwI83zwW-2hjdch6eOMBW"}, {n:"Georgina Aguirre",i:"1zgW5rx9uwOCs59VmxhpfWgxKDhITZ68E"}, {n:"Maria Eugenia Galviz",i:"1VeoA_LjUOo_dUDygDKE_KA3qZViiEd8F"}, {n:"Martha Galvis",i:"1ox3c5QQHtNjT92wuVu9v8FII0I8OWdaC"}]},
- {cat:"Trenes", day:"d6", title:"París Gare de Lyon → Barcelona Sants", sub:"TGV INOUI 9715 · 21 sep · 14:42 · expediente P4PNMJ", items:[{n:"Billete 1 de 4",i:"1HAVlfVvGrf75QFRkq9ZvdLIZBpDDbGDc"}, {n:"Billete 2 de 4",i:"1nxIje188sDTM239kAP3Zg7wYMyAbSiBL"}, {n:"Billete 3 de 4",i:"1PDXiU9mI1yqXmNXy97K2ZU4SighqGQxY"}, {n:"Billete 4 de 4",i:"1hKjoPy_S15O4xSZ3jhwo6Z57_fWfeC2u"}]},
- {cat:"Hospedajes", day:"d6", title:"Casa de Barcelona", sub:"21 al 24 sep · reserva HMWM9XXSK3", items:[{n:"Confirmación de la reserva",i:"1ARmgo9ruiLNaSLLgqgkklOduQvxLB58v"}, {n:"Recibo de pago",i:"1RBJ2S1MccjJNucEa_BdlA1piWmlLIF4w"}]},
- {cat:"Vuelos", day:"d9", title:"Barcelona → Venecia Marco Polo", sub:"Vueling IB5560 · 24 sep · 14:45", items:[{n:"Georgina Aguirre",i:"15fTw3bsjIM6rxMkBGBw6fX9Q80z35C9T"}, {n:"Martha Lucía Galvis",i:"1NRUwb6qdGeJtCd5eJNSEGQju-lANGIWN"}, {n:"María Eugenia Galviz",i:"1kWK-8vRaoELVQB5xYxzKv4Cg1SM8TmZ4"}, {n:"Caterine Ladino",i:"10S27_lWswYKwk1hSiBv-AfAb-VAd3h7i"}]},
- {cat:"Hospedajes", day:"d9", title:"Casa de Venecia", sub:"24 al 26 sep · entrada de 15:00 a 23:00", items:[{n:"Confirmación de la reserva",i:"1xZ8q5Li9cP_-WE9yoW0nVQ5yxgwJ1W7Q"}, {n:"Recibo de pago",i:"17T92-04zlNONO90ZlZM8WVspayyyO47a"}]},
- {cat:"Entradas", day:"d10", title:"Basílica de San Marcos", sub:"25 sep · 11:00 · Venecia", items:[{n:"Billete 3",i:"1hXJTqwB3Yq6nRd43gdQB494twTFhOcNe"}, {n:"Billete 4",i:"1teGjiD5Zu-jYapq_CFsFfNo5g0vqZnqq"}, {n:"Billete 5",i:"1D-h260OWKCMwgm8hVAkU_PnTMwl9u4OI"}, {n:"Billete 6",i:"1LtrUOSsGsjO7ZXjTv2KPkJZWXKTz9IfA"}, {n:"Recibo de compra",i:"1UVNJ-kIflT7HtJ0HL9KrMruJs-RpYUCl"}]},
- {cat:"Trenes", day:"d11", title:"Venecia Santa Lucía → Roma Termini", sub:"Frecciarossa · 26 sep · 12:26 · referencia 2702492", items:[{n:"Reserva Trenitalia",i:"1f8fOPMO44Fl0q9uX_ey3iWKsT69zKGG7"}]},
- {cat:"Trenes", day:"d11", title:"Billetes nominativos del Frecciarossa", sub:"Uno por persona · 26 sep", items:[{n:"Billete 1 de 4",i:"1dB5mcym4AkkMUrrkFDmxLQuUgrEFigC2"}, {n:"Billete 2 de 4",i:"1HTH1Am7y_VN-PyPCNtQXBYEGJoyY6-ib"}, {n:"Billete 3 de 4",i:"12CPmB63n5ag1D3pbV3fRD6jjA2rfr8Z1"}, {n:"Billete 4 de 4",i:"1tZeiLXVtGklWu71lowvXxex8TPMR-uBb"}]},
- {cat:"Hospedajes", day:"d11", title:"Casa de Roma", sub:"Via della Consulta 1b, 00184 · 26 sep al 1 oct", items:[{n:"Confirmación de la reserva",i:"1ehcIxt59ANnp_V-SKgspgA6R46-Wjlu7"}]},
- {cat:"Entradas", day:"d13", title:"Coliseo, Foro y Palatino", sub:"28 sep · 10:25", items:[{n:"Abrir la entrada",i:"1orUZLiVnm79i6mcCzdhICF0_qjGK-ZnV"}]},
- {cat:"Entradas", day:"d15", title:"Museos Vaticanos y Capilla Sixtina", sub:"30 sep · 10:30", items:[{n:"Abrir la entrada",i:"1N3su_4bEhWQMUFP-DGaxrBy73Y5RhV2U"}]},
- {cat:"Vuelos", day:"d16", title:"Roma Fiumicino → París Orly", sub:"Transavia TO 3917 · 1 oct · reserva GF88PT", items:[{n:"Confirmación Transavia · GF88PT",i:"1WPjyDyJZ9l0mlsVozDV2DQwpXu_NacJF"}]},
+ {cat:"Vuelos", day:"d1", dir:"/Tiquetes/1- Bogota a Paris", title:"Bogotá → Madrid → París Orly", sub:"Air Europa · 15 y 16 sep · localizador 7D63DW", items:[{n:"Georgina Aguirre De Galvis",i:"1HJNIJGOPRSVLm99JLsFId76JbZlq7kk4"}, {n:"Maria Eugenia Galviz Aguirre",i:"17y4oSLaH2BSghd3TDRwFAvZFddkNiIcz"}, {n:"Martha Lucia Galvis Aguirre",i:"1x8J1dTZnSa8ZQPRJ12DwnFQV0Xa46rdu"}]},
+ {cat:"Vuelos", day:"d1", dir:"/Tiquetes/2- CDMX a Paris", title:"México → París CDG · Caterine", sub:"Aeroméxico · 15 y 16 sep", items:[{n:"Itinerario Aeroméxico · captura 1",i:"14CmSdULX0k64KZ0-NF5Y71Bi8HVs9sAP"}, {n:"Itinerario Aeroméxico · captura 2",i:"1YUPNb-pc6v3zxVV9YDOLeAOnDEiDH5PQ"}]},
+ {cat:"Traslados", day:"d1", dir:"/Traslados/1-1 Aeropuerto Paris - Hotel", title:"Van privada Orly → casa de París", sub:"16 sep · 18:30 · reserva 588871925 · 62 €", items:[{n:"Confirmación Booking · van privada",i:"1BOXH0Gv-0HmolaputCNWuUe64ubkxm_9"}]},
+ {cat:"Hospedajes", day:"d1", dir:"/Hospedajes/1- Paris", title:"Casa de París", sub:"11 Rue du Delta, 75009 · 16 al 21 sep · reserva HMXXDNTPZF", items:[{n:"Confirmación de la reserva",i:"11ZxNDMUMSsQkdycMRGx1kpgMmbNpJl1y"}, {n:"Recibo de pago",i:"1hNNJbj2YYooHD0Sb3vWjJJTzbByM9LfH"}]},
+ {cat:"Entradas", day:"d2", dir:"/Entradas/1- Paris", title:"Torre Eiffel · ascensor a la cima", sub:"17 sep · 11:00 · reserva 262010530930", items:[{n:"Abrir la entrada",i:"1BHbilGa6J7fQktTgjsQB3Po04Uqem952"}]},
+ {cat:"Entradas", day:"d2", dir:"/Entradas/1- Paris", title:"Crucero por el Sena", sub:"17 sep · válido de 10:00 a 22:00 · GYG2Q9BXRFRN", items:[{n:"Abrir la entrada",i:"1905nMkQP0xVshZRcFBPuy2cRZpFZa89d"}]},
+ {cat:"Entradas", day:"d3", dir:"/Entradas/1- Paris", title:"Museo del Louvre", sub:"18 sep · 10:00 · reserva C262340001706", items:[{n:"Abrir la entrada",i:"1nsZd97QzqGTlcvlEIU9dNTCh8Vbbk43m"}]},
+ {cat:"Entradas", day:"d4", dir:"/Entradas/1- Paris", title:"Palacio de Versalles", sub:"19 sep · 10:00 · Puerta A · Passeport", items:[{n:"Abrir la entrada",i:"1r0gRJN9tp5i40DJNg0t1003sKEWoVpxl"}]},
+ {cat:"Entradas", day:"d5", dir:"/Entradas/1- Paris/20-09-2026 DisneyLand Paris", title:"Disneyland París", sub:"20 sep · una entrada por persona", items:[{n:"Caterine Ladino",i:"1G8P8EJxMmYcjwI83zwW-2hjdch6eOMBW"}, {n:"Georgina Aguirre",i:"1zgW5rx9uwOCs59VmxhpfWgxKDhITZ68E"}, {n:"Maria Eugenia Galviz",i:"1VeoA_LjUOo_dUDygDKE_KA3qZViiEd8F"}, {n:"Martha Galvis",i:"1ox3c5QQHtNjT92wuVu9v8FII0I8OWdaC"}]},
+ {cat:"Trenes", day:"d6", dir:"/Traslados/1- Paris a Barcelona", title:"París Gare de Lyon → Barcelona Sants", sub:"TGV INOUI 9715 · 21 sep · 14:42 · expediente P4PNMJ", items:[{n:"Billete 1 de 4",i:"1HAVlfVvGrf75QFRkq9ZvdLIZBpDDbGDc"}, {n:"Billete 2 de 4",i:"1nxIje188sDTM239kAP3Zg7wYMyAbSiBL"}, {n:"Billete 3 de 4",i:"1PDXiU9mI1yqXmNXy97K2ZU4SighqGQxY"}, {n:"Billete 4 de 4",i:"1hKjoPy_S15O4xSZ3jhwo6Z57_fWfeC2u"}]},
+ {cat:"Hospedajes", day:"d6", dir:"/Hospedajes/2- Barcelona", title:"Casa de Barcelona", sub:"21 al 24 sep · reserva HMWM9XXSK3", items:[{n:"Confirmación de la reserva",i:"1ARmgo9ruiLNaSLLgqgkklOduQvxLB58v"}, {n:"Recibo de pago",i:"1RBJ2S1MccjJNucEa_BdlA1piWmlLIF4w"}]},
+ {cat:"Vuelos", day:"d9", dir:"/Traslados/2- Barcelona a Venecia", title:"Barcelona → Venecia Marco Polo", sub:"Vueling IB5560 · 24 sep · 14:45", items:[{n:"Georgina Aguirre",i:"15fTw3bsjIM6rxMkBGBw6fX9Q80z35C9T"}, {n:"Martha Lucía Galvis",i:"1NRUwb6qdGeJtCd5eJNSEGQju-lANGIWN"}, {n:"María Eugenia Galviz",i:"1kWK-8vRaoELVQB5xYxzKv4Cg1SM8TmZ4"}, {n:"Caterine Ladino",i:"10S27_lWswYKwk1hSiBv-AfAb-VAd3h7i"}]},
+ {cat:"Hospedajes", day:"d9", dir:"/Hospedajes/3- Venecia", title:"Casa de Venecia", sub:"24 al 26 sep · entrada de 15:00 a 23:00", items:[{n:"Confirmación de la reserva",i:"1xZ8q5Li9cP_-WE9yoW0nVQ5yxgwJ1W7Q"}, {n:"Recibo de pago",i:"17T92-04zlNONO90ZlZM8WVspayyyO47a"}]},
+ {cat:"Entradas", day:"d10", dir:"/Entradas/3- Italia/25-09-26 11_00 am Basilica de San Marcos", title:"Basílica de San Marcos", sub:"25 sep · 11:00 · Venecia", items:[{n:"Billete 3",i:"1hXJTqwB3Yq6nRd43gdQB494twTFhOcNe"}, {n:"Billete 4",i:"1teGjiD5Zu-jYapq_CFsFfNo5g0vqZnqq"}, {n:"Billete 5",i:"1D-h260OWKCMwgm8hVAkU_PnTMwl9u4OI"}, {n:"Billete 6",i:"1LtrUOSsGsjO7ZXjTv2KPkJZWXKTz9IfA"}, {n:"Recibo de compra",i:"1UVNJ-kIflT7HtJ0HL9KrMruJs-RpYUCl"}]},
+ {cat:"Trenes", day:"d11", dir:"/Tiquetes/4-Venecia a Roma", title:"Venecia Santa Lucía → Roma Termini", sub:"Frecciarossa · 26 sep · 12:26 · referencia 2702492", items:[{n:"Reserva Trenitalia",i:"1f8fOPMO44Fl0q9uX_ey3iWKsT69zKGG7"}]},
+ {cat:"Trenes", day:"d11", dir:"/Traslados/3- Venecia a Roma", title:"Billetes nominativos del Frecciarossa", sub:"Uno por persona · 26 sep", items:[{n:"Billete 1 de 4",i:"1dB5mcym4AkkMUrrkFDmxLQuUgrEFigC2"}, {n:"Billete 2 de 4",i:"1HTH1Am7y_VN-PyPCNtQXBYEGJoyY6-ib"}, {n:"Billete 3 de 4",i:"12CPmB63n5ag1D3pbV3fRD6jjA2rfr8Z1"}, {n:"Billete 4 de 4",i:"1tZeiLXVtGklWu71lowvXxex8TPMR-uBb"}]},
+ {cat:"Hospedajes", day:"d11", dir:"/Hospedajes/4- Roma", title:"Casa de Roma", sub:"Via della Consulta 1b, 00184 · 26 sep al 1 oct", items:[{n:"Confirmación de la reserva",i:"1ehcIxt59ANnp_V-SKgspgA6R46-Wjlu7"}]},
+ {cat:"Entradas", day:"d13", dir:"/Entradas/3- Italia", title:"Coliseo, Foro y Palatino", sub:"28 sep · 10:25", items:[{n:"Abrir la entrada",i:"1orUZLiVnm79i6mcCzdhICF0_qjGK-ZnV"}]},
+ {cat:"Entradas", day:"d15", dir:"/Entradas/3- Italia", title:"Museos Vaticanos y Capilla Sixtina", sub:"30 sep · 10:30", items:[{n:"Abrir la entrada",i:"1N3su_4bEhWQMUFP-DGaxrBy73Y5RhV2U"}]},
+ {cat:"Vuelos", day:"d16", dir:"/Tiquetes/3- Roma a Paris", title:"Roma Fiumicino → París Orly", sub:"Transavia TO 3917 · 1 oct · reserva GF88PT", items:[{n:"Confirmación Transavia · GF88PT",i:"1WPjyDyJZ9l0mlsVozDV2DQwpXu_NacJF"}]},
 ];
 
 /* ============ CARPETA DE DRIVE ============ */
@@ -1636,6 +1649,157 @@ document.addEventListener('click',e=>{
   if(b){ const [pk,tk]=b.dataset.ver.split(':'); verDoc(pk,tk); }
 });
 
+
+/* ============ SINCRONIZACIÓN CON LA CARPETA DE DRIVE ============ */
+/* Pega aquí la URL /exec de la aplicación web de sync-drive.gs.
+   Mientras esté vacía, el tablero usa el catálogo fijo de más arriba. */
+const SYNC_URL='';
+const SKEY='viaje-europa-2026-drive';
+let SYNC={at:null, nuevos:0, error:null};
+
+function nrm(x){
+  return String(x||'').normalize('NFD').replace(/[̀-ͯ]/g,'')
+    .replace(/[  ]/g,' ').toLowerCase();
+}
+function sinExt(n){ return String(n).replace(/\.[a-z0-9]{2,4}$/i,''); }
+
+/* ¿de quién es este archivo? */
+function personaDe(txt){
+  const t=nrm(txt);
+  const claves=[['p1',['caterine','ladino']],['p2',['martha']],
+                ['p3',['eugenia']],['p4',['georgina']]];
+  for(const [k,ws] of claves) if(ws.some(w=>t.indexOf(w)>=0)) return k;
+  return null;
+}
+/* ¿de qué día es? busca una fecha en el nombre o en la carpeta */
+function diaDe(txt){
+  const m=nrm(txt).match(/(\d{1,2})[-_.](\d{1,2})[-_.](\d{2,4})/);
+  if(!m) return '';
+  const dd=+m[1], mm=+m[2]; let yy=+m[3]; if(yy<100) yy+=2000;
+  const iso=yy+'-'+String(mm).padStart(2,'0')+'-'+String(dd).padStart(2,'0');
+  return (DAYS.find(d=>d.iso===iso)||{}).id||'';
+}
+/* nombre legible para un archivo recién aparecido */
+function limpio(nombre){
+  return sinExt(nombre)
+    .replace(/^\d{1,2}[-_.]\d{1,2}[-_.]\d{2,4}\s*/,'')       // 22-09-26
+    .replace(/^\d{1,2}([:_.h]\d{2})?\s*(am|pm)\s*/i,'')      // 10am, 11_00 am
+    .replace(/^\d{1,2}[:_.]\d{2}\s*/,'')                     // 14:45
+    .replace(/^[\s\-_.]+/,'').replace(/_/g,' ').trim();
+}
+function bonito(nombre){
+  const b=sinExt(nombre);
+  const p=PERSONAS.find(x=>x.k===personaDe(b));
+  if(p) return p.n;
+  const loc=b.match(/^[A-Z0-9]{5,8}\s*-\s*(.+)$/);            // "7D63DW - NOMBRE"
+  if(loc) return loc[1].toLowerCase().replace(/\b\w/g,c=>c.toUpperCase());
+  if(/ricevuta|recibo/i.test(b)) return 'Recibo de compra';
+  const d=limpio(nombre);
+  if(d.length>3 && /[a-záéíóúñ]{3}/i.test(d)) return d;
+  return 'Abrir el documento';
+}
+const CATDIR={'Tiquetes':'Vuelos','Traslados':'Traslados','Hospedajes':'Hospedajes','Entradas':'Entradas'};
+
+/* Mezcla lo que hay en Drive con el catálogo fijo */
+function aplicarDrive(files){
+  const vistos=new Set();
+  BILLETES.forEach(g=>g.items.forEach(it=>vistos.add(it.i)));
+  PERSONAS.forEach(pp=>TIPOS.forEach(t=>{ if(pp.docs[t.k]) vistos.add(pp.docs[t.k]); }));
+
+  let nuevos=0;
+  files.forEach(f=>{
+    if(vistos.has(f.id)) return;
+    const ruta=f.p||'';
+    const corte=ruta.lastIndexOf('/');
+    const dir=ruta.slice(0,corte), nombre=ruta.slice(corte+1);
+    if(!dir) return;                                   // archivos sueltos en la raíz
+    if(/\.(xlsx?|html?|csv)$/i.test(nombre)) return;   // el Excel y el html de respaldo
+
+    /* pasaportes */
+    if(/^\/identificaciones/i.test(dir)){
+      const pk=personaDe(nombre);
+      const pp=PERSONAS.find(x=>x.k===pk);
+      if(pp && !pp.docs.pas){ pp.docs.pas=f.id; nuevos++; }
+      return;
+    }
+    /* seguros y cartas consulares */
+    if(/^\/seguros/i.test(dir)){
+      const pk=personaDe(nombre);
+      const pp=PERSONAS.find(x=>x.k===pk);
+      const tipo=/consular/i.test(nombre)?'con':'seg';
+      if(pp && !pp.docs[tipo]){ pp.docs[tipo]=f.id; nuevos++; }
+      return;
+    }
+    /* billetes: primero, ¿pertenece a un grupo que ya existe? */
+    const g=BILLETES.find(x=>nrm(x.dir)===nrm(dir));
+    if(g){ g.items.push({n:bonito(nombre), i:f.id, nuevo:1}); nuevos++; return; }
+
+    /* si no, se crea un grupo con el nombre de su carpeta */
+    const partes=dir.split('/').filter(Boolean);
+    const cat=CATDIR[partes[0]]||'Entradas';
+    const carpeta=(partes[partes.length-1]||'Sin carpeta')
+      .replace(/^[\d\s\-_.]+/,'').replace(/_/g,' ').trim() || partes[partes.length-1];
+    const titulo=carpeta;
+    BILLETES.push({cat:cat, day:diaDe(nombre)||diaDe(dir), dir:dir,
+      title:titulo.charAt(0).toUpperCase()+titulo.slice(1), sub:'Recién encontrado en Drive',
+      items:[{n:bonito(nombre), i:f.id, nuevo:1}], nuevo:1});
+    nuevos++;
+  });
+  /* deja los grupos en el orden del viaje */
+  const orden=d=>{ const i=DAYS.findIndex(x=>x.id===d); return i<0?99:i; };
+  BILLETES.sort((a,b)=>orden(a.day)-orden(b.day));
+  return nuevos;
+}
+
+async function sincronizar(manual){
+  const aviso=document.getElementById('syncMsg');
+  const pinta=()=>{ renderBilletes(); renderPersonas(); repaintDays(); };
+
+  /* lo último que se leyó, para que funcione sin señal */
+  if(!manual){
+    try{
+      const c=localStorage.getItem(SKEY);
+      if(c){ const d=JSON.parse(c); SYNC.at=d.at; aplicarDrive(d.files||[]); pinta(); }
+    }catch(e){}
+  }
+  if(!SYNC_URL){ mostrar(); return; }
+
+  if(manual && aviso) aviso.innerHTML='Buscando cambios en Drive…';
+  try{
+    const r=await fetch(SYNC_URL,{cache:'no-store'});
+    const d=await r.json();
+    if(!d.ok) throw new Error(d.error||'Drive no respondió');
+    SYNC.nuevos=aplicarDrive(d.files||[]);
+    SYNC.at=d.at; SYNC.error=null;
+    try{ localStorage.setItem(SKEY,JSON.stringify({at:d.at,files:d.files})); }catch(e){}
+    pinta();
+  }catch(e){
+    SYNC.error=String(e.message||e);
+  }
+  mostrar();
+
+  function mostrar(){
+    if(!aviso) return;
+    if(!SYNC_URL){
+      aviso.innerHTML='<b>La sincronización todavía no está encendida.</b> El catálogo es el que quedó guardado. '+
+        'Para que los archivos nuevos de Drive aparezcan solos hay que instalar <code>sync-drive.gs</code> una vez.';
+      aviso.className='syncbar off'; return;
+    }
+    if(SYNC.error){
+      aviso.innerHTML='No se pudo leer Drive ahora mismo, así que se está mostrando la última lista guardada. '+
+        '<span style="color:var(--ink-soft)">('+esc(SYNC.error)+')</span>';
+      aviso.className='syncbar off'; return;
+    }
+    const h=SYNC.at?new Date(SYNC.at):null;
+    const cuando=h?h.toLocaleString('es',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'}):'';
+    aviso.innerHTML=(SYNC.nuevos
+        ? '<b>'+SYNC.nuevos+' documento'+(SYNC.nuevos>1?'s':'')+' nuevo'+(SYNC.nuevos>1?'s':'')+' desde Drive.</b> '
+        : 'Todo al día con Drive. ')
+      +(cuando?'Última revisión: '+esc(cuando)+'.':'');
+    aviso.className='syncbar'+(SYNC.nuevos?' hay':'');
+  }
+}
+
 const CATC={'Vuelos':'var(--vuelo)','Trenes':'var(--paris)','Traslados':'var(--barcelona)',
   'Hospedajes':'var(--venecia)','Entradas':'var(--roma)'};
 function bilDia(day){
@@ -1658,12 +1822,13 @@ function renderBilletes(){
       <h4>${esc(g.title)}</h4>
       <div class="sub">${dd?'<b>'+esc(dd)+'</b> · ':''}${esc(g.sub)}</div>
       <div class="blist">${g.items.map(it=>
-        `<a class="blink" target="_blank" rel="noopener" href="${driveView(it.i)}"><span class="pg">${it.n.indexOf('captura')>=0?'IMG':'PDF'}</span>${esc(it.n)}</a>`
+        `<a class="blink${it.nuevo?' nv':''}" target="_blank" rel="noopener" href="${driveView(it.i)}"><span class="pg">${it.nuevo?'NUEVO':(it.n.indexOf('captura')>=0?'IMG':'PDF')}</span>${esc(it.n)}</a>`
       ).join('')}</div>
     </div>`;
   }).join('') || '<div class="card" style="color:var(--ink-soft)">No hay documentos de ese tipo.</div>';
 }
 document.getElementById('bilFilter').addEventListener('change',renderBilletes);
+document.getElementById('syncNow').addEventListener('click',()=>sincronizar(true));
 
 function renderDocs(){
   const list=document.getElementById('docList');
@@ -1862,6 +2027,7 @@ document.getElementById('export').addEventListener('click',()=>{
 /* ============ ARRANQUE ============ */
 function paint(){
   renderRail();renderDays();renderMoves();renderRutas();renderBookings();renderBilletes();renderDocs();renderPersonas();
+  sincronizar(false);
   document.getElementById('tcInput').value=tc();
   document.getElementById('ppl').value=S.ppl||4;
   document.getElementById('budget').value=S.budget||'';
