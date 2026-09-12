@@ -294,6 +294,30 @@ ul.check input:checked + span{text-decoration:line-through;color:var(--ink-soft)
 .regla.ok{--c:var(--ok)} .regla.urg{--c:var(--roma)}
 @media(max-width:640px){ .soslinks,.sosreglas{grid-template-columns:1fr} }
 
+.btop{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding-bottom:14px;margin-bottom:6px;border-bottom:1px solid var(--line)}
+.btop .lb{font-family:var(--mono);font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-soft);display:block}
+.btop b{font-family:var(--display);font-size:24px;line-height:1.15;display:block}
+.btop b.neg{color:var(--roma)}
+.btop .pl{font-size:13.5px;color:var(--ink-soft)}
+.bfila{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px dashed var(--line-soft)}
+.bfila:last-of-type{border-bottom:0}
+.bq{min-width:0;flex:0 0 auto}
+.bn{font-weight:700;font-size:15.5px;line-height:1.2}
+.bn small{font-weight:500;font-size:12px;color:var(--ink-soft)}
+.bm{font-size:13px;color:var(--ink-soft);font-family:var(--mono)}
+.bbar{flex:1;min-width:60px;height:8px;border-radius:99px;background:var(--line-soft);overflow:hidden}
+.bbar i{display:block;height:100%;border-radius:99px;transition:width .4s}
+.bres{text-align:right;font-family:var(--display);font-weight:700;font-size:16px;flex:0 0 auto;line-height:1.15}
+.bres small{display:block;font-family:var(--body);font-weight:500;font-size:11.5px;color:var(--ink-soft)}
+.bres.neg{color:var(--roma)}
+@media(max-width:600px){
+  .btop{grid-template-columns:1fr;gap:9px}
+  .btop b{font-size:20px}
+  .bfila{flex-wrap:wrap}
+  .bbar{order:3;flex-basis:100%;margin-top:2px}
+  .bq{flex:1}
+}
+
 .syncbar{border:1px solid var(--line);border-left:5px solid var(--ok);border-radius:10px;background:var(--paper-2);
   padding:10px 14px;font-size:14.5px;line-height:1.5;margin-bottom:12px}
 .syncbar.off{border-left-color:var(--ink-soft);color:var(--ink-soft)}
@@ -619,6 +643,12 @@ ul.check input:checked + span{text-decoration:line-through;color:var(--ink-soft)
 </section>
 
 <section id="tab-gastos" hidden>
+  <h2 class="sec">La bolsa que llevo</h2>
+  <p class="lede">Cada una me entregó su parte para los gastos de allá: comidas, transporte y lo que salga.
+  Como todo lo voy a pagar con mi tarjeta, ese dinero está junto y aquí se ve cuánto queda de cada una
+  conforme se van anotando los gastos abajo.</p>
+  <div id="bolsa"></div>
+
   <h2 class="sec">Cuentas del viaje</h2>
   <p class="lede">Anota el gasto el mismo día, aunque sea aproximado. Al final del viaje nadie recuerda quién pagó el taxi de Venecia.</p>
   <div class="card">
@@ -1119,7 +1149,7 @@ function rutaHTML(r,cv){
 
 /* ============ ESTADO Y GUARDADO ============ */
 const KEY='viaje-europa-2026';
-let S={checks:{},notes:{},moves:{},hotels:{},expenses:[],bookings:[],personal:[],pers:{},rsvOrigen:'',rsvFecha:'',ppl:4,budget:'',pbudget:'',tc:21.5};
+let S={checks:{},notes:{},moves:{},hotels:{},expenses:[],bookings:[],personal:[],pers:{},rsvOrigen:'',rsvFecha:'',tcop:4400,ppl:4,budget:'',pbudget:'',tc:21.5};
 const mem={};
 let saveTimer=null;
 
@@ -1294,6 +1324,66 @@ function renderMoves(){
 
 /* ============ RENDER: MALETAS, CUIDADOS ============ */
 /* ============ GASTOS ============ */
+
+/* ============ LA BOLSA COMÚN ============ */
+/* Lo que cada una entregó para gastar allá. Caterine lleva lo suyo aparte.
+   Viene de la hoja "Gastos de Europa" del Drive. */
+const BOLSA=[
+ {n:'Georgina',      ini:'GA', c:'var(--roma)',      monto:5021000, mon:'COP'},
+ {n:'Martha',        ini:'ML', c:'var(--barcelona)', monto:4753000, mon:'COP'},
+ {n:'María Eugenia', ini:'ME', c:'var(--venecia)',   monto:4451000, mon:'COP'},
+ {n:'Caterine',      ini:'CL', c:'var(--paris)',     monto:60000,   mon:'MXN', propio:1}
+];
+function cop(){ const v=Number(S.tcop); return (v>500&&v<20000)?v:4400; }
+function aEuros(m,mon){ return mon==='COP' ? m/cop() : m/tc(); }
+function fmtMon(m,mon){
+  return new Intl.NumberFormat('es',{maximumFractionDigits:0}).format(Math.round(m))+' '+mon;
+}
+function renderBolsa(){
+  const host=document.getElementById('bolsa'); if(!host) return;
+  const gastado=S.expenses.reduce((a,b)=>a+b.amt,0);
+  const ppl=Math.max(1,Number(S.ppl)||4);
+  const porCabeza=gastado/ppl;
+  const total=BOLSA.reduce((a,b)=>a+aEuros(b.monto,b.mon),0);
+  const queda=total-gastado;
+
+  const filas=BOLSA.map(b=>{
+    const e=aEuros(b.monto,b.mon);
+    const resta=e-porCabeza;
+    const pct=e>0?Math.max(0,Math.min(100,resta/e*100)):0;
+    const bajo=resta<e*0.2;
+    return `<div class="bfila">
+      <span class="avatar" style="--c:${b.c};width:36px;height:36px;flex:0 0 36px;font-size:13.5px;background:var(--c)">${esc(b.ini)}</span>
+      <div class="bq">
+        <div class="bn">${esc(b.n)}${b.propio?' <small>lo suyo</small>':''}</div>
+        <div class="bm">Entregó ${esc(fmtMon(b.monto,b.mon))} · ${eur(e)}</div>
+      </div>
+      <div class="bbar"><i style="width:${pct}%;background:${bajo?'var(--warn)':'var(--ok)'}"></i></div>
+      <div class="bres ${resta<0?'neg':''}">${eur(resta)}<small>${resta<0?'de más':'le queda'}</small></div>
+    </div>`;
+  }).join('');
+
+  host.innerHTML=`<div class="card" style="--c:var(--venecia);border-left:5px solid var(--c)">
+    <div class="btop">
+      <div><span class="lb">Total de la bolsa</span><b>${eur(total)}</b><span class="pl">${mxn(total)}</span></div>
+      <div><span class="lb">Ya gastado</span><b>${eur(gastado)}</b><span class="pl">${eur(porCabeza)} por persona</span></div>
+      <div><span class="lb">Queda</span><b class="${queda<0?'neg':''}">${eur(queda)}</b><span class="pl">${mxn(queda)}</span></div>
+    </div>
+    ${filas}
+    <div class="fields" style="margin-top:14px">
+      <div><label class="f" for="tcop">COP por 1 €</label><input type="number" id="tcop" step="1" min="500" value="${cop()}"></div>
+      <div><label class="f" for="tcop2">MXN por 1 €</label><input type="number" id="tcop2" step="0.01" min="1" data-tc="1" value="${tc()}"></div>
+    </div>
+    <div style="color:var(--ink-soft);font-size:14px;margin-top:9px">
+      El reparto es a partes iguales entre ${ppl} personas, igual que el resumen de abajo.
+      Ajusta el cambio del día para que las cuentas den.</div>
+  </div>`;
+}
+document.addEventListener('input',e=>{
+  if(e.target.id==='tcop'){ S.tcop=Number(e.target.value)||4400; save(); renderBolsa(); }
+  if(e.target.dataset&&e.target.dataset.tc){ S.tc=Number(e.target.value)||21.5; save(); renderBolsa(); renderBookings(); }
+});
+
 function renderExpenses(){
   const body=document.getElementById('eList');
   if(!S.expenses.length){
@@ -1320,6 +1410,7 @@ function renderExpenses(){
   rows.push(`<tr class="total"><td style="font-weight:500">Por persona</td><td class="num">${mxn(total/ppl)}</td></tr>`);
   document.getElementById('eSum').innerHTML=rows.join('');
   document.getElementById('pplLabel').textContent=ppl;
+  renderBolsa();
 
   const b=Number(S.budget)||0;
   const msg=document.getElementById('budgetMsg');
