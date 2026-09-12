@@ -605,7 +605,7 @@ ul.check input:checked + span{text-decoration:line-through;color:var(--ink-soft)
 
 <section id="tab-traslados" hidden>
   <h2 class="sec">Los seis movimientos del viaje</h2>
-  <p class="lede">Aquí va el número de reserva y la hora real en cuanto los tengas. Es lo único del viaje que no se puede improvisar.</p>
+  <p class="lede">Cada vuelo, tren y traslado con su localizador, su hora y el billete a un toque. Es lo único del viaje que no se puede improvisar.</p>
   <div id="moves"></div>
   <h2 class="sec">Del aeropuerto o la estación a la casa</h2>
   <p class="lede">La ruta recomendada para cada llegada y cada salida, con la línea que hay que tomar.
@@ -939,40 +939,31 @@ const DAYS = [
 ];
 
 const MOVES = [
- {k:'mv0', when:'15 y 16 sep · PAGADO', title:'Bogotá → Madrid → París Orly', city:'París',
-  detail:'Air Europa, localizador 7D63DW. Salen de Bogotá el 15 a las 20:15, llegan a Madrid a las 13:00 y a Orly a las 18:25. Viajan solo con equipaje de mano.',
-  fields:['Medidas del equipaje de mano','Asistencia pedida','Asientos juntos','Notas']},
- {k:'mv0b', when:'15 y 16 sep · PAGADO', title:'México → París CDG (Caterine)', city:'París',
-  detail:'Aeroméxico. Sale de México el 15 a las 19:25 y llega a CDG el 16 a las 19:50, con una escala.',
-  fields:['Número de vuelo','Terminal en CDG','Traslado al hotel','Notas']},
- {k:'mv1', when:'16 sep · PAGADO', title:'Van privada Orly → casa de París', city:'París',
-  detail:'Reserva 588871925, 62 euros. Recogen a las 18:30 en Orly con cartel a nombre de la familia.',
-  fields:['Teléfono del chofer','Punto de encuentro','Confirmado un día antes','Notas']},
- {k:'mv2', when:'21 sep · PAGADO', title:'Tren París → Barcelona', city:'París',
-  detail:'TGV INOUI 9715, expediente P4PNMJ. Gare de Lyon 14:42 → Barcelona Sants 21:32. Coche 18 planta baja, plazas 818, 819, 822 y 823.',
-  fields:['Traslado en Sants','Anfitrión avisado','Cena comprada','Maletas etiquetadas']},
- {k:'mv3', when:'24 sep · PAGADO', title:'Vuelo Barcelona → Venecia', city:'Barcelona',
-  detail:'Vuelo IB5560 operado por Vueling. Barcelona Terminal 1 a las 14:45, llegada a Venecia Marco Polo a las 16:35. Incluye una maleta documentada por persona.',
-  fields:['Asistencia pedida','Check-in hecho','Notas','']},
- {k:'mv4', when:'24 sep · FALTA', title:'Lancha del aeropuerto de Venecia a la casa', city:'Venecia',
-  detail:'Taxi acuático privado o Alilaguna. Preguntar al anfitrión cuál es el muelle más cercano a la puerta.',
-  fields:['Empresa','Hora','Reserva','Muelle de llegada']},
- {k:'mv5', when:'26 sep · PAGADO', title:'Tren Venecia → Roma', city:'Venecia',
-  detail:'Frecciarossa, referencia 2702492. Santa Lucia 12:26 → Roma Termini 16:24, casi cuatro horas.',
-  fields:['Coche y asientos','Vaporetto a Ferrovia','Taxi en Termini','Notas']},
- {k:'mv6', when:'1 oct · PAGADO', title:'Vuelo Roma → París Orly', city:'Roma',
-  detail:'Transavia TO 3917, reserva GF88PT. Fiumicino 18:10 → París Orly 20:20. Llega al aeropuerto correcto para el vuelo del día siguiente.',
-  fields:['Traslado a Fiumicino','Equipaje guardado en Roma','Check-in hecho','Notas']},
- {k:'mv7', when:'2 oct · PAGADO', title:'Regresos: ellas a Bogotá, Caterine a México', city:'París',
-  detail:'Ellas salen de Orly a las 10:55 con escala en Madrid y llegan a Bogotá a las 18:15. Caterine sale de CDG a las 18:40 y llega a México a las 02:05 del día 3.',
-  fields:['Traslado a la terminal 07:45','Asistencia para ellas','Traslado Orly → CDG','Terminal en CDG']}
+ {k:'mv0', docs:['/Tiquetes/1- Bogota a Paris'], when:'15 y 16 sep · PAGADO', title:'Bogotá → Madrid → París Orly', city:'París',
+  detail:'Air Europa, localizador 7D63DW. Salen de Bogotá el 15 a las 20:15, llegan a Madrid a las 13:00 y a Orly a las 18:25. Viajan solo con equipaje de mano.'},
+ {k:'mv0b', docs:['/Tiquetes/2- CDMX a Paris'], when:'15 y 16 sep · PAGADO', title:'México → París CDG (Caterine)', city:'París',
+  detail:'Aeroméxico. Sale de México el 15 a las 19:25 y llega a CDG el 16 a las 19:50, con una escala.'},
+ {k:'mv1', docs:['/Traslados/1-1 Aeropuerto Paris - Hotel'], when:'16 sep · PAGADO', title:'Van privada Orly → casa de París', city:'París',
+  detail:'Reserva 588871925, 62 euros. Recogen a las 18:30 en Orly con cartel a nombre de la familia.'},
+ {k:'mv2', docs:['/Traslados/1- Paris a Barcelona'], when:'21 sep · PAGADO', title:'Tren París → Barcelona', city:'París',
+  detail:'TGV INOUI 9715, expediente P4PNMJ. Gare de Lyon 14:42 → Barcelona Sants 21:32. Coche 18 planta baja, plazas 818, 819, 822 y 823.'},
+ {k:'mv3', docs:['/Traslados/2- Barcelona a Venecia'], when:'24 sep · PAGADO', title:'Vuelo Barcelona → Venecia', city:'Barcelona',
+  detail:'Vuelo IB5560 operado por Vueling. Barcelona Terminal 1 a las 14:45, llegada a Venecia Marco Polo a las 16:35. Incluye una maleta documentada por persona.'},
+ {k:'mv4', docs:[], when:'24 sep · FALTA', title:'Lancha del aeropuerto de Venecia a la casa', city:'Venecia',
+  detail:'Taxi acuático privado o Alilaguna. Preguntar al anfitrión cuál es el muelle más cercano a la puerta.'},
+ {k:'mv5', docs:['/Tiquetes/4-Venecia a Roma','/Traslados/3- Venecia a Roma'], when:'26 sep · PAGADO', title:'Tren Venecia → Roma', city:'Venecia',
+  detail:'Frecciarossa, referencia 2702492. Santa Lucia 12:26 → Roma Termini 16:24, casi cuatro horas.'},
+ {k:'mv6', docs:['/Tiquetes/3- Roma a Paris'], when:'1 oct · PAGADO', title:'Vuelo Roma → París Orly', city:'Roma',
+  detail:'Transavia TO 3917, reserva GF88PT. Fiumicino 18:10 → París Orly 20:20. Llega al aeropuerto correcto para el vuelo del día siguiente.'},
+ {k:'mv7', docs:['/Tiquetes/1- Bogota a Paris','/Tiquetes/2- CDMX a Paris'], when:'2 oct · PAGADO', title:'Regresos: ellas a Bogotá, Caterine a México', city:'París',
+  detail:'Ellas salen de Orly a las 10:55 con escala en Madrid y llegan a Bogotá a las 18:15. Caterine sale de CDG a las 18:40 y llega a México a las 02:05 del día 3.'}
 ];
 
 const HOTELS = [
- {k:'h1', city:'París', nights:'16 al 21 de septiembre · 5 noches · PAGADO', ask:'11 Rue du Delta, 75009 París. Reserva HMXXDNTPZF. Preguntar al anfitrión por el piso, el ascensor y cómo se recogen las llaves.'},
- {k:'h2', city:'Barcelona', nights:'21 al 24 de septiembre · 3 noches · PAGADO', ask:'Reserva HMWM9XXSK3. Avisar que llegan hacia las 22:15 desde la estación de Sants.'},
- {k:'h3', city:'Venecia', nights:'24 al 26 de septiembre · 2 noches · PAGADO', ask:'Entrada de 15:00 a 23:00, salida a las 10:00. Preguntar cuántos puentes hay hasta el vaporetto y dónde puede dejarlas la lancha.'},
- {k:'h4', city:'Roma', nights:'26 de septiembre al 1 de octubre · 5 noches', ask:'Via della Consulta 1b, 00184 Roma. Preguntar si pueden dejar las maletas el 1 de octubre después de la salida.'},
+ {k:'h1', dir:'/Hospedajes/1- Paris', city:'París', nights:'16 al 21 de septiembre · 5 noches · PAGADO', ask:'11 Rue du Delta, 75009 París. Reserva HMXXDNTPZF. Preguntar al anfitrión por el piso, el ascensor y cómo se recogen las llaves.'},
+ {k:'h2', dir:'/Hospedajes/2- Barcelona', city:'Barcelona', nights:'21 al 24 de septiembre · 3 noches · PAGADO', ask:'Reserva HMWM9XXSK3. Avisar que llegan hacia las 22:15 desde la estación de Sants.'},
+ {k:'h3', dir:'/Hospedajes/3- Venecia', city:'Venecia', nights:'24 al 26 de septiembre · 2 noches · PAGADO', ask:'Entrada de 15:00 a 23:00, salida a las 10:00. Preguntar cuántos puentes hay hasta el vaporetto y dónde puede dejarlas la lancha.'},
+ {k:'h4', dir:'/Hospedajes/4- Roma', city:'Roma', nights:'26 de septiembre al 1 de octubre · 5 noches', ask:'Via della Consulta 1b, 00184 Roma. Preguntar si pueden dejar las maletas el 1 de octubre después de la salida.'},
  {k:'h5', city:'París · junto a Orly', nights:'1 al 2 de octubre · 1 noche · PAGADO', ask:'Reserva 5831697889. Pedir transporte a la terminal y que guarden la maleta de Caterine hasta la tarde del día 2.'}
 ];
 
@@ -1259,6 +1250,21 @@ function renderRail(){
 }
 
 /* ============ RENDER: TRASLADOS Y HOTELES ============ */
+/* Los billetes que corresponden a una o varias carpetas de Drive. */
+function docsDe(dirs, cv){
+  if(!dirs||!dirs.length) return '';
+  const items=[];
+  dirs.forEach(d=>{
+    const g=BILLETES.find(x=>nrm(x.dir)===nrm(d));
+    if(g) g.items.forEach(it=>items.push(it));
+  });
+  if(!items.length) return '';
+  return `<div class="docbox" style="--c:${cv};margin-top:13px">
+    <b class="hd">Documentos</b>
+    <div class="blist" style="margin-top:5px">${items.map(it=>
+      `<a class="blink" style="--c:${cv};padding:6px 12px;font-size:13.5px" target="_blank" rel="noopener" href="${driveView(it.i)}">${esc(it.n)}</a>`
+    ).join('')}</div></div>`;
+}
 function renderRutas(){
   document.getElementById('rutas').innerHTML=RUTAS.map(r=>{
     const cv=cvar(r.city);
@@ -1275,14 +1281,11 @@ function renderRutas(){
 }
 function renderMoves(){
   document.getElementById('moves').innerHTML=MOVES.map(m=>{
-    const f=m.fields.map((l,i)=>{
-      const k=m.k+'-'+i;
-      return `<div><label class="f" for="${k}">${esc(l)}</label><input type="text" id="${k}" data-move="${k}" value="${esc(S.moves[k]||'')}"></div>`;
-    }).join('');
-    return `<div class="card" style="--c:${cvar(m.city)};border-left:5px solid var(--c)">
+    const cv=cvar(m.city);
+    return `<div class="card" style="--c:${cv};border-left:5px solid var(--c)">
       <h3>${esc(m.title)}</h3><div class="who">${esc(m.when)}</div>
       <div style="color:var(--ink-soft);font-size:15px">${esc(m.detail)}</div>
-      <div class="fields">${f}</div></div>`;
+      ${docsDe(m.docs, cv)}</div>`;
   }).join('');
 
   document.getElementById('hotels').innerHTML='<div class="grid g2">'+HOTELS.map(h=>{
@@ -1290,11 +1293,9 @@ function renderMoves(){
     return `<div class="card" style="--c:${cv};border-left:5px solid var(--c)">
       <h3>${esc(h.city)}</h3><div class="who">${esc(h.nights)}</div>
       <div style="color:var(--ink-soft);font-size:15px">${esc(h.ask)}</div>
+      ${docsDe(h.dir?[h.dir]:[], cv)}
       <div class="fields">
-        <div><label class="f">Hotel</label><input type="text" data-hotel="${h.k}-n" value="${esc(S.hotels[h.k+'-n']||'')}"></div>
-        <div><label class="f">Dirección</label><input type="text" data-hotel="${h.k}-a" value="${esc(S.hotels[h.k+'-a']||'')}"></div>
-        <div><label class="f">N.º de reserva</label><input type="text" data-hotel="${h.k}-r" value="${esc(S.hotels[h.k+'-r']||'')}"></div>
-        <div><label class="f">Teléfono</label><input type="text" data-hotel="${h.k}-t" value="${esc(S.hotels[h.k+'-t']||'')}"></div>
+        <div><label class="f">Dirección exacta · la usan los enlaces de Google Maps</label><input type="text" data-hotel="${h.k}-a" value="${esc(S.hotels[h.k+'-a']||'')}" placeholder="Calle, número y ciudad"></div>
       </div></div>`;
   }).join('')+'</div>';
 }
@@ -2025,7 +2026,6 @@ document.addEventListener('change',e=>{
 
 document.addEventListener('input',e=>{
   const t=e.target;
-  if(t.dataset.move!==undefined){S.moves[t.dataset.move]=t.value;save();}
   if(t.dataset.pers!==undefined){ if(!S.pers)S.pers={}; S.pers[t.dataset.pers]=t.value; save(); return; }
   if(t.dataset.hotel!==undefined){S.hotels[t.dataset.hotel]=t.value;save();
     if(/-a$/.test(t.dataset.hotel)){ renderRutas(); repaintDays(); } }
