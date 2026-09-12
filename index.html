@@ -461,9 +461,7 @@ ul.check input:checked + span{text-decoration:line-through;color:var(--ink-soft)
   <div class="meters">
     <div class="meter" style="--mc:var(--paris)"><div class="k">Faltan</div><div class="v" id="mCount">—</div></div>
     <div class="meter" style="--mc:var(--venecia)"><div class="k">Avance del plan</div><div class="v" id="mProg">0<small>%</small></div></div>
-    <div class="meter" style="--mc:var(--barcelona)"><div class="k">Reservas (MXN)</div><div class="v" id="mRsv">€0</div></div>
     <div class="meter" style="--mc:var(--roma)"><div class="k">Gastado en ruta (MXN)</div><div class="v" id="mSpent">€0</div></div>
-    <div class="meter" style="--mc:var(--vuelo)"><div class="k">Por persona (MXN)</div><div class="v" id="mPer">€0</div></div>
     <div class="meter" style="--mc:var(--barcelona)"><div class="k">Mis gastos (MXN)</div><div class="v" id="mMine">€0</div></div>
   </div>
   <div class="legend">
@@ -1962,11 +1960,8 @@ function updMeters(){
   const total=DAYS.reduce((a,d)=>a+d.blocks.length,0);
   const done=Object.values(S.checks).filter(Boolean).length;
   document.getElementById('mProg').innerHTML=Math.round(done/total*100)+'<small>%</small>';
-  const rsv=(S.bookings||[]).reduce((a,b)=>a+b.precio,0);
-  document.getElementById('mRsv').innerHTML=mxn(rsv)+'<small><br>'+eur(rsv)+'</small>';
   const spent=S.expenses.reduce((a,b)=>a+b.amt,0);
   document.getElementById('mSpent').innerHTML=mxn(spent)+'<small><br>'+eur(spent)+'</small>';
-  document.getElementById('mPer').innerHTML=mxn((spent+rsv)/Math.max(1,Number(S.ppl)||4));
   const mine=(S.personal||[]).reduce((a,b)=>a+b.amt,0);
   document.getElementById('mMine').innerHTML=mxn(mine)+'<small><br>'+eur(mine)+'</small>';
 
