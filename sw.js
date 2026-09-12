@@ -1,5 +1,5 @@
 /* Guarda el tablero en el teléfono para que abra sin señal. */
-const CACHE = 'europa-2026-v4';
+const CACHE = 'europa-2026-v5';
 const SHELL = ['./', './index.html', './manifest.webmanifest', './icon-192.png', './icon-512.png', './icon-180.png'];
 
 self.addEventListener('install', e => {
