@@ -511,6 +511,7 @@ ul.check input:checked + span{text-decoration:line-through;color:var(--ink-soft)
         <div style="padding:6px 0;border-bottom:1px dashed var(--line-soft)"><b>Tren a Roma</b><div style="color:var(--ink-soft);font-size:15px">Referencia 2702492 · 26 sep 12:26</div></div>
         <div style="padding:6px 0;border-bottom:1px dashed var(--line-soft)"><b>Versalles</b><div style="color:var(--ink-soft);font-size:15px">19 sep 10:00 · Puerta A, Pabellón Dufour</div></div>
         <div style="padding:6px 0;border-bottom:1px dashed var(--line-soft)"><b>Disneyland París</b><div style="color:var(--ink-soft);font-size:15px">20 sep · reserva 35951969 · 1 día, 1 parque</div></div>
+        <div style="padding:6px 0;border-bottom:1px dashed var(--line-soft)"><b>Billete de transporte en París</b><div style="color:var(--ink-soft);font-size:15px">2,55 € el viaje sencillo en metro, RER y tren, sin zonas: sirve igual para Versalles y para Disney</div></div>
         <div style="padding:6px 0"><b>Emergencias en toda Europa</b><div style="color:var(--ink-soft);font-size:15px">112, gratis y desde cualquier teléfono</div></div>
       </div>
     </div>
@@ -752,29 +753,29 @@ const DAYS = [
 
  {id:'d4', iso:'2026-09-19', city:'París', title:'Palacio de Versalles', resumen:'Excursión de día completo. Entrada a las 10:00 por la puerta A.', pace:3,
   blocks:[
-   {h:'08:45',t:'Salida de casa en van privada',d:'Versalles queda a unos 45 minutos. Reserva los dos trayectos por separado: la ida desde ahora y el regreso esa misma mañana, cuando ya sepas cómo va el día.',p:'reservar'},
+   {h:'08:20',t:'Salida de casa hacia Versalles en tren',d:'Diez minutos a pie hasta Gare du Nord, RER B dirección Saint-Rémy-lès-Chevreuse hasta Saint-Michel–Notre-Dame, y ahí abajo el RER C dirección Versailles Château Rive Gauche, que es el final de esa rama. Hora y cuarto puerta a puerta contando el cambio y los diez minutos a pie de la estación al palacio.',p:'clave'},
    {h:'09:40',t:'Llegada y control de seguridad',d:'Hay margen para el control, un café y llegar a la puerta sin correr.'},
    {h:'10:00',t:'Entrada al palacio · Puerta A, Pabellón Dufour',d:'Billete Passeport pagado, 35 euros por persona, transacción 200500399. La entrada es por la puerta A y el horario permite acceder dentro de la media hora siguiente. Un retraso de más de una hora puede significar que no las dejen pasar.',p:'pagado'},
    {h:'10:15',t:'Salón de los Espejos y aposentos reales',d:'Unas dos horas, todo en interiores. Es un circuito de un solo sentido y con mucha gente: no se puede regresar a media visita.'},
    {h:'12:30',t:'Comida dentro del dominio',d:'Hay restaurantes junto al Gran Canal. Sentarse ahí es parte del plan, no una parada rápida.'},
    {h:'14:00',t:'Jardines con las fuentes musicales',d:'El Passeport ya incluye los jardines en día de Grandes Aguas, que es lo que les tocó por ser sábado. Los caminos son de gravilla y las distancias enormes.'},
    {h:'14:30',t:'Recorrer los jardines en el trenecito',d:'Este es el truco del día. Va del palacio al Gran Canal, al Trianón y al Caserío de María Antonieta. Se paga aparte y ahorra kilómetros de caminata.',p:'clave'},
-   {h:'16:30',t:'Regreso a París',d:'Ese sábado los jardines cierran antes, a las 17:30, porque en la noche hay espectáculo. Salir a las 16:30 evita la salida en masa.'},
+   {h:'16:30',t:'Regreso a París en el mismo RER C',d:'Ese sábado los jardines cierran antes, a las 17:30, porque en la noche hay espectáculo. Salir a las 16:30 evita la salida en masa y el tren de vuelta lleno. En Saint-Michel se cambia al RER B hasta Gare du Nord.'},
    {h:'19:30',t:'Cena tranquila cerca de casa',d:'Nada de planes después: mañana es Disney y es un día largo.'}
   ],
   tip:'El billete es nominativo y no se cambia ni se devuelve. Llévenlo en el teléfono y también impreso, y con identificación: lo piden en cada control.',
   planB:'Si el día pinta pesado, se puede hacer solo el palacio y el jardín de enfrente y volver a comer a París. Vale igual.',
-  alert:'La entrada es a las 10:00 en punto por la PUERTA A del Pabellón Dufour, no por la entrada principal. Reserven la van para las 08:45 y no más tarde.'},
+  alert:'La entrada es a las 10:00 en punto por la PUERTA A del Pabellón Dufour, no por la entrada principal. Salgan de casa a las 08:20 y no más tarde: son dos trenes y diez minutos a pie al final.'},
 
  {id:'d5', iso:'2026-09-20', city:'París', title:'Disneyland París', resumen:'Día completo en el parque, a ritmo relajado.', pace:3,
   blocks:[
-   {h:'08:00',t:'Salida hacia el parque en Uber',d:'Un domingo temprano hay poco tráfico y son unos 45 minutos. Resérvenlo desde la app la noche anterior para no depender de que haya coche.',p:'reservar'},
+   {h:'08:00',t:'Salida hacia el parque en RER',d:'Diez minutos a pie hasta Gare du Nord, RER B hasta Châtelet–Les Halles y ahí el RER A dirección Marne-la-Vallée–Chessy, que es la última parada y deja en la puerta del parque. Una hora en total. Fíjense en el letrero del andén: el RER A se abre en varias ramas y solo sirve el que dice Marne-la-Vallée–Chessy.',p:'clave'},
    {h:'09:30',t:'Entrada · una entrada, un parque',d:'Entradas pagadas, 87 euros por persona, reserva 35951969. El billete dice "parque de tu elección", así que eligen al llegar. Mi recomendación es el Parque Disneyland, el del castillo: atracciones más tranquilas y es la experiencia clásica.',p:'pagado'},
    {h:'09:45',t:'Main Street y el castillo primero',d:'Con las piernas frescas, la parte más fotogénica. Lleven la entrada completa impresa o en el móvil, no solo el QR, y una identificación: son nominativas.',p:'clave'},
    {h:'12:30',t:'Comida sentadas, con mesa reservada',d:'Reservar un restaurante de servicio a la mesa desde ahora es lo que garantiza una hora de descanso real en lugar de comer de pie con bandeja.',p:'reservar'},
    {h:'14:30',t:'Vuelta al parque en el tren de vapor',d:'El Disneyland Railroad da la vuelta completa con varias estaciones. Es el mismo truco del trenecito de Versalles: descansan mientras se mueven.',p:'clave'},
    {h:'17:00',t:'Cabalgata Disney Stars on Parade',d:'Ver la cabalgata sentadas en la banqueta de Main Street es el mejor momento del día y no exige nada.'},
-   {h:'18:30',t:'Regreso a París en RER A',d:'La estación Marne-la-Vallée–Chessy está a cinco minutos de la salida y pasa cada 10 o 15 minutos. Ojo: es zona 5, hace falta el billete correcto. Bajarse en Auber es más cómodo que en Châtelet.',p:'clave'},
+   {h:'18:30',t:'Regreso a París en el mismo RER A',d:'La estación Marne-la-Vallée–Chessy está a cinco minutos de la salida y pasa cada 10 o 15 minutos. Bajarse en Châtelet–Les Halles para el RER B de vuelta a Gare du Nord.',p:'clave'},
    {h:'20:30',t:'Cena ligera y maletas',d:'Mañana es el tren a Barcelona. Dejen las maletas armadas esta noche aunque sea a medias.'}
   ],
   tip:'Dos días fuertes seguidos, Versalles y Disney, es lo más exigente del viaje. La regla de hoy es no correr: no intenten verlo todo, no hagan fila para las atracciones intensas y siéntense cada vez que puedan.',
@@ -1082,10 +1083,10 @@ const RUTA_DIA={
      text:'Metro línea 2 desde Anvers, la estación al pie de casa, dirección Porte Dauphine hasta Charles de Gaulle–Étoile; ahí se cambia a la línea 6 dirección Nation y se baja en Trocadéro. Unos 25 minutos.'},
  d3:{to:'Museo del Louvre, París, Francia', lines:[['M4','#a0006e'],['M1','#ffcd00',1]],
      text:'Línea 4 desde Barbès–Rochechouart dirección Bagneux hasta Châtelet, y una parada en la línea 1 hasta Palais-Royal–Musée du Louvre. Unos 20 minutos. Salgan 40 minutos antes: la entrada es con hora.'},
- d4:{to:'Palacio de Versalles, Francia', lines:[['RER C','#ffcd00',1]],
-     text:'La van privada es el plan y con la entrada a las 10:00 en punto conviene. En transporte público serían el RER C desde Saint-Michel–Notre-Dame hasta Versailles Château Rive Gauche, unos 50 minutos más el traslado hasta el RER.'},
- d5:{to:'Disneyland París, Marne-la-Vallée, Francia', lines:[['M4','#a0006e'],['RER A','#e3051c']],
-     text:'Línea 4 desde Barbès hasta Châtelet–Les Halles y ahí el RER A dirección Marne-la-Vallée–Chessy, que es la última parada y deja en la puerta del parque. Unos 55 minutos en total. Compren el billete que cubre la zona 5.'},
+ d4:{to:'Versailles Château Rive Gauche, Versalles, Francia', lines:[['a pie','#6B6478'],['RER B','#5291ce'],['RER C','#ffcd00',1]],
+     text:'Diez minutos a pie hasta Gare du Nord, RER B hasta Saint-Michel–Notre-Dame y ahí el RER C dirección Versailles Château Rive Gauche, final de esa rama. Hora y cuarto con la caminata de diez minutos que queda de la estación al palacio. Salgan 08:20 para la entrada de las 10:00.'},
+ d5:{to:'Disneyland París, Marne-la-Vallée, Francia', lines:[['a pie','#6B6478'],['RER B','#5291ce'],['RER A','#e3051c']],
+     text:'Diez minutos a pie hasta Gare du Nord, RER B hasta Châtelet–Les Halles y ahí el RER A dirección Marne-la-Vallée–Chessy, última parada y puerta del parque. Una hora en total. El RER A se abre en varias ramas: solo sirve el que dice Marne-la-Vallée–Chessy en el letrero del andén.'},
  d7:{to:'Sagrada Família, Barcelona, España', lines:[['L2','#a1006b'],['L5','#0079c2']],
      text:'Las líneas 2 (lila) y 5 (azul) tienen parada Sagrada Família y la salida da justo a la fachada del Nacimiento, que es la que hay que ver primero.'},
  d8:{to:'Park Güell, Barcelona, España', lines:[['L3','#00a94f'],['bus 24','#d6336c']],
