@@ -199,11 +199,7 @@ p.lede{color:var(--ink-soft);margin:0 0 18px;max-width:70ch}
 .note.alert{border-color:var(--warn);background:#FBF2E0}
 .note.alert b{color:var(--warn)}
 
-textarea.notes{
-  width:100%;margin-top:14px;min-height:62px;resize:vertical;font-family:var(--body);font-size:15px;
-  padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink)
-}
-textarea.notes:focus,input:focus,select:focus{outline:2px solid var(--c);outline-offset:0}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--c);outline-offset:0}
 
 /* ---------- Tablas / formularios genéricos ---------- */
 .card{background:var(--paper-2);border:1px solid var(--line);border-radius:var(--r);padding:18px;box-shadow:var(--shadow);margin-bottom:14px}
@@ -1227,9 +1223,6 @@ function renderDays(){
         ${bbox}
         ${rbox}
         ${dbox}
-        <div class="note"><b>Para mamá, la abuela y la tía</b>${esc(d.tip)}</div>
-        ${d.planB?`<div class="note" style="--c:var(--ink-soft)"><b>Si algo falla</b>${esc(d.planB)}</div>`:''}
-        <textarea class="notes" data-note="${d.id}" placeholder="Notas del día: reservas, direcciones, cómo se sintieron…">${esc(S.notes[d.id]||'')}</textarea>
       </div>
     </article>`;
   }).join('');
@@ -2027,7 +2020,6 @@ document.addEventListener('change',e=>{
 
 document.addEventListener('input',e=>{
   const t=e.target;
-  if(t.dataset.note!==undefined){S.notes[t.dataset.note]=t.value;save();}
   if(t.dataset.move!==undefined){S.moves[t.dataset.move]=t.value;save();}
   if(t.dataset.pers!==undefined){ if(!S.pers)S.pers={}; S.pers[t.dataset.pers]=t.value; save(); return; }
   if(t.dataset.hotel!==undefined){S.hotels[t.dataset.hotel]=t.value;save();
@@ -2052,7 +2044,7 @@ document.getElementById('eAdd').addEventListener('click',()=>{
 
 document.getElementById('reset').addEventListener('click',async()=>{
   if(!confirm('¿Borrar todas las palomitas, notas, reservas y gastos guardados?'))return;
-  S={checks:{},notes:{},moves:{},hotels:{},pack:{},contacts:{},expenses:[],bookings:[],personal:[],ppl:4,budget:'',pbudget:'',tc:21.5};
+  S={checks:{},notes:{},moves:{},hotels:{},pack:{},contacts:{},expenses:[],bookings:[],personal:[],pers:{},ppl:4,budget:'',pbudget:'',tc:21.5};
   try{ if(window.storage) await window.storage.delete(KEY,false); }catch(e){}
   delete mem[KEY];
   boot(true);
