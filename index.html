@@ -564,22 +564,10 @@ ul.check input:checked + span{text-decoration:line-through;color:var(--ink-soft)
 
 <section id="tab-ident" hidden>
   <h2 class="sec">Quién lleva qué</h2>
-  <p class="lede">El pasaporte, el seguro de asistencia y la carta consular de cada una, en un solo lugar.
-  Toca cualquiera y el documento se abre aquí mismo, sin salir de la página ni descargar nada.
-  Abajo de cada tarjeta puedes anotar el número de pasaporte y el de la póliza:
-  <b>eso se queda guardado solo en este teléfono</b>, no se publica ni lo ve nadie más.</p>
-
   <div class="docmeter" id="docMeter"></div>
-  <p class="lede" style="font-size:15px;margin:-6px 0 16px">Cuando subas a Drive lo que falta, aparece aquí solo:
-  basta con que el nombre del archivo lleve el nombre de la persona, como los que ya están.
-  Los pasaportes van en la carpeta <b>Identificaciones</b> y los seguros y las cartas en <b>Seguros</b>.</p>
   <div class="grid g2" id="personas"></div>
 
   <h2 class="sec">Si algo pasa</h2>
-  <p class="lede">Martha, María Eugenia y Georgina tienen asistencia en viaje con <b>Traveler Assistance Services</b>,
-  contratada a través de Seguro para Viaje. Las tres llevan el mismo plan y la misma vigencia: del 15 de septiembre
-  al 2 de octubre de 2026. Caterine todavía no tiene, y es lo único que le falta al viaje.</p>
-
   <div class="sos">
     <div class="sostop">
       <div>
@@ -608,61 +596,15 @@ ul.check input:checked + span{text-decoration:line-through;color:var(--ink-soft)
     </div>
   </div>
 
-  <div class="grid g2">
-    <div class="card" style="--c:var(--venecia);border-left:5px solid var(--c)">
-      <h3>Qué cubre el Plan Ideal</h3>
-      <div class="who">Los mismos montos para las tres · sin copago</div>
-      <table><tbody>
-        <tr><td>Total de asistencia</td><td class="num"><b>200.000 €</b></td></tr>
-        <tr><td>Atención médica por enfermedad, covid incluido</td><td class="num">100.000 €</td></tr>
-        <tr><td>Atención médica por accidente</td><td class="num">100.000 €</td></tr>
-        <tr><td>Urgencia por enfermedad preexistente</td><td class="num">800 €</td></tr>
-        <tr><td>Medicamentos recetados fuera del hospital</td><td class="num">1.000 €</td></tr>
-        <tr><td>Odontología de urgencia</td><td class="num">400 €</td></tr>
-        <tr><td>Repatriación sanitaria</td><td class="num">30.000 €</td></tr>
-        <tr><td>Hotel por convalecencia</td><td class="num">60 € al día</td></tr>
-        <tr><td>Pérdida de equipaje</td><td class="num">400 €</td></tr>
-        <tr><td>Pérdida de pasaporte</td><td class="num">75 €</td></tr>
-        <tr><td>Videoconsulta, telemedicina y línea 24/7</td><td class="num">Incluido</td></tr>
-      </tbody></table>
-      <div style="color:var(--ink-soft);font-size:14px;margin-top:9px">El detalle completo está en el certificado de cada una, arriba.</div>
-    </div>
-
-    <div>
-      <div class="card" style="--c:var(--roma);border-left:5px solid var(--c)">
-        <h3>Emergencias, sin seguro de por medio</h3>
-        <div class="who">Los mismos en Francia, España e Italia</div>
-        <table><tbody>
-          <tr><td><b>112</b></td><td>Ambulancia, policía y bomberos. Gratis desde cualquier celular, aunque no tenga saldo ni tarjeta SIM. Atienden en inglés.</td></tr>
-          <tr><td><b>114</b></td><td>El mismo 112 pero por mensaje de texto, si no se puede hablar.</td></tr>
-        </tbody></table>
-        <div class="fields">
-          <div><label class="f" for="tel-emb">Consulado de Colombia más cercano</label><input type="text" id="tel-emb" data-pers="tel-emb" placeholder="Teléfono y dirección"></div>
-        </div>
-      </div>
-
-      <div class="card" style="--c:var(--barcelona);border-left:5px solid var(--c)">
-        <h3>La letra chica</h3>
-        <div class="who">Dos cosas que conviene saber antes</div>
-        <table><tbody>
-          <tr><td><b>Carencia de 5 días.</b> Aplica solo si la asistencia se compró estando ya en el país de destino. Estas se compraron en Colombia antes de salir, así que no debería afectarlas, pero el dato está en el certificado.</td></tr>
-          <tr><td><b>Cambios y cancelaciones.</b> Entre 48 y 72 horas hábiles antes de que empiece el viaje, y con penalidad según la fecha.</td></tr>
-        </tbody></table>
-      </div>
-    </div>
-  </div>
-
-  <div class="grid g2">
-    <div class="card" style="--c:var(--paris);border-left:5px solid var(--c)">
-      <h3>Antes de salir de casa</h3>
-      <div class="who">Cinco minutos que evitan un dolor de cabeza</div>
-      <table><tbody>
-        <tr><td>Abrir cada documento de esta pestaña una vez con señal, para que quede cargado.</td></tr>
-        <tr><td>En la app de Google Drive, marcar la carpeta del viaje como <b>disponible sin conexión</b>.</td></tr>
-        <tr><td>Que cada una lleve su número de certificado anotado en la billetera, aparte del teléfono.</td></tr>
-        <tr><td>Llevar una copia en papel del pasaporte, separada del original.</td></tr>
-        <tr><td>Revisar que el pasaporte venza al menos tres meses después del 2 de octubre. Es lo que pide Schengen.</td></tr>
-      </tbody></table>
+  <div class="card" style="--c:var(--roma);border-left:5px solid var(--c)">
+    <h3>Emergencias, sin seguro de por medio</h3>
+    <div class="who">Los mismos en Francia, España e Italia</div>
+    <table><tbody>
+      <tr><td><b>112</b></td><td>Ambulancia, policía y bomberos. Gratis desde cualquier celular, aunque no tenga saldo ni tarjeta SIM. Atienden en inglés.</td></tr>
+      <tr><td><b>114</b></td><td>El mismo 112 pero por mensaje de texto, si no se puede hablar.</td></tr>
+    </tbody></table>
+    <div class="fields">
+      <div><label class="f" for="tel-emb">Consulado de Colombia más cercano</label><input type="text" id="tel-emb" data-pers="tel-emb" placeholder="Teléfono y dirección"></div>
     </div>
   </div>
 </section>
