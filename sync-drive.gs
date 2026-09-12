@@ -16,11 +16,36 @@
  *   5. Acepta los permisos y copia la URL que termina en /exec.
  *
  * Esa URL es la que va en la constante SYNC_URL de index.html.
+ *
+ * Si cambias este archivo, hay que publicar la versión nueva:
+ * "Implementar" > "Gestionar implementaciones" > el lápiz > en Versión elige
+ * "Nueva versión" > "Implementar". Así la URL sigue siendo la misma.
  */
 
 var CARPETA = '1netn2u_ku8Yxdi6mD4T4mCXVgAldnLX4';
 
-function doGet() {
+function doGet(e) {
+  // ?file=ID devuelve ese archivo en base64, para leer el Excel de control.
+  if (e && e.parameter && e.parameter.file) return archivo(e.parameter.file);
+  return listado();
+}
+
+function archivo(id) {
+  try {
+    var f = DriveApp.getFileById(id);
+    return json({
+      ok: true,
+      id: id,
+      name: f.getName(),
+      m: f.getLastUpdated().toISOString(),
+      b64: Utilities.base64Encode(f.getBlob().getBytes())
+    });
+  } catch (err) {
+    return json({ ok: false, error: String(err) });
+  }
+}
+
+function listado() {
   var archivos = [];
   try {
     recorrer(DriveApp.getFolderById(CARPETA), '');

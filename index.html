@@ -502,23 +502,20 @@ ul.check input:checked + span{text-decoration:line-through;color:var(--ink-soft)
 
 <section id="tab-reservas" hidden>
   <h2 class="sec">Lo que ya está comprado</h2>
-  <p class="lede">Llena el archivo de Excel conforme vayas comprando y suéltalo aquí. Cada reserva se acomoda sola en su día del itinerario. Cuando quieras mandarle el plan a alguien más, usa <b>Crear copia para compartir</b>: genera un solo archivo que ya trae todo adentro, sin que la otra persona tenga que importar nada. Los montos se muestran en pesos mexicanos usando el tipo de cambio que pongas abajo; si el Excel ya trae la columna En MXN, el tablero toma de ahí tu tipo de cambio automáticamente.</p>
-  <div class="drop" id="drop">
-    <button class="btn" id="pick">Elegir archivo de Excel</button>
-    <p>o arrástralo hasta aquí · acepta .xlsx y .csv</p>
-    <input type="file" id="file" accept=".xlsx,.xls,.csv" hidden>
-  </div>
-  <div id="impMsg" style="color:var(--ink-soft);font-size:15px;margin-bottom:8px"></div>
+  <p class="lede">Las reservas del archivo de control, con lo que costó cada una, quién la vendió y su localizador.
+  Cada una aparece también dentro de su día del itinerario.</p>
+  <div class="syncbar off" id="impMsg"></div>
   <div class="chips" id="rsvChips"></div>
-  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px">
+  <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:10px 0 14px">
     <select id="rsvFilter" style="max-width:220px">
       <option value="">Todos los estados</option>
-      <option>Pendiente</option><option>Cotizado</option><option>Reservado</option><option>Pagado</option>
+      <option value="Pagado">Pagado</option>
+      <option value="Reservado">Reservado, sin pagar</option>
+      <option value="Pendiente">Pendiente</option>
     </select>
-    <span style="display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft)">
+    <span style="font-family:var(--mono);font-size:12px;color:var(--ink-soft)">
       MXN por € <input type="number" id="tcInput" step="0.01" min="1" style="width:92px"></span>
     <button class="btn ghost small" id="rsvCsv">Descargar como CSV</button>
-    <button class="btn ghost small" id="rsvShare">Crear copia para compartir</button>
   </div>
   <div id="rsvList"></div>
 </section>
@@ -996,6 +993,10 @@ const BILLETES = [
  {cat:"Vuelos", day:"d16", dir:"/Tiquetes/3- Roma a Paris", title:"Roma Fiumicino → París Orly", sub:"Transavia TO 3917 · 1 oct · reserva GF88PT", items:[{n:"Confirmación Transavia · GF88PT",i:"1WPjyDyJZ9l0mlsVozDV2DQwpXu_NacJF"}]},
 ];
 
+/* Las 25 reservas del Excel de control, al día del 11 de septiembre de 2026.
+   Si el Excel de Drive se puede leer, estas se reemplazan por las de ahí. */
+const RESERVAS_BASE = [{"id":"R01","iso":"2026-09-16","ciudad":"Previo","tipo":"Transporte","concepto":"Vuelo México → París","prov":"AeroMexico","estado":"Pagado","h1":"","h2":"","dir":"","loc":"","pax":"1","precio":774.44,"usd":836.4,"mxn":0,"orig":16650.55,"moneda":"MXN","link":"","notas":"Vuelo redondo MEX-CDG (incluye el regreso R02), 1 escala cada tramo. Comprado con Bestday, tarjeta Visa BBVA a 12 pagos fijos. Total MXN$16,650.55. Pasajera: Caterine Ladino Galvis."},{"id":"R02","iso":"2026-10-02","ciudad":"Previo","tipo":"Transporte","concepto":"Vuelo París → México","prov":"AeroMexico","estado":"Pagado","h1":"","h2":"","dir":"","loc":"","pax":"1","precio":0,"usd":0.0,"mxn":0.0,"orig":0,"moneda":"EUR","link":"","notas":"Vuelo de regreso incluido en el pago redondo de R01 (MXN$16,650.55 total). Sale CDG 18:40 (2 oct), llega MEX 02:05 del día siguiente. Operado en código compartido AeroMéxico/KLM."},{"id":"R03","iso":"2026-09-16","ciudad":"Previo","tipo":"Transporte","concepto":"Vuelo Bogotá → Madrid → París-Orly (familia)","prov":"AirEuropa","estado":"Pagado","h1":"","h2":"","dir":"","loc":"7D63DW","pax":"3","precio":0,"usd":0,"mxn":0,"orig":0,"moneda":"EUR","link":"","notas":"Pedir asistencia especial para las tres, 48 h antes. Ruta real: BOG 15 sep 20:15 → MAD 16 sep 13:00 (UX194) → ORY 16 sep 16:30–18:25 (UX1025). Llegan a Orly, NO a Charles de Gaulle. Tarifa sin equipaje facturado incluido (0PC): confirmar si se agregó maleta. Localizador UX/7D63DW."},{"id":"R04","iso":"2026-10-02","ciudad":"Previo","tipo":"Transporte","concepto":"Vuelo París-Orly → Madrid → Bogotá (familia)","prov":"AirEuropa","estado":"Pagado","h1":"","h2":"","dir":"","loc":"7D63DW","pax":"3","precio":0,"usd":0.0,"mxn":0.0,"orig":0,"moneda":"EUR","link":"","notas":"Ruta real: ORY 2 oct 10:55–12:55 (UX1028) → MAD → BOG 15:15–18:15 (UX193). Sale de Orly, no de Charles de Gaulle."},{"id":"R05","iso":"2026-09-16","ciudad":"Previo","tipo":"Otro","concepto":"Seguro de viaje con cobertura médica","prov":"","estado":"Pendiente","h1":"","h2":"","dir":"","loc":"","pax":"4","precio":0,"usd":0.0,"mxn":0.0,"orig":0,"moneda":"EUR","link":"","notas":"Verificar cobertura por edad y padecimientos previos"},{"id":"R06","iso":"2026-09-16","ciudad":"París","tipo":"Hospedaje","concepto":"Hotel París · 5 noches (16–21 sep)","prov":"Airbnb","estado":"Pagado","h1":"16:00","h2":"10:00","dir":"","loc":"HMXXDNTPZF","pax":"4","precio":915.21,"usd":988.43,"mxn":19677.0,"orig":19677.0,"moneda":"MXN","link":"","notas":"Confirmar que el edificio tiene ascensor"},{"id":"R07","iso":"2026-09-16","ciudad":"París","tipo":"Traslado","concepto":"Van privada Aeropuerto  ORY → Airbnb","prov":"Booking","estado":"Pagado","h1":"18:30","h2":"19:15","dir":"","loc":"588871925","pax":"4","precio":62.0,"usd":66.96,"mxn":1333.0,"orig":62.0,"moneda":"EUR","link":"","notas":"OJO: el vuelo de Caterine llega a CDG (19:50) pero el vuelo de las tres familiares llega a ORLY (18:25): son aeropuertos distintos. Definir si se arma un traslado por separado desde Orly o se reorganiza el encuentro antes de reservar esta van."},{"id":"R08","iso":"2026-09-17","ciudad":"París","tipo":"Entrada","concepto":"Torre Eiffel · ascensor hasta la punta","prov":"Torre Eiffel","estado":"Pagado","h1":"11:00","h2":"13:00","dir":"","loc":"262010530930","pax":"4","precio":146.8,"usd":158.54,"mxn":3156.2,"orig":146.8,"moneda":"EUR","link":"","notas":"Boleto con ascensor, NO escaleras. Orden n° 262010530930 · 4 entradas adulto a 36,70€ c/u = 146,80€ total."},{"id":"R09","iso":"2026-09-17","ciudad":"París","tipo":"Entrada","concepto":"Crucero por el Sena · 1 hora de 10 am a 10 pm saliendo cada 30 min","prov":"Get Your Guide","estado":"Pagado","h1":"15:30","h2":"16:30","dir":"","loc":"GYG2Q9BXRFRN","pax":"4","precio":66.33,"usd":71.63,"mxn":1426.0,"orig":1426.0,"moneda":"MXN","link":"","notas":"Sale del Port de la Bourdonnais. Booking ref GYG2Q9BXRFRN (PIN XsHJE/AC) · proveedor BATEAUX PARISIENS, tel +33176641467."},{"id":"R10","iso":"2026-09-18","ciudad":"París","tipo":"Entrada","concepto":"Museo del Louvre · entrada 10 am","prov":"Louvre","estado":"Pagado","h1":"09:00","h2":"11:00","dir":"","loc":"C262340001706","pax":"4","precio":128.0,"usd":138.24,"mxn":2752.0,"orig":128.0,"moneda":"EUR","link":"","notas":"Entrar por el Carrousel; hay sillas de ruedas gratis. Pedido C262340001706 (venta V260781848564) · 4 entradas Plein tarif hors EEE a 32€ c/u = 128€ total."},{"id":"R11","iso":"2026-09-19","ciudad":"París","tipo":"Entrada","concepto":"Palacio de Versalles","prov":"Palacio de Versalles","estado":"Pendiente","h1":"10:00","h2":"04:30","dir":"","loc":"","pax":"4","precio":158.88,"usd":171.59,"mxn":3416.0,"orig":3416.0,"moneda":"MXN","link":"","notas":""},{"id":"R12","iso":"2026-09-20","ciudad":"París","tipo":"Entrada","concepto":"Disney Paris","prov":"DisneyLand Paris","estado":"Pagado","h1":"08:00","h2":"21:32","dir":"","loc":"","pax":"4","precio":320.93,"usd":346.6,"mxn":6900.0,"orig":6900.0,"moneda":"MXN","link":"","notas":""},{"id":"R13","iso":"2026-09-21","ciudad":"Traslado","tipo":"Transporte","concepto":"Tren París → Barcelona","prov":"SNCF Connect","estado":"Pagado","h1":"14:42","h2":"","dir":"","loc":"","pax":"4","precio":516.0,"usd":557.28,"mxn":11094.0,"orig":516.0,"moneda":"EUR","link":"","notas":"Tren TGV INOUI 9715, Coche 18 Bajo, mesa de 4 (plazas 818, 819, 822 y 823, Club Cuatro). Tarifa SEMI FLEX: cambio y reembolso gratis hasta 7 días antes. Expediente P4PNMJ. Límite: 2 maletas (90x70x50) + 1 de mano por persona."},{"id":"R14","iso":"2026-09-21","ciudad":"Barcelona","tipo":"Hospedaje","concepto":"Airbnb Barcelona · 3 noches (21–24 sep)","prov":"Airbnb","estado":"Pagado","h1":"15:00","h2":"11:00","dir":"","loc":"HMWM9XXSK3","pax":"4","precio":560.47,"usd":605.3,"mxn":12050.0,"orig":12050.0,"moneda":"MXN","link":"","notas":"Zona Eixample: plana y bien conectada"},{"id":"R15","iso":"2026-09-22","ciudad":"Barcelona","tipo":"Entrada","concepto":"Sagrada Familia · sin torres","prov":"","estado":"Pendiente","h1":"","h2":"","dir":"","loc":"GYG996WXHXKA","pax":"4","precio":478.6,"usd":516.89,"mxn":10290.0,"orig":10290.0,"moneda":"MXN","link":"","notas":"Pedir horario de mañana por los vitrales del este"},{"id":"R16","iso":"2026-09-23","ciudad":"Barcelona","tipo":"Entrada","concepto":"Park Güell · zona monumental","prov":"","estado":"Pendiente","h1":"","h2":"","dir":"","loc":"","pax":"4","precio":108.0,"usd":116.64,"mxn":2322.0,"orig":108.0,"moneda":"EUR","link":"","notas":"Cupo por franja horaria, se agota"},{"id":"R17","iso":"2026-09-24","ciudad":"Traslado","tipo":"Transporte","concepto":"Vuelo Barcelona → Venecia","prov":"","estado":"Pagado","h1":"14:45","h2":"16:35","dir":"","loc":"P4PNMJ","pax":"4","precio":238.33,"usd":257.39,"mxn":5124.0,"orig":5124.0,"moneda":"MXN","link":"","notas":"Confirmar si llega a Marco Polo o a Treviso"},{"id":"R18","iso":"2026-09-24","ciudad":"Venecia","tipo":"Hospedaje","concepto":"Hotel Venecia · 2 noches (24–26 sep)","prov":"Airbnb","estado":"Pagado","h1":"15:00","h2":"11:00","dir":"","loc":"","pax":"4","precio":637.21,"usd":688.19,"mxn":13700.0,"orig":13700.0,"moneda":"MXN","link":"","notas":"Preguntar cuántos puentes hay hasta el vaporetto"},{"id":"R19","iso":"2026-09-25","ciudad":"Venecia","tipo":"Entrada","concepto":"Basílica de San Marcos · con reserva","prov":"Bsilica de San Marcos","estado":"Pagado","h1":"11:00","h2":"","dir":"","loc":"171-7OPMOU6","pax":"4","precio":35.0,"usd":37.8,"mxn":752.5,"orig":35.0,"moneda":"EUR","link":"","notas":"Acceso accesible por la Porta dei Fiori. ID Ordine 171-7OPMOU6, confirmación SP42DXH5ZCCZ · 3 adultos (10€ c/u) + 1 mayor de 65 (5€, Georgina) = 35€ total."},{"id":"R20","iso":"2026-09-26","ciudad":"Traslado","tipo":"Transporte","concepto":"Tren Frecciarossa Venecia → Roma","prov":"Trenitalia","estado":"Pagado","h1":"12:26","h2":"16:24","dir":"","loc":"2702492","pax":"4","precio":256.98,"usd":277.53,"mxn":5525.0,"orig":5525.0,"moneda":"MXN","link":"","notas":"Unas 4 horas. Salida de media tarde"},{"id":"R21","iso":"2026-09-26","ciudad":"Roma","tipo":"Hospedaje","concepto":"Hotel Roma · 5 noches (26 sep – 1 oct)","prov":"Airbnb","estado":"Reservado","h1":"15:00","h2":"11:00","dir":"","loc":"","pax":"4","precio":1175.86,"usd":1269.93,"mxn":25281.0,"orig":25281.0,"moneda":"MXN","link":"","notas":"Prati o Monti, cerca de metro con ascensor"},{"id":"R22","iso":"2026-09-28","ciudad":"Roma","tipo":"Entrada","concepto":"Coliseo + Foro + Palatino","prov":"Coliseo","estado":"Pagado","h1":"10:25","h2":"","dir":"","loc":"","pax":"4","precio":272.09,"usd":293.86,"mxn":5850.0,"orig":5850.0,"moneda":"MXN","link":"","notas":"Preguntar por el acceso con movilidad reducida"},{"id":"R23","iso":"2026-09-30","ciudad":"Roma","tipo":"Entrada","concepto":"Museos Vaticanos + Capilla Sixtina","prov":"Vaticano","estado":"Pagado","h1":"10:35","h2":"","dir":"","loc":"GYG996W789W8","pax":"4","precio":191.16,"usd":206.46,"mxn":4110.0,"orig":4110.0,"moneda":"MXN","link":"","notas":"Miércoles temprano: menos gente por la audiencia papal. Booking ref GYG996W789W8 (PIN Pw+yBsq+). Punto de encuentro: Via Germanico 40, Roma — llegar 25 min antes."},{"id":"R24","iso":"2026-10-01","ciudad":"Traslado","tipo":"Transporte","concepto":"Vuelo Roma → París","prov":"Expedia","estado":"Pagado","h1":"18:10","h2":"","dir":"","loc":"73532409725610","pax":"4","precio":400.09,"usd":432.1,"mxn":8602.0,"orig":8602.0,"moneda":"MXN","link":"","notas":"Confirmar terminal de llegada contra la de salida del día 2"},{"id":"R25","iso":"2026-10-01","ciudad":"París","tipo":"Hospedaje","concepto":"Hotel junto al aeropuerto ORY · 1 noche","prov":"Booking - Villa Paris Orly","estado":"Pagado","h1":"","h2":"","dir":"","loc":"5831697889","pax":"4","precio":153.49,"usd":165.77,"mxn":3300.0,"orig":3300.0,"moneda":"MXN","link":"","notas":"Con transporte a la terminal las 24 horas"}];
+
 /* ============ CARPETA DE DRIVE ============ */
 const DRIVE_FOLDER='https://drive.google.com/drive/folders/1netn2u_ku8Yxdi6mD4T4mCXVgAldnLX4';
 function driveView(id){ return 'https://drive.google.com/file/d/'+id+'/view'; }
@@ -1118,7 +1119,7 @@ function rutaHTML(r,cv){
 
 /* ============ ESTADO Y GUARDADO ============ */
 const KEY='viaje-europa-2026';
-let S={checks:{},notes:{},moves:{},hotels:{},expenses:[],bookings:[],personal:[],pers:{},ppl:4,budget:'',pbudget:'',tc:21.5};
+let S={checks:{},notes:{},moves:{},hotels:{},expenses:[],bookings:[],personal:[],pers:{},rsvOrigen:'',rsvFecha:'',ppl:4,budget:'',pbudget:'',tc:21.5};
 const mem={};
 let saveTimer=null;
 
@@ -1393,32 +1394,46 @@ function parseCSV(text){
   const head=cut(lines[0]);
   return lines.slice(1).map(l=>{const c=cut(l),o={};head.forEach((h,i)=>o[h]=(c[i]||'').trim());return o;});
 }
-async function importFile(file){
+/* Convierte las filas crudas del Excel en reservas y las deja en el tablero. */
+function cargarReservas(raw, origen){
+  const rows=raw.map(mapRow).filter(Boolean);
+  if(!rows.length) return 0;
+  const ref=rows.find(r=>r.precio>0&&r.mxn>0);
+  if(ref){ const t=ref.mxn/ref.precio; if(t>5&&t<60) S.tc=Math.round(t*10000)/10000; }
+  S.bookings=rows; S.rsvOrigen=origen||''; save();
+  const tcEl=document.getElementById('tcInput'); if(tcEl) tcEl.value=tc();
+  renderBookings(); repaintDays();
+  return rows.length;
+}
+/* Lee el Excel de control desde Drive, si la aplicación web sabe servir archivos. */
+async function leerExcelDeDrive(files){
   const msg=document.getElementById('impMsg');
-  msg.textContent='Leyendo '+file.name+'…';
+  const xls=(files||[]).find(f=>/\.xlsx?$/i.test(f.p||''));
+  if(!SYNC_URL||!xls||typeof XLSX==='undefined'){ avisoReservas(); return; }
   try{
-    let raw=[];
-    if(/\.csv$/i.test(file.name)){
-      raw=parseCSV(await file.text());
-    } else {
-      if(typeof XLSX==='undefined')throw new Error('sin-xlsx');
-      const buf=await file.arrayBuffer();
-      const wb=XLSX.read(new Uint8Array(buf),{type:'array',cellDates:true});
-      let sh=wb.SheetNames.find(n=>slug(n).indexOf('reserva')>=0)||wb.SheetNames[0];
-      raw=XLSX.utils.sheet_to_json(wb.Sheets[sh],{defval:''});
-    }
-    const rows=raw.map(mapRow).filter(Boolean);
-    if(!rows.length){msg.textContent='No encontré filas con datos. Revisa que la hoja se llame RESERVAS y que la fila 1 tenga los encabezados.';return;}
-    const ref=rows.find(r=>r.precio>0&&r.mxn>0);
-    if(ref){const t=ref.mxn/ref.precio; if(t>5&&t<60) S.tc=Math.round(t*10000)/10000;}
-    S.bookings=rows;save();
-    document.getElementById('tcInput').value=tc();
-    msg.innerHTML='Listo: <b>'+rows.length+'</b> reservas importadas de '+esc(file.name)+'.';
-    renderBookings();repaintDays();
-  }catch(err){
-    msg.textContent=(err.message==='sin-xlsx')
-      ? 'No se pudo cargar el lector de Excel (quizá no hay internet). Guarda el archivo como CSV desde Excel y súbelo así.'
-      : 'No pude leer el archivo. Verifica que sea el .xlsx original o un .csv.';
+    const r=await fetch(SYNC_URL+'?file='+encodeURIComponent(xls.id),{cache:'no-store'});
+    const d=await r.json();
+    if(!d.ok||!d.b64) throw new Error(d.error||'sin-archivo');
+    const bin=atob(d.b64); const arr=new Uint8Array(bin.length);
+    for(let i=0;i<bin.length;i++) arr[i]=bin.charCodeAt(i);
+    const wb=XLSX.read(arr,{type:'array',cellDates:true});
+    const sh=wb.SheetNames.find(n=>slug(n).indexOf('reserva')>=0)||wb.SheetNames[0];
+    const n=cargarReservas(XLSX.utils.sheet_to_json(wb.Sheets[sh],{defval:''}), 'drive');
+    if(n) S.rsvFecha=(xls.m||'').slice(0,10);
+  }catch(e){ /* se queda con las incrustadas */ }
+  avisoReservas();
+}
+function avisoReservas(){
+  const msg=document.getElementById('impMsg'); if(!msg) return;
+  const n=(S.bookings||[]).length;
+  if(S.rsvOrigen==='drive'){
+    msg.className='syncbar';
+    msg.innerHTML='<b>'+n+' reservas</b> leídas del Excel de control que está en Drive'+
+      (S.rsvFecha?', actualizado el '+esc(S.rsvFecha):'')+'. Cambia el archivo allá y esto cambia solo.';
+  }else{
+    msg.className='syncbar off';
+    msg.innerHTML='<b>'+n+' reservas</b> del Excel de control, según cómo estaba el 11 de septiembre. '+
+      'Para que se lean solas desde Drive hay que actualizar la implementación de <code>sync-drive.gs</code>.';
   }
 }
 function rsvHTML(b){
@@ -1472,30 +1487,9 @@ function repaintDays(){
   renderDays();
   open.forEach(id=>{const c=document.getElementById(id);if(c){c.classList.add('open');c.querySelector('.dayhead').setAttribute('aria-expanded','true');}});
 }
-document.getElementById('pick').addEventListener('click',()=>document.getElementById('file').click());
-document.getElementById('file').addEventListener('change',e=>{if(e.target.files[0])importFile(e.target.files[0]);});
-const dz=document.getElementById('drop');
-['dragenter','dragover'].forEach(ev=>dz.addEventListener(ev,e=>{e.preventDefault();dz.classList.add('over');}));
-['dragleave','drop'].forEach(ev=>dz.addEventListener(ev,e=>{e.preventDefault();dz.classList.remove('over');}));
-dz.addEventListener('drop',e=>{if(e.dataTransfer.files[0])importFile(e.dataTransfer.files[0]);});
 document.getElementById('rsvFilter').addEventListener('change',renderBookings);
 document.getElementById('tcInput').addEventListener('input',e=>{
   S.tc=parseFloat(e.target.value)||21.5;save();renderBookings();renderExpenses();renderPersonal();repaintDays();
-});
-document.getElementById('rsvShare').addEventListener('click',()=>{
-  const clone=document.documentElement.cloneNode(true);
-  clone.querySelectorAll('script[data-seed]').forEach(n=>n.remove());
-  const seed=document.createElement('script');
-  seed.setAttribute('data-seed','1');
-  seed.textContent='window.__SEED__='+JSON.stringify(S).replace(/</g,'\\u003c')+';';
-  const b=clone.querySelector('body');
-  b.insertBefore(seed,b.firstChild);
-  const blob=new Blob(['<!DOCTYPE html>\n'+clone.outerHTML],{type:'text/html;charset=utf-8'});
-  const a=document.createElement('a');
-  a.href=URL.createObjectURL(blob);
-  a.download='itinerario-europa-2026-para-compartir.html';
-  a.click();
-  document.getElementById('impMsg').innerHTML='Copia generada. Trae adentro las reservas y '+DOC.docs.length+' documento(s): mándala por WhatsApp o correo y se abre sola.';
 });
 document.getElementById('rsvCsv').addEventListener('click',()=>{
   const h=['ID','Fecha','Ciudad','Tipo','Concepto','Proveedor','Estado','Hora inicio','Hora fin','Direccion','Localizador','Personas','Precio como te lo cobraron','Moneda','En EUR','En USD','Enlace','Notas'];
@@ -1806,6 +1800,7 @@ async function sincronizar(manual){
     if(!d.ok) throw new Error(d.error||'Drive no respondió');
     SYNC.nuevos=aplicarDrive(d.files||[]);
     SYNC.at=d.at; SYNC.error=null;
+    leerExcelDeDrive(d.files||[]);
     try{ localStorage.setItem(SKEY,JSON.stringify({at:d.at,files:d.files})); }catch(e){}
     pinta();
   }catch(e){
@@ -2060,7 +2055,11 @@ document.getElementById('export').addEventListener('click',()=>{
 
 /* ============ ARRANQUE ============ */
 function paint(){
+  if(!S.bookings||!S.bookings.length||S.rsvOrigen!=='drive'){
+    S.bookings=RESERVAS_BASE.slice(); if(!S.rsvOrigen) S.rsvOrigen='base';
+  }
   renderRail();renderDays();renderMoves();renderRutas();renderBookings();renderBilletes();renderDocs();renderPersonas();
+  avisoReservas();
   sincronizar(false);
   document.getElementById('tcInput').value=tc();
   document.getElementById('ppl').value=S.ppl||4;
