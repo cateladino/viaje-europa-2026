@@ -479,7 +479,6 @@ ul.check input:checked + span{text-decoration:line-through;color:var(--ink-soft)
 
 <nav class="tabs" role="tablist">
   <button role="tab" aria-selected="true" data-tab="dias">Día a día</button>
-  <button role="tab" aria-selected="false" data-tab="reservas">Lo que ya está pagado</button>
   <button role="tab" aria-selected="false" data-tab="docs">Billetes en PDF</button>
   <button role="tab" aria-selected="false" data-tab="ident">Pasaportes y seguros</button>
   <button role="tab" aria-selected="false" data-tab="traslados">Traslados y casas</button>
@@ -522,26 +521,6 @@ ul.check input:checked + span{text-decoration:line-through;color:var(--ink-soft)
   <h2 class="sec">Día a día</h2>
   <p class="lede">Toca cualquier día para abrirlo. El punto de color indica la ciudad y las etiquetas dicen si algo ya está pagado o si todavía hay que comprarlo.</p>
   <div id="days"></div>
-</section>
-
-<section id="tab-reservas" hidden>
-  <h2 class="sec">Lo que ya está comprado</h2>
-  <p class="lede">Las reservas del archivo de control, con lo que costó cada una, quién la vendió y su localizador.
-  Cada una aparece también dentro de su día del itinerario.</p>
-  <div class="syncbar off" id="impMsg"></div>
-  <div class="chips" id="rsvChips"></div>
-  <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:10px 0 14px">
-    <select id="rsvFilter" style="max-width:220px">
-      <option value="">Todos los estados</option>
-      <option value="Pagado">Pagado</option>
-      <option value="Reservado">Reservado, sin pagar</option>
-      <option value="Pendiente">Pendiente</option>
-    </select>
-    <span style="font-family:var(--mono);font-size:12px;color:var(--ink-soft)">
-      MXN por € <input type="number" id="tcInput" step="0.01" min="1" style="width:92px"></span>
-    <button class="btn ghost small" id="rsvCsv">Descargar como CSV</button>
-  </div>
-  <div id="rsvList"></div>
 </section>
 
 <section id="tab-docs" hidden>
@@ -1492,13 +1471,11 @@ function cargarReservas(raw, origen){
   const ref=rows.find(r=>r.precio>0&&r.mxn>0);
   if(ref){ const t=ref.mxn/ref.precio; if(t>5&&t<60) S.tc=Math.round(t*10000)/10000; }
   S.bookings=rows; S.rsvOrigen=origen||''; save();
-  const tcEl=document.getElementById('tcInput'); if(tcEl) tcEl.value=tc();
-  renderBookings(); repaintDays();
+  renderBookings(); renderBolsa(); repaintDays();
   return rows.length;
 }
 /* Lee el Excel de control desde Drive, si la aplicación web sabe servir archivos. */
 async function leerExcelDeDrive(files){
-  const msg=document.getElementById('impMsg');
   const xls=(files||[]).find(f=>/\.xlsx?$/i.test(f.p||''));
   if(!SYNC_URL||!xls||typeof XLSX==='undefined'){ avisoReservas(); return; }
   try{
@@ -1514,19 +1491,7 @@ async function leerExcelDeDrive(files){
   }catch(e){ /* se queda con las incrustadas */ }
   avisoReservas();
 }
-function avisoReservas(){
-  const msg=document.getElementById('impMsg'); if(!msg) return;
-  const n=(S.bookings||[]).length;
-  if(S.rsvOrigen==='drive'){
-    msg.className='syncbar';
-    msg.innerHTML='<b>'+n+' reservas</b> leídas del Excel de control que está en Drive'+
-      (S.rsvFecha?', actualizado el '+esc(S.rsvFecha):'')+'. Cambia el archivo allá y esto cambia solo.';
-  }else{
-    msg.className='syncbar off';
-    msg.innerHTML='<b>'+n+' reservas</b> del Excel de control, según cómo estaba el 11 de septiembre. '+
-      'Para que se lean solas desde Drive hay que actualizar la implementación de <code>sync-drive.gs</code>.';
-  }
-}
+function avisoReservas(){}
 function rsvHTML(b){
   const meta=[b.h1&&(b.h1+(b.h2?'–'+b.h2:'')),b.loc&&('LOC '+b.loc),b.prov,b.pax&&(b.pax+' pers.')].filter(Boolean).join(' · ');
   return `<div class="rsv">
@@ -1539,56 +1504,15 @@ function rsvHTML(b){
     </span>
     <span class="pr">${b.precio?eur(b.precio):'—'}${b.precio?`<div style="font-weight:400;color:var(--ink-soft);font-size:12px">${mxn(b.precio)}</div>`:''}${(b.moneda&&b.moneda!=='EUR'&&b.orig)?`<div style="font-weight:400;color:var(--ink-soft);font-size:12px">pagado en ${esc(b.moneda)}</div>`:''}</span></div>`;
 }
-function renderBookings(){
-  const list=document.getElementById('rsvList');
-  const chips=document.getElementById('rsvChips');
-  const f=document.getElementById('rsvFilter').value;
-  const all=S.bookings||[];
-  if(!all.length){
-    list.innerHTML='<div class="card" style="color:var(--ink-soft)">Todavía no importas nada. En cuanto subas el Excel, aquí verás cada reserva con su localizador y su precio, ordenada por fecha.</div>';
-    chips.innerHTML='';updMeters();return;
-  }
-  const sum=k=>all.filter(b=>b.estado===k).reduce((a,b)=>a+b.precio,0);
-  const total=all.reduce((a,b)=>a+b.precio,0);
-  const pend=all.filter(b=>b.estado==='Pendiente').length;
-  const ppl=Math.max(1,Number(S.ppl)||4);
-  chips.innerHTML=[
-    ['Total comprometido',mxn(total)],['Equivale a',eur(total)],['Ya pagado',mxn(sum('Pagado'))],
-    ['Reservado sin pagar',mxn(sum('Reservado'))],['Por persona',mxn(total/ppl)],
-    ['Sin definir',pend+' de '+all.length]
-  ].map(c=>`<span class="chip">${c[0]} <b>${c[1]}</b></span>`).join('');
-
-  const rows=f?all.filter(b=>b.estado===f):all;
-  const groups={};
-  rows.forEach(b=>{(groups[b.iso||'Sin fecha']=groups[b.iso||'Sin fecha']||[]).push(b);});
-  list.innerHTML=Object.keys(groups).sort().map(k=>{
-    const d=DAYS.find(x=>x.iso===k);
-    const cv=d?cvar(d.city):'var(--ink-soft)';
-    const t=k==='Sin fecha'?'Sin fecha asignada':fLarga(k);
-    const st=groups[k].reduce((a,b)=>a+b.precio,0);
-    return `<div class="card" style="--c:${cv};border-left:5px solid var(--c)">
-      <h3 style="text-transform:capitalize">${esc(t)}</h3>
-      <div class="who">${groups[k].length} reserva${groups[k].length>1?'s':''} · ${mxn(st)} · ${eur(st)}</div>
-      ${groups[k].map(rsvHTML).join('')}</div>`;
-  }).join('');
-  updMeters();
-}
+/* Ya no hay pestaña de reservas: los datos siguen alimentando los medidores
+   de la cabecera y el bloque "Reservas de este día" de cada tarjeta. */
+function renderBookings(){ updMeters(); }
 function repaintDays(){
   const open=[...document.querySelectorAll('.day.open')].map(x=>x.id);
   renderDays();
   open.forEach(id=>{const c=document.getElementById(id);if(c){c.classList.add('open');c.querySelector('.dayhead').setAttribute('aria-expanded','true');}});
 }
-document.getElementById('rsvFilter').addEventListener('change',renderBookings);
-document.getElementById('tcInput').addEventListener('input',e=>{
-  S.tc=parseFloat(e.target.value)||21.5;save();renderBookings();renderExpenses();renderPersonal();repaintDays();
-});
-document.getElementById('rsvCsv').addEventListener('click',()=>{
-  const h=['ID','Fecha','Ciudad','Tipo','Concepto','Proveedor','Estado','Hora inicio','Hora fin','Direccion','Localizador','Personas','Precio como te lo cobraron','Moneda','En EUR','En USD','Enlace','Notas'];
-  const q=s=>'"'+String(s==null?'':s).replace(/"/g,'""')+'"';
-  const body=(S.bookings||[]).map(b=>[b.id,b.iso,b.ciudad,b.tipo,b.concepto,b.prov,b.estado,b.h1,b.h2,b.dir,b.loc,b.pax,b.orig,b.moneda,b.precio,b.usd,b.link,b.notas].map(q).join(','));
-  const blob=new Blob(['\ufeff'+[h.map(q).join(',')].concat(body).join('\n')],{type:'text/csv;charset=utf-8'});
-  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='reservas-europa-2026.csv';a.click();
-});
+
 
 
 /* ============ DOCUMENTOS ADJUNTOS ============ */
@@ -2088,7 +2012,7 @@ document.addEventListener('click',e=>{
   const tab=e.target.closest('nav.tabs button');
   if(tab){
     document.querySelectorAll('nav.tabs button').forEach(b=>b.setAttribute('aria-selected',b===tab));
-    ['dias','reservas','docs','ident','traslados','gastos','personal'].forEach(t=>{
+    ['dias','docs','ident','traslados','gastos','personal'].forEach(t=>{
       document.getElementById('tab-'+t).hidden=(t!==tab.dataset.tab);
     });
     document.querySelector('.railwrap').style.display=(tab.dataset.tab==='dias')?'':'none';
@@ -2152,7 +2076,6 @@ function paint(){
   renderRail();renderDays();renderMoves();renderRutas();renderBookings();renderBilletes();renderDocs();renderPersonas();
   avisoReservas();
   sincronizar(false);
-  document.getElementById('tcInput').value=tc();
   document.getElementById('ppl').value=S.ppl||4;
   document.getElementById('budget').value=S.budget||'';
   renderExpenses();
